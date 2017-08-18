@@ -1,0 +1,80 @@
+body {
+  padding-top: 70px;
+}
+
+.left {
+  float: left;
+  padding: 0 20px 20px 0;
+}
+
+.thumb-profile {
+  height: 230px;
+}
+
+.thumb-research {
+  width: 100%;
+  text-align: center;
+}
+
+.h1-padding {
+  padding-bottom: 30px;
+}
+
+.normal-text, .normal-text p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+h4 {
+	font-weight: bold;
+}
+
+samp {
+  padding: 5px 5px 5px 26px;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+pre {
+  font-size: 16px;
+}
+
+code {
+  font-size: 100%;
+}
+
+.table>thead>tr>th {
+	text-align: center;
+}
+
+.table>tbody>tr>th {
+	text-align: center;
+	font-weight: normal;
+}
+
+.custom-table {
+	text-align: center;
+}
+
+.course1 {
+  background-color: #fef;
+}
+
+.course2 {
+  background-color: #efe;
+}
+
+.course3 {
+  background-color: #ded;
+}
+
+.style-2901 {
+	background-color: #eee;
+	padding: 40px 60px;
+	border-radius: 6px;
+}
+
+.margined {
+	padding-left: 40px;
+}

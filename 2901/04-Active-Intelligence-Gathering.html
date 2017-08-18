@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Vitaly Ford smart grid security research">
+    <meta name="author" content="Vitaly Ford">
+    <link rel="icon" href="../../../favicon.ico">
+
+    <title>Vitaly Ford's Personal Website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/navbar-fixed-top.css" rel="stylesheet">
+
+    <script src="../js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-brand" href="#">Vitaly Ford</p>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../research.html">Research</a></li>
+            <li><a href="../publications.html">Publications</a></li>
+            <li><a href="../docs/VitalyFordResume.pdf" target="_blank" rel="noopener norefferer">Resume</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+      			<li class="dropdown">
+      			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CSC 2120 <span class="caret"></span></a>
+      			  <ul class="dropdown-menu">
+        				<li><a href="../2120syllabus.html">Syllabus</a></li>
+        				<li><a href="../2120programs.html">Programs</a></li>
+                <li><a href="../2120examples.html">Examples</a></li>
+        				<li><a href="../schedule.html">Office Hours Schedule</a></li>
+      			  </ul>
+      			</li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CSC 2121 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="../2121syllabus.html">Syllabus</a></li>
+                <li><a href="../2121labs.html">Labs</a></li>
+                <li><a href="../schedule.html">Office Hours Schedule</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CSC 2901 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+				<li><a href="CSC2901syllabus.pdf">Syllabus</a></li>
+				<li><a href="00-Videos.html">00 Recordings</a></li>
+                <li><a href="01-Background.html">01 Background</a></li>
+                <li><a href="02-Assessment-Planning.html">02 Assessment Planning</a></li>
+                <li><a href="03-Passive-Intelligence-Gathering.html">03 Passive Recon</a></li>
+                <li class="active"><a href="04-Active-Intelligence-Gathering.html">04 Active Recon</a></li>
+                <li><a href="05-Exploitation.html">05 Exploitation</a></li>
+                <li><a href="06-Post-Exploitation.html">06 Post-Exploitation</a></li>
+				<li><a href="07-Useful-Resources.html">07 Useful Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="normal-text style-2901">
+        <h2><code> &gt;&gt; CSC 2901 - Active Intelligence Gathering</code></h2>
+        <h2><a id="Active_Reconnaissance_0"></a>Active Reconnaissance</h2>
+        <h3><a id="NMAP__Network_Mapper_2"></a>NMAP - Network Mapper</h3>
+        <h4><a id="Common_options_3"></a>Common options:</h4>
+        <pre><code>-A  # very aggressive and noisy, like a wild bear when it's awake in winter
+-F  # scanning only top 100 ports
+-sA # stateful port? can test firewalls
+-sS # SYN stealthy scan
+-sX # XMAS stealthy scan, good for UNIX scanning
+-sI # zombie host scan, super stealthy
+-sV # service version
+-sC # run default nse scripts according to -sV
+-sP # ping scan
+-Pn # no ping, gotta be stealthy!
+-p- # all the ports from 0 to 65535
+-n  # do not do DNS resolution, will save time
+-v  # verbose mode, show all the output possible
+-T(0-5)      # timing, how fast you want to scan; set to 0 if paranoid
+
+--reason     # why the port is open?
+--open       # show results for open ports only
+--spoof_mac  # creates a fake MAC address to send packets from
+--scan_delay # adds a delay between probes; do not use with max_parallelism
+--max_parallelism # how many probes you want at once?
+--packet-trace    # will show the packets that are sent and recieved
+
+-oX # outputs results in XML
+-oG # outputs results in a greppable format
+-oA # outputs result in normal, grappable, and XML
+        </code></pre>
+        <h4><a id="Be_Stealhy_Confuse_Admin_31"></a>Be Stealhy, Confuse Admin</h4>
+        <p>More info: <a href="https://pentestlab.blog/2012/04/02/nmap-techniques-for-avoiding-firewalls" target="_blank">https://pentestlab.blog/2012/04/02/nmap-techniques-for-avoiding-firewalls</a></p>
+        <p>Idle scan - put blame on zombies: <a href="https://nmap.org/book/idlescan.html">https://nmap.org/book/idlescan.html</a><br>
+        Want to find zombies? Sure! Scan for 1000 random IPs to see if some of them are zombies:</p>
+        <pre><code class="language-sh">$ nmap -iR <span class="hljs-number">1000</span> --script ipidseq -T4 -v -oA zombies
+        </code></pre>
+        <p>Want to find anonymous FTP servers to store your files temporarily?</p>
+        <pre><code class="language-sh">$ nmap -iR <span class="hljs-number">1000</span> --script ftp-anon -T4 -v -oA ftpAnon
+        </code></pre>
+        <p>Want to decoy machines on the network to confuse the admin?</p>
+        <pre><code class="language-sh">$ nmap -D IP_1,IP_2,IP_3,ME -p <span class="hljs-number">80</span>,<span class="hljs-number">21</span>,<span class="hljs-number">22</span>,<span class="hljs-number">25</span>,<span class="hljs-number">443</span> -Pn REAL_TARGET_IP
+        </code></pre>
+        <p>Example (from Book: Advanced Penetration Testing for Highly-Secured Environments - Second Edition):<br>
+        <img src="decoy.jpg" alt=""></p>
+        <h4><a id="Other_scans_47"></a>Other scans</h4>
+        <pre><code class="language-sh">
+$ nmap -p- <span class="hljs-operator">-s</span>S -n -v  --reason --open -oX demo-ports.xml <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+$ nmap <span class="hljs-operator">-s</span>U -n -v --open --reason <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+$ nmap <span class="hljs-operator">-s</span>S <span class="hljs-operator">-s</span>V <span class="hljs-operator">-s</span>C -v -n -p <span class="hljs-number">21</span>,<span class="hljs-number">22</span>,<span class="hljs-number">80</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+        </code></pre>
+        <h4><a id="Nmap_scripts_53"></a>Nmap scripts</h4>
+        <p>Update: <code>$ nmap -script-updatedb</code></p>
+		<p>All scripts: <a href="https://nmap.org/nsedoc/" target="_blank">https://nmap.org/nsedoc/</a></p>
+        <h4><a id="Use_zenmap_for_nmap_GUI_55"></a>Use zenmap for nmap GUI</h4>
+        <h3><a id="SNMP__Simple_Network_Management_Protocol_57"></a>SNMP - Simple Network Management Protocol</h3>
+        <p>Let’s hunt for <em>community strings</em> that are like passwords for communicating with devices.<br>
+        Fast SNMP scanner: <a href="https://github.com/trailofbits/onesixtyone">https://github.com/trailofbits/onesixtyone</a></p>
+        <pre><code class="language-sh">$ onesixtyone -c dict.txt <span class="hljs-number">192.168</span>.<span class="hljs-number">0.1</span>
+        </code></pre>
+        <p>Try other dictionaries as well.<br>
+        To have better chances in guessing community strings, try add your own ideas like <code>tntech-public or tntech-private</code>.<br>
+        In Metasploit:</p>
+        <pre><code class="language-sh">
+use auxiliary/scanner/snmp/snmp_enum
+use /auxiliary/scanner/snmp/snmp_enumshares
+        </code></pre>
+        <h3><a id="What_About_TCPWrapped_Services_71"></a>What About TCP-Wrapped Services?</h3>
+        <p>TCP Wrapper is a host-based network access control mechanism in Unix-based systems.<br>
+        When we nmap a host, we will see tcpwrapped services like this (from Book: Building Virtual Pentesting Labs for Advanced Penetration Testing - Second Edition):<br>
+        <img src="tcpwrapped.jpg" alt=""><br>
+        There are two files that take care of it: <code>/etc/hosts.allow</code> and <code>/etc/hosts.deny</code>.</p>
+        <h3>How to Know Service Version that is Filtered</h3>
+        <p>For example, for SSH, we can run <code>nc</code> with <code>-p</code> option that defines where the traffic is coming from:</p>
+        <code>nc -p 20 IP_ADDR 22</code>
+        <h3><a id="Advices_to_Your_Customers_77"></a>Advices to Your Customers</h3>
+        <ul>
+        <li>Don’t use typical names for DNS, mail, prod, dev, etc.</li>
+        <li>Port knocking for the win</li>
+        <li>Have a dummy service (like telnet) and if somebody is trying to connect their, block them</li>
+        <li>Have an IDS and IPS in place, just for the sake of it</li>
+        <li>Change your default SNMP community strings, don’t give info to the attackers</li>
+        </ul>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../js/jquery.min.js"><\/script>')</script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
