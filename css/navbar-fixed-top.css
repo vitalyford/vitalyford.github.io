@@ -59,6 +59,7 @@ code {
 
 .custom-table {
 	text-align: center;
+  vertical-align: middle !important;
 }
 
 .course1 {
@@ -71,6 +72,10 @@ code {
 
 .course3 {
   background-color: #ded;
+}
+
+.RandD {
+  background-color: #e3b5b5;
 }
 
 .style-2901 {
