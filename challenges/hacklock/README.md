@@ -12,8 +12,8 @@ Example use
 Copy the _img,_script and _style folders to your hosting  
 Copy these 2 lines in your HTML source  
 
-&lt;link rel="stylesheet" type="text/css" href="_style/patternlock.css"/>  
-&lt;script src="_script/patternlock.js">&lt;/script>  
+&lt;link rel="stylesheet" type="text/css" href="./style/patternlock.css"/>  
+&lt;script src="./script/patternlock.js">&lt;/script>  
 
 give your password input element the className "patternlock"  
 e.g. &lt;input type="password" name="password" class="patternlock">
