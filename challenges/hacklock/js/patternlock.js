@@ -290,7 +290,7 @@ var patternLock = (function () {
                 var doSubmit = true;
                 if (document.forms[0].onsubmit){ doSubmit = document.forms[0].onsubmit() }
                 if(doSubmit){
-                    document.forms[0].submit();
+                    //document.forms[0].submit();
                 }
             }
         }
