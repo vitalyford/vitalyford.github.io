@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="text-center">
+        <p class="lead">
+            <a class="p-lr-10" href="https://linkedin.com/in/vitalyford" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            <a class="p-lr-10" href="https://github.com/vitalyford" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a class="p-lr-10" href="https://www.arcadia.edu/profile/vitaly-ford" target="_blank" rel="noopener noreferrer"><i class="fas fa-university"></i></a>
+        </p>
+        <hr>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a350602185.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+{% if page.name == "contact.html" %}
+<script>
+function copyToClipboard(text, el) {
+    var copyTest = document.queryCommandSupported('copy');
+    var elOriginalText = el.attr('data-original-title');
+
+    if (copyTest === true) {
+        var copyTextArea = document.createElement("textarea");
+        copyTextArea.value = text;
+        document.body.appendChild(copyTextArea);
+        copyTextArea.select();
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'Copied!' : 'Whoops, not copied!';
+            el.attr('data-original-title', msg).tooltip('show');
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        document.body.removeChild(copyTextArea);
+        el.attr('data-original-title', elOriginalText);
+    } 
+    else {
+        // Fallback if browser doesn't support .execCommand('copy')
+        window.prompt("Copy to clipboard: Ctrl+C or Command+C, Enter", text);
+    }
+}
+
+$(document).ready(function() {
+    $('.js-tooltip').tooltip();
+    $('.js-copy').click(function() {
+        var text = $(this).attr('data-copy');
+        var el = $(this);
+        copyToClipboard(text, el);
+    });
+});
+</script>
+{% endif %}
+<script>
+// ===== Scroll to Top ==== 
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+        $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+});
+$('#return-to-top').click(function() {      // When arrow is clicked
+    $('body,html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+});
+</script>

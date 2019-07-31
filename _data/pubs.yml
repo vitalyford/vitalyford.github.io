@@ -1,0 +1,55 @@
+- year: 2019
+  papers:
+    - name: "V. Ford and A.Siraj, \"GenCyberCoin: An Engaging, Customizable, and Gamified Web Platform for Cybersecurity Summer Camps and Classrooms\", accepted, Journal of Computing Sciences in Colleges, October 2019."
+      url: "/papers/Ford Siraj GenCyberCoin.pdf"
+
+    - name: "EPOC, Arcadia University, KINBER, PennState, \"White Paper: Arcadia University Bioinformatics Application Deep Dive\", July 2019."
+      url: "/papers/20190722-EPOC-Report-Arcadia.pdf"
+
+- year: 2018
+  papers:
+    - name: "A. Tarasyev, V. Ford, V. Turygina, and A. Dolganov, \"Optimization of Information Resources in The Industrial Ecology\", in Proceedings of the 17th IFAC Workshop on Control Applications of Optimization, Yekaterinburg, Russia, October 15-19, 2018."
+      url: "/papers/Optimization fo Information Resources in the Industrial Ecology.pdf"
+
+    - name: "I. Sachkov, A. Dolganov, V. Ford, and V. Turygina, \"The Features of the Presentation of the Topic \"Synergism of the Economics\" For Students of Information Technologies\", in Proceedings of the 17th IFAC Workshop on Control Applications of Optimization, Yekaterinburg, Russia, October 15-19, 2018."
+      url: "/papers/The Features of the Presentation of the Topic Synergism of the Economics.pdf"
+
+    - name: "V. Ford, D. Tyler, and A. Siraj, \"AMIsim: Application-layer Advanced Metering Infrastructure Simulation Framework for Secure Communication Protocol Performance Evaluation\", in Proceedings of the 11th USENIX Workshop on Cyber Security Experimentation and Test (CSET), August 2018."
+      url: "/papers/Ford Tyler Siraj AMIsim.pdf"
+
+    - name: "K. Rabieh, M. Pan, Z. Han, and V. Ford, \"SRPV: A Scalable Revocation Scheme for Pseudonyms-based Vehicular Ad Hoc Networks\", in Proceedings of the IEEE ICC 2018 Communication and Information Systems Security Symposium, May 2018."
+      url: "/papers/A Scalable Revocation Scheme for Pseudonyms-based Vehicular Ad Hoc Networks.pdf"
+
+- year: 2017
+  papers:
+    - name: "V. Ford, A. Siraj, A. Haynes, and E. L. Brown, \"Capture the Flag Unplugged: An Offline Cyber Competition\", in Proceedings of the ACM Special Interest Group on Computer Science Education (SIGCSE) 2017."
+      url: "/papers/Ford Siraj CTF-unplugged.pdf"
+
+- year: 2016
+  papers:
+    - name: "V. Ford, A. Siraj, and M. A. Rahman, \"Secure and Efficient Protection of Consumer Privacy in Advanced Metering Infrastructure Supporting Fine-grained Data Analysis\", Journal of Computer and System Sciences (Rank A*), in Press, July 2016."
+      url: "/papers/Ford Siraj Rahman Privacy-Preserving Protocol for AMI.pdf"
+
+- year: 2015
+  papers:
+    - name: "V. Ford and A. Siraj, \"POSTER: Reliable and efficient protection of consumer privacy in Advanced Metering Infrastructure\", Institute for Computer Sciences, Social Informatics and Telecommunications Engineering 2015 B. Thuraisingham et al. (Eds.): SecureComm 2015, LNICST 164, pp. 563–566, 2015."
+      url: "/papers/Ford Siraj SecureComm 2015 extended abstract.pdf"
+
+    - name: "C. Cody, V. Ford, and A. Siraj, \"Decision Tree Learning for Fraud Detection in Consumer Energy Consumption\", in Proceedings of the 14th IEEE International Conference on Machine Learning and Applications, December 9-11, 2015."
+      url: "/papers/Cody Ford Siraj fraud detection.pdf"
+
+    - name: "V. Ford, \"POSTER: Reliable and efficient protection of consumer privacy in Advanced Metering Infrastructure\", New York Institute of Technology Annual Cybersecurity Conference, September 24, 2015."
+      url: ""
+    
+- year: 2014
+  papers:
+    - name: "V. Ford, A. Siraj, and W. Eberle, \"Smart Grid Energy Fraud Detection Using Artificial Neural Networks\", in Proceedings of the 2014 IEEE Symposium Series on Computational Intelligence, December 9-12, 2014."
+      url: "/papers/IEEE SSCI CIASG proceedings Ford Siraj Eberle.pdf"
+
+    - name: "V. Ford and A. Siraj, \"Applications of Machine Learning in Cyber Security\", in Proceedings of the 27th International Conference on Computer Applications in Industry and Engineering, October 13-15, 2014."
+      url: "/papers/Ford Siraj Machine Learning in Cyber Security final manuscript.pdf"
+
+- year: 2013
+  papers:
+    - name: "V. Ford and A. Siraj, \"Clustering of smart meter data for disaggregation\", in Proceedings of IEEE Global Conference on Signal and Information Processing, December 3-5, 2013."
+      url: "/papers/For Siraj GlobalSIP Clustering for disaggregation of smart meter data.pdf"

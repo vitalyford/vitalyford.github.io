@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include header.html %}
+
+  <body>
+
+    {% include menu.html %}
+
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron" style="word-wrap: break-word;">
+        <h2>
+            {% if page.image_src %}<img src="{{ page.image_src }}" class="img-responsive img-square left thumb-profile" alt="{{ page.alt_text }}"/>{% endif %}
+            <code> &gt;&gt; {{ page.title }}</code>
+        </h2>
+        <br>
+        {{ content }}
+      </div>
+    </div> <!-- /container -->
+
+    {% include footer.html %}
+
+  </body>
+</html>
