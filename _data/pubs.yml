@@ -1,6 +1,9 @@
 - year: 2019
   papers:
-    - name: "V. Ford and A.Siraj, \"GenCyberCoin: An Engaging, Customizable, and Gamified Web Platform for Cybersecurity Summer Camps and Classrooms\", accepted, Journal of Computing Sciences in Colleges, October 2019."
+    - name: "I. Sachkov, V. Turygina, and V. Ford, \"Development of FEM Programs for Assessing the Risk of Electrical Breakdown of Devices Operating in High Humidity Conditions\", in Proceedings of the 45th International Conference on Application of Mathematics in Engineering and Economics, 2172, 080013 (2019)."
+      url: "/papers/FEM-programs.pdf"
+
+    - name: "V. Ford and A. Siraj, \"GenCyberCoin: An Engaging, Customizable, and Gamified Web Platform for Cybersecurity Summer Camps and Classrooms\", the Journal of Computing Sciences in Colleges, 35th CCSC-EA, 35.3 (2019): 87-96."
       url: "/papers/Ford Siraj GenCyberCoin.pdf"
 
     - name: "EPOC, Arcadia University, KINBER, PennState, \"White Paper: Arcadia University Bioinformatics Application Deep Dive\", July 2019."
@@ -25,9 +28,7 @@
     - name: "V. Ford, A. Siraj, A. Haynes, and E. L. Brown, \"Capture the Flag Unplugged: An Offline Cyber Competition\", in Proceedings of the ACM Special Interest Group on Computer Science Education (SIGCSE) 2017."
       url: "/papers/Ford Siraj CTF-unplugged.pdf"
 
-- year: 2016
-  papers:
-    - name: "V. Ford, A. Siraj, and M. A. Rahman, \"Secure and Efficient Protection of Consumer Privacy in Advanced Metering Infrastructure Supporting Fine-grained Data Analysis\", Journal of Computer and System Sciences (Rank A*), in Press, July 2016."
+    - name: "V. Ford, A. Siraj, and M. A. Rahman, \"Secure and Efficient Protection of Consumer Privacy in Advanced Metering Infrastructure Supporting Fine-grained Data Analysis\", Journal of Computer and System Sciences (Rank A*), 83.1 (2017): 84-100."
       url: "/papers/Ford Siraj Rahman Privacy-Preserving Protocol for AMI.pdf"
 
 - year: 2015
