@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "name": "Adobe Summit",
+            "lat": 36.122740,
+            "lon": -115.166068,
+            "decision": "online"
+        },
+        {
+            "name": "Aruba Networks Atmosphere",
+            "lat": 36.113683,
+            "lon": -115.182262,
+            "decision": "online"
+        },
+        {
+            "name": "CanSecWest",
+            "lat": 49.280902,
+            "lon": -123.126538,
+            "decition": "convene"
+        }
+    ]
+}
