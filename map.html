@@ -138,7 +138,7 @@
             });
 
             // add legend
-            var legend = L.control({position: 'topleft'});
+            var legend = L.control({position: 'topright'});
             legend.onAdd = function(map) {
                 var div = L.DomUtil.create('div', 'info legend');
                 div.innerHTML += '<i style="background: #F54242"></i> Meeting is convening<br><i style="background: #00AD2B"></i> Meeting went virtual<br><i style="background: #030FFC"></i> Unknown or postponed';
