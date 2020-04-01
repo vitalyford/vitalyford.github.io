@@ -1,3 +1,8 @@
+- year: 2020
+  papers:
+    - name: "D. Brown, V. Ford, S. Ghafoor, \"A Framework for the Evaluation of Parallel and Distributed Computing Education Resources\", in Proceedings of the 34th IEEE International Parallel and Distributed Processing Symposium, EduPar NSF/TCPP Workshop on Parallel and Distributed Computing Education"
+      url: "/papers/pdc-framework.pdf"
+
 - year: 2019
   papers:
     - name: "I. Sachkov, V. Turygina, and V. Ford, \"Development of FEM Programs for Assessing the Risk of Electrical Breakdown of Devices Operating in High Humidity Conditions\", in Proceedings of the 45th International Conference on Application of Mathematics in Engineering and Economics, 2172, 080013 (2019)."
