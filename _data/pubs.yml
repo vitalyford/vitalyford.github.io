@@ -1,6 +1,6 @@
 - year: 2020
   papers:
-    - name: "D. Brown, V. Ford, S. Ghafoor, \"A Framework for the Evaluation of Parallel and Distributed Computing Education Resources\", in Proceedings of the 34th IEEE International Parallel and Distributed Processing Symposium, EduPar NSF/TCPP Workshop on Parallel and Distributed Computing Education"
+    - name: "D. Brown, V. Ford, S. Ghafoor, \"A Framework for the Evaluation of Parallel and Distributed Computing Education Resources\", in Proceedings of the 34th IEEE International Parallel and Distributed Processing Symposium, EduPar NSF/TCPP Workshop on Parallel and Distributed Computing Education, May 18, 2020."
       url: "/papers/pdc-framework.pdf"
 
 - year: 2019
