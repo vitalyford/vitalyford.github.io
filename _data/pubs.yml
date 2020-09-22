@@ -1,5 +1,11 @@
 - year: 2020
   papers:
+    - name: "C. Kolb, J. Strouse, J. Palmer, V. Ford, V. Turygina, \"Cyber Securing the Future\", in Proceedings of the 18th International Conference of Numerical Analysis and Applied Mathematics, the 4th Symposium on Mathematical Methods in Economics and Nature Use, September 21, 2020."
+      url: "/papers/ICNAAM_CyberSecuringTheFuture.pdf"
+
+    - name: "A. Pressman, T. Ramdass, P. Walls, V. Ford, V. Turygina, \"Utilizing Virtual Reality Game Design to Improve Problem Solving and Logical Thinking Skills\", in Proceedings of the 18th International Conference of Numerical Analysis and Applied Mathematics, the 4th Symposium on Mathematical Methods in Economics and Nature Use, September 21, 2020."
+      url: "/papers/ICNAAM_VirtualReality.pdf"
+    
     - name: "D. Brown, V. Ford, S. Ghafoor, \"A Framework for the Evaluation of Parallel and Distributed Computing Education Resources\", in Proceedings of the 34th IEEE International Parallel and Distributed Processing Symposium, EduPar NSF/TCPP Workshop on Parallel and Distributed Computing Education, May 18, 2020."
       url: "/papers/pdc-framework.pdf"
 
