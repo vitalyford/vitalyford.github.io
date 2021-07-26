@@ -1,3 +1,14 @@
+- year: 2021
+  papers:
+    - name: "A. Ibrahim and V. Ford, \"Observations, Evaluations, and Recommendations for DETERLab from an Educational Perspective\", Journal of Cybersecurity Education, Research and Practice: Vol. 2021: No. 1, Article 4."
+      url: "/papers/ibrahim-ford-deterlab-eval.pdf"
+
+    - name: "M. Zhang, G. Zhang, S. Zhang, Z. Liu, V. Ford, V. Turygina, \"Application of Data-Driven Measures for Impeding COVID-19 Spread at an Academic Institution\", in Proceedings of IVUS 2021: 26th International Conference Information Society and University Studies, April 23, 2021."
+      url: "/papers/Data-driven-Measures-COVID-19.pdf"
+
+    - name: "M. Zhang, G. Zhang, S. Zhang, Z. Liu, V. Ford, V. Turygina, \"Analysis and Methodology of Inhibiting COVID-19 Spread on a University Campus\", in Proceedings of IVUS 2021: 26th International Conference Information Society and University Studies, April 23, 2021."
+      url: "/papers/Analysis-and-Methodology-COVID-19.pdf"
+
 - year: 2020
   papers:
     - name: "C. Kolb, J. Strouse, J. Palmer, V. Ford, V. Turygina, \"Cyber Securing the Future\", in Proceedings of the 18th International Conference of Numerical Analysis and Applied Mathematics, the 4th Symposium on Mathematical Methods in Economics and Nature Use, September 21, 2020."
