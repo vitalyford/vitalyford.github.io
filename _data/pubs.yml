@@ -1,3 +1,16 @@
+- year: 2023
+  papers:
+    - name: "A. Ibrahim and V. Ford, \"Recommendations for Developing More Usable and Effective Hands-on Cybersecurity Education Materials Based on Critical Evaluation Criteria,\" Cybersecurity Pedagogy and Practice Journal: Vol. 2, No. 2. URL: Sep. 2023."
+      url: "/papers/Recommendations for Developing More Usable and Effective Cybersecurity Materials.pdf"
+
+    - name: "J. Collins and V. Ford, \"Teaching by Practice: Shaping Secure Coding Mentalities through Cybersecurity CTFs,\" Journal of Cybersecurity Education, Research and Practice: Vol. 2022. Jan. 2023."
+      url: "/papers/Shaping Secure Coding Mentalities through Cybersecurity CTFs.pdf"
+
+- year: 2022
+  papers:
+    - name: "L. Zhang, R. Kong, H. Wang, and V. Ford, \"Demystifying Long-Short Term Memory Model to Predict Stock Prices,\" poster presentation and extended abstract publication, 38th CCSC Eastern Regional Conference 2022."
+      url: "/papers/Demystifying Long-Short Term Memory to Predict Stock Prices.pdf"
+
 - year: 2021
   papers:
     - name: "A. Ibrahim and V. Ford, \"Observations, Evaluations, and Recommendations for DETERLab from an Educational Perspective\", Journal of Cybersecurity Education, Research and Practice: Vol. 2021: No. 1, Article 4."
