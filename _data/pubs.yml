@@ -1,3 +1,10 @@
+- year: 2024
+  papers:
+    - name: "A. Ibrahim and V. Ford, \"Developing More Usable and Effective Hands-on Cybersecurity Education Materials\", 2024 National Initiative for Cybersecurity Education Conference and Expo, June 4-5, 2024."
+      url: "#"
+    - name: "L. Zhang, Z. Chen, V. Ford, P. Xu, \"Advancing Building Energy Modeling with Large Language Models: Exploration and Case Studies\", IBPSA USA SimBuild, May 2024."
+      url: "/papers/Advancing Building Energy Modeling with Large Language Models.pdf"
+
 - year: 2023
   papers:
     - name: "A. Ibrahim and V. Ford, \"Recommendations for Developing More Usable and Effective Hands-on Cybersecurity Education Materials Based on Critical Evaluation Criteria,\" Cybersecurity Pedagogy and Practice Journal: Vol. 2, No. 2. URL: Sep. 2023."
