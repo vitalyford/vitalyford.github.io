@@ -1,3 +1,8 @@
+- year: 2025
+  papers:
+    - name: "L. Zhang, V. Ford, Z. Chen, and J. Chen, \"Automatic Building Energy Model Development and Debugging Using Large Language Models Agentic Workflow\", Energy and Buildings: Vol. 327. Jan. 2025."
+      url: "/papers/Automatic Building Energy Model Development and Debugging.pdf"
+
 - year: 2024
   papers:
     - name: "A. Ibrahim and V. Ford, \"Developing More Usable and Effective Hands-on Cybersecurity Education Materials\", 2024 National Initiative for Cybersecurity Education Conference and Expo, June 4-5, 2024."
