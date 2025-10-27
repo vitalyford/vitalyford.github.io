@@ -56,6 +56,9 @@
     - name: "EPOC, Arcadia University, KINBER, PennState, \"White Paper: Arcadia University Bioinformatics Application Deep Dive\", July 2019."
       url: "/papers/20190722-EPOC-Report-Arcadia.pdf"
 
+    - name: "Addleman, H., Bare, Z., Flint, M., Ford, V., Hamm, K., Margolis, L., Miller, K., Oxenford, J., Reinhard, S., Zottola, J. and Zurawski, J., \"Arcadia University Bioinformatics Application Deep Dive\". 2019. (No. UCPMS-2568399; LBNL-2001317). Lawrence Berkeley National Lab.(LBNL), Berkeley, CA"
+      url: "https://escholarship.org/content/qt1196z33x/qt1196z33x.pdf"
+
 - year: 2018
   papers:
     - name: "A. Tarasyev, V. Ford, V. Turygina, and A. Dolganov, \"Optimization of Information Resources in The Industrial Ecology\", in Proceedings of the 17th IFAC Workshop on Control Applications of Optimization, Yekaterinburg, Russia, October 15-19, 2018."
