@@ -49,7 +49,7 @@ export default function PageHeader({ title, subtitle, imageSrc, altText }: PageH
             }}
           >
             {title}
-            <span className="terminal-cursor" />
+            <span className="cyber-indicator" />
           </h1>
           {subtitle && (
             <p

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { GitHubCalendar } from "react-github-calendar";
+import GitHubActivityFun from "@/components/GitHubActivityFun";
 
 interface Project {
   title: string;
@@ -32,14 +32,25 @@ const featuredProjects: Project[] = [
     badge: "Open Source",
   },
   {
-    title: "CTF Unplugged",
-    description: "An unplugged version of a Capture The Flag competition for K-12",
-    href: "/ctf-unplugged/CTF_Unplugged_May_2019.docx",
-    badge: "K-12",
+    title: "Zero-trust Infrastructure",
+    description: "Zero-trust network with 30+ applications secured via Cloudflare Access",
+    href: "https://vford.cloudflareaccess.com",
+    badge: "Security",
   },
 ];
 
 const achievements: Achievement[] = [
+  {
+    title: "CCSC-Eastern Co-Chair",
+    description: "General Chair for the 38th Annual Eastern Regional Conference",
+    year: "2025",
+  },
+  {
+    title: "Ally Award",
+    description: "Women in Cybersecurity (WiCyS) Ally Award Winner",
+    href: "https://www.wicys.org/awards/",
+    year: "2024",
+  },
   {
     title: "NSF SaTC: EDU Grant Co-PI",
     description: "Cybersecurity Faculty Development for High School Teachers",
@@ -47,133 +58,175 @@ const achievements: Achievement[] = [
     year: "2023-2026",
   },
   {
+    title: "Professor of the Year",
+    description: "Arcadia University's most prestigious teaching award",
+    year: "2022",
+  },
+  {
     title: "NSF Cyberinfrastructure Grant Co-PI",
     description: "New Campus Science & Education Network at Arcadia",
     href: "https://www.arcadia.edu/news/2018/09/margolis-dr-ford-awarded-nsf-grant-new-campus-science-education-network-0",
     year: "2018-2020",
   },
-  {
-    title: "GenCyberCoin Subawards PI",
-    description: "Multiple years of NSA/NSF GenCyber program sponsorship",
-    year: "2018-2020",
-  },
-  {
-    title: "First CS Ph.D. in Cybersecurity",
-    description: "Tennessee Tech's first computer science Ph.D. graduate in cybersecurity",
-    href: "https://www.tntech.edu/news/releases/tennessee-tech%E2%80%99s-impact-on-cybersecurity-continues-to-expand-with-first-ph.d.-graduate",
-  },
 ];
 
 const stats = [
-  { label: "Publications", value: "20+" },
+  { label: "Publications", value: "27" },
   { label: "Citations", value: "718", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
-  { label: "Years Teaching", value: "10+" },
-  { label: "NSF Grants", value: "3" },
-  { label: "CTF Teams Coached", value: "50+" },
+  { label: "Education Focus", value: "10+ Yrs" },
+  { label: "Funding Awards", value: "8", description: "NSF & Internal" },
+  { label: "Teams Coached", value: "50+" },
 ];
 
 export default function Home() {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section style={{ padding: "2rem 0 4rem" }}>
+      <section style={{ padding: "4rem 0 6rem" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "3rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "4rem",
             alignItems: "center",
           }}
         >
-          {/* Hero Content */}
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "2rem", flexWrap: "wrap", marginBottom: "2rem" }}>
-              <div className="profile-image-wrapper">
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Vitaly Ford"
-                  width={160}
-                  height={160}
-                  className="profile-image"
-                  style={{ objectFit: "cover", width: "160px", height: "160px" }}
-                  priority
-                />
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-mono), monospace",
-                    color: "var(--cyber-green)",
-                    fontSize: "0.9rem",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  $ whoami
-                </p>
-                <h1
-                  className="hero-title"
-                  style={{
-                    fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                    fontWeight: 700,
-                    lineHeight: 1.1,
-                    marginBottom: "0",
-                  }}
-                >
-                  <span className="text-gradient">Vitaly Ford</span>
-                </h1>
-              </div>
+          {/* Left Column: Content */}
+          <div className="animate-slide-up">
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                padding: "0.4rem 0.8rem",
+                background: "rgba(0, 245, 255, 0.05)",
+                border: "1px solid var(--cyber-cyan-glow)",
+                borderRadius: "50px",
+                marginBottom: "1.5rem",
+              }}
+            >
+              <div
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  background: "var(--cyber-green)",
+                  boxShadow: "0 0 10px var(--cyber-green)",
+                }}
+              />
+              <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                Status: Human-in-the-loop
+              </span>
             </div>
+
+            <h1
+              className="hero-title"
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 4.25rem)",
+                fontWeight: 700,
+                lineHeight: 1.05,
+                marginBottom: "1.5rem",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Vitaly Ford
+            </h1>
 
             <h2
               style={{
                 fontFamily: "var(--font-mono), monospace",
-                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                fontSize: "clamp(1rem, 2.5vw, 1.4rem)",
                 color: "var(--cyber-cyan)",
-                marginBottom: "1.5rem",
+                marginBottom: "2rem",
                 fontWeight: 500,
+                display: "flex",
+                alignItems: "center",
+                whiteSpace: "nowrap",
+                flexWrap: "nowrap",
+                width: "fit-content",
               }}
             >
               &gt;&gt; Discover Innovation → Deliver Success
-              <span className="terminal-cursor" />
+              <span className="cyber-indicator" />
             </h2>
 
             <p
               style={{
                 fontSize: "1.1rem",
                 color: "var(--text-secondary)",
-                lineHeight: 1.8,
-                maxWidth: "700px",
-                marginBottom: "1.5rem",
+                lineHeight: 1.7,
+                maxWidth: "600px",
+                marginBottom: "2.5rem",
               }}
             >
-              Associate Professor at{" "}
+              Associate Professor and Program Coordinator at{" "}
               <a href="https://www.arcadia.edu/profile/vitaly-ford" target="_blank" rel="noopener noreferrer">
                 Arcadia University
-              </a>
-              , specializing in <strong style={{ color: "var(--text-primary)" }}>Smart Grid Security</strong>,{" "}
-              <strong style={{ color: "var(--text-primary)" }}>Machine Learning</strong>, and{" "}
-              <strong style={{ color: "var(--text-primary)" }}>Cybersecurity Education</strong>.
+              </a>. Co-founder and CTO at Citodex Technology Ltd.
+              <br />
+              <span style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginTop: "1rem", display: "block" }}>
+                Specializing in Smart Grid Security, Machine Learning, and Cybersecurity Education.
+              </span>
             </p>
 
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "2rem" }}>
-              Director of Cybersecurity R&D at the{" "}
-              <a href="https://cyberstudents.org/" target="_blank" rel="noopener noreferrer">
-                National Cybersecurity Student Association
-              </a>{" "}
-              and Global Student Chapter Coordinator for{" "}
-              <a href="https://www.wicys.org/" target="_blank" rel="noopener noreferrer">
-                Women in Cybersecurity
-              </a>
-              .
-            </p>
-
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/research" className="cyber-btn cyber-btn-primary">
+            <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
+              <Link href="/research" className="cyber-btn cyber-btn-primary" style={{ padding: "0.875rem 2rem" }}>
                 <span>View Research</span>
               </Link>
-              <Link href="/contact" className="cyber-btn">
+              <Link href="/contact" className="cyber-btn" style={{ padding: "0.875rem 2rem" }}>
                 <span>Get in Touch</span>
               </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Profile Image */}
+          <div className="animate-fade-in" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
+            <div className="circuit-glow">
+              <div
+                className="profile-image-wrapper"
+                style={{
+                  padding: "6px",
+                  background: "var(--cyber-surface)",
+                  borderRadius: "16px",
+                  boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
+                }}
+              >
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Vitaly Ford"
+                  width={320}
+                  height={320}
+                  className="profile-image"
+                  style={{
+                    objectFit: "cover",
+                    width: "320px",
+                    height: "320px",
+                    borderRadius: "12px",
+                  }}
+                  priority
+                />
+              </div>
+
+              {/* Decorative Tech Overlay Tags */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "-20px",
+                  right: "-20px",
+                  background: "var(--cyber-surface)",
+                  border: "1px solid var(--cyber-border)",
+                  padding: "0.75rem 1rem",
+                  borderRadius: "8px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.25rem",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                  backdropFilter: "blur(10px)",
+                }}
+              >
+                <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
+                <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>AI Agentic Architectures</span>
+              </div>
             </div>
           </div>
         </div>
@@ -236,16 +289,7 @@ export default function Home() {
       <section style={{ padding: "2rem 0" }}>
         <h2 className="section-heading">GitHub Activity</h2>
         <div className="cyber-card" style={{ padding: "1.5rem", overflow: "hidden" }}>
-          <GitHubCalendar
-            username="vitalyford"
-            colorScheme="dark"
-            fontSize={12}
-            blockSize={12}
-            blockMargin={4}
-            theme={{
-              dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#00f5ff"],
-            }}
-          />
+          <GitHubActivityFun username="vitalyford" />
         </div>
       </section>
 
@@ -350,10 +394,10 @@ export default function Home() {
       <section style={{ padding: "2rem 0" }}>
         <h2 className="section-heading">Beyond the Code</h2>
 
-        <p style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
-          In my spare time, I enjoy playing table tennis and chess as well as participating in{" "}
-          <strong style={{ color: "var(--text-primary)" }}>Capture the Flag competitions</strong> and
-          coaching student cybersecurity and programming teams.
+        <p style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+          When not teaching or building AI agents, I enjoy playing table tennis and chess. I am an active{" "}
+          <span style={{ color: "var(--text-primary)" }}>bug bounty hunter</span> (Oracle Cloud) and
+          mentor student cybersecurity teams for the National Cyber League.
         </p>
       </section>
 

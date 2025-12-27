@@ -37,16 +37,13 @@ export default function Schedule() {
           </div>
 
           <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem", lineHeight: 1.7 }}>
-            My schedule tends to be in an <strong style={{ color: "var(--cyber-cyan)" }}>unstable version</strong>.
+            My schedule tends to be in an <span style={{ color: "var(--cyber-cyan)" }}>unstable version</span>.
             <br />
-            Email or Discord is the best way to reach me and set up a meeting.
+            Email or Discord is the best way to reach me and set up a meeting if there are no appointments below.
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <a href="/contact" className="cyber-btn cyber-btn-primary">
-              <span>Contact Me</span>
-            </a>
-            <a href="/et" className="cyber-btn">
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <a href="/et" className="cyber-btn cyber-btn-primary">
               <span>Schedule Meeting</span>
             </a>
           </div>

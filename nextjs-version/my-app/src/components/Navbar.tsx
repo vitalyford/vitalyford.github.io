@@ -121,7 +121,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: "0.125rem" }}>
+          <div className="nav-desktop">
             {mainLinks.map((link) =>
               link.external ? (
                 <a
