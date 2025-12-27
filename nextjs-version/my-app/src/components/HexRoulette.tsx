@@ -75,10 +75,11 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
             initial={{
                 opacity: 0,
                 scale: 0.9,
-                y: displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0)
+                y: displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0),
+                x: isTooltip ? "-50%" : 0
             }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1, y: 0, x: isTooltip ? "-50%" : 0 }}
+            exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
             className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
             style={{
                 fontSize: "0.85rem",
@@ -103,11 +104,11 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     minWidth: "200px",
                     ...(displayMode === "tooltip-bottom" ? {
                         top: "100%",
-                        left: "0",
+                        left: "50%",
                         marginTop: "0.75rem",
                     } : {
                         bottom: "100%",
-                        left: "0",
+                        left: "50%",
                         marginBottom: "0.75rem",
                     })
                 } : {})

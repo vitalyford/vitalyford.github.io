@@ -78,7 +78,7 @@ export default function Home() {
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
     { label: "Citations", value: "718", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
-    { label: "Education Focus", value: `${yearsActive} Yrs` },
+    { label: "Education and Tech Focus", value: `${yearsActive} Yrs` },
     { label: "Funding Awards", value: "8", description: "NSF & Internal" },
     { label: "Teams Coached", value: "50+" },
   ];
