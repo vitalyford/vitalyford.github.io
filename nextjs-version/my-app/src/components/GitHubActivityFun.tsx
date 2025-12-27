@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -14,6 +14,8 @@ interface ContributionDay {
     contributionCount: number;
     contributionLevel: "NONE" | "FIRST_QUARTILE" | "SECOND_QUARTILE" | "THIRD_QUARTILE" | "FOURTH_QUARTILE" | string;
     date: string;
+    x: number; // week index
+    y: number; // day index
 }
 
 interface ContributionsData {
@@ -25,27 +27,102 @@ interface GitHubActivityFunProps {
     username: string;
 }
 
+interface LogEntry {
+    id: string;
+    msg: string;
+    type: "info" | "success" | "warning" | "error";
+    timestamp: number;
+}
+
 export default function GitHubActivityFun({ username }: GitHubActivityFunProps) {
     const [data, setData] = useState<ContributionsData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [pacmanPos, setPacmanPos] = useState({ x: 0, y: 0 });
-    const [pacmanDir, setPacmanDir] = useState<"right" | "left" | "up" | "down">("right");
-    const [hasEaten, setHasEaten] = useState<string[]>([]); // Array of dates eaten
+    const [currentNode, setCurrentNode] = useState<{ x: number; y: number } | null>(null);
+    const [visitedDates, setVisitedDates] = useState<Set<string>>(new Set());
+    const [pathHistory, setPathHistory] = useState<{ x: number; y: number }[]>([]);
+    const [logs, setLogs] = useState<LogEntry[]>([]);
     const [isAuto, setIsAuto] = useState(true);
-    const [targetPos, setTargetPos] = useState<{ x: number; y: number } | null>(null);
-    const [hackerMode, setHackerMode] = useState(false);
+    const [targetNode, setTargetNode] = useState<{ x: number; y: number } | null>(null);
     const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+    const [hackerMode, setHackerMode] = useState(false);
+
+    const [activeMessage, setActiveMessage] = useState("Initializing neural subnet...");
+
+    const funMessages = [
+        "Decrypting contribution metadata...",
+        "Feeding the commit monster...",
+        "Recalibrating flux capacitors...",
+        "Optimizing TSP heuristic paths...",
+        "Scanning for high-intensity nodes...",
+        "Bypassing firewall sequence...",
+        "Injection of neural packets successful.",
+        "Harvesting green pixels...",
+        "Syncing biometric data stream...",
+        "Quantizing commit history...",
+        "Rerouting local traffic through proxy...",
+        "Compiling holographic output...",
+        "Neural Link stable. Monitoring...",
+        "Calibrating quantum commit oscillators...",
+        "Intercepting pull request packets...",
+        "Analyzing repository heat signatures...",
+        "Synthesizing contribution isotopes...",
+        "Overclocking the recursive crawler...",
+        "Bending the spacetime contribution continuum...",
+        "Extracting dark matter from git history...",
+        "Reconstructing fragmented commit logs...",
+        "Patching neural pathways to main branch...",
+        "Deploying decoy commits to distract AI...",
+        "Synchronizing git hooks with brain waves...",
+        "Tunneling through the contribution firewall...",
+        "Refactoring reality. Please wait...",
+        "Decoding commit hash entropy...",
+        "Purging merge conflict ghosts...",
+        "Charging the contribution capacitor...",
+        "Establishing secure handshake with GitHub API...",
+        "Tracing recursive function echoes...",
+        "Compiling destiny from source code...",
+        "Mapping the multi-repo multiverse...",
+    ];
+
+    // Derived state for only days with contributions
+    const contributionNodes = useMemo<ContributionDay[]>(() => {
+        if (!data) return [];
+        const nodes: ContributionDay[] = [];
+        data.contributions.forEach((week, x) => {
+            week.forEach((day, y) => {
+                if (day.contributionCount > 0) {
+                    nodes.push({ ...day, x, y });
+                }
+            });
+        });
+        return nodes;
+    }, [data]);
+
+    const addLog = (msg: string, type: LogEntry["type"] = "info") => {
+        setLogs((prev) => [
+            { id: Math.random().toString(36).substr(2, 9), msg, type, timestamp: Date.now() },
+            ...prev.slice(0, 5),
+        ]);
+    };
 
     useEffect(() => {
         async function fetchData() {
             try {
+                addLog("Initiating Neural Link to GitHub...", "info");
                 const response = await fetch(`https://github-contributions-api.deno.dev/${username}.json?y=last`);
-                if (!response.ok) throw new Error("Failed to fetch contribution data");
+                if (!response.ok) throw new Error("Connection Timeout");
                 const json = await response.json();
-                setData(json);
-            } catch (error) {
-                console.error("Error fetching GitHub activity:", error);
+
+                // Add coordinates to each day
+                const enrichedContributions = json.contributions.map((week: any[], x: number) =>
+                    week.map((day, y) => ({ ...day, x, y }))
+                );
+
+                setData({ ...json, contributions: enrichedContributions });
+                addLog("Biometric sequence confirmed. Data stream stable.", "success");
+            } catch (error: any) {
+                addLog(`Uplink Error: ${error.message}`, "error");
             } finally {
                 setLoading(false);
             }
@@ -53,95 +130,96 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         fetchData();
     }, [username]);
 
-    // Keyboard Controls
+    // Character Logic
     useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d"].includes(e.key)) {
-                e.preventDefault();
-                setIsAuto(false);
-                setTargetPos(null);
+        if (!data || contributionNodes.length === 0) return;
 
-                let nextDir: typeof pacmanDir = pacmanDir;
-                let nextPos = { ...pacmanPos };
-
-                if (e.key === "ArrowUp" || e.key === "w") { nextDir = "up"; nextPos.y = Math.max(0, pacmanPos.y - 1); }
-                if (e.key === "ArrowDown" || e.key === "s") { nextDir = "down"; nextPos.y = Math.min(6, pacmanPos.y + 1); }
-                if (e.key === "ArrowLeft" || e.key === "a") { nextDir = "left"; nextPos.x = Math.max(0, pacmanPos.x - 1); }
-                if (e.key === "ArrowRight" || e.key === "d") { nextDir = "right"; nextPos.x = Math.min((data?.contributions.length || 1) - 1, pacmanPos.x + 1); }
-
-                setPacmanDir(nextDir);
-                setPacmanPos(nextPos);
-
-                const day = data?.contributions[nextPos.x]?.[nextPos.y];
-                if (day && day.contributionCount > 0) {
-                    setHasEaten((prev) => [...prev.slice(-20), day.date]);
-                    if (day.contributionCount > 5) triggerHackerMode();
-                }
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [pacmanPos, data, pacmanDir]);
-
-    const triggerHackerMode = () => {
-        setHackerMode(true);
-        setTimeout(() => setHackerMode(false), 5000);
-    };
-
-    // Flatten the grid for animation traversal
-    const flattenedDays = useMemo(() => {
-        if (!data) return [];
-        return data.contributions.flat();
-    }, [data]);
-
-    // Auto-traversal or Targeting Logic
-    useEffect(() => {
-        if (!data || (!isAuto && !targetPos)) return;
+        // Initialize starting position
+        if (!currentNode) {
+            setCurrentNode({ x: 0, y: 0 });
+            return;
+        }
 
         const interval = setInterval(() => {
-            if (isAuto) {
-                const currentIndex = (pacmanPos.x * 7 + pacmanPos.y + 1) % flattenedDays.length;
-                const weekIndex = Math.floor(currentIndex / 7);
-                const dayIndex = currentIndex % 7;
+            if (!isAuto && !targetNode) return;
+            if (!currentNode) return;
 
-                if (dayIndex === 0) setPacmanDir("right");
-                else setPacmanDir("down");
+            const curr = currentNode;
+            let next: { x: number; y: number } | null = null;
 
-                setPacmanPos({ x: weekIndex, y: dayIndex });
+            if (targetNode) {
+                next = targetNode;
+                setTargetNode(null);
+                addLog(`Manual Override: Target set to [${next.x},${next.y}]`, "warning");
+                setActiveMessage("Manual override in progress...");
+            } else {
+                // TSP Heuristic: Greedy Nearest Neighbor
+                const remaining = contributionNodes.filter(n => !visitedDates.has(n.date));
 
-                const day = data.contributions[weekIndex][dayIndex];
-                if (day && day.contributionCount > 0) {
-                    setHasEaten((prev) => [...prev.slice(-20), day.date]);
-                    if (day.contributionCount > 5) triggerHackerMode();
-                }
-            } else if (targetPos) {
-                // Simple pathfinding towards target
-                const nextPos = { ...pacmanPos };
-                if (pacmanPos.x < targetPos.x) { nextPos.x++; setPacmanDir("right"); }
-                else if (pacmanPos.x > targetPos.x) { nextPos.x--; setPacmanDir("left"); }
-                else if (pacmanPos.y < targetPos.y) { nextPos.y++; setPacmanDir("down"); }
-                else if (pacmanPos.y > targetPos.y) { nextPos.y--; setPacmanDir("up"); }
-                else {
-                    setTargetPos(null);
+                if (remaining.length === 0) {
+                    addLog("Optimization Complete. Resetting Path Buffer.", "info");
+                    setVisitedDates(new Set());
+                    setPathHistory([]);
                     return;
                 }
-                setPacmanPos(nextPos);
-                const day = data.contributions[nextPos.x][nextPos.y];
-                if (day && day.contributionCount > 0) {
-                    setHasEaten((prev) => [...prev.slice(-20), day.date]);
-                    if (day.contributionCount > 5) triggerHackerMode();
+
+                // Randomly change fun message
+                if (Math.random() > 0.7) {
+                    setActiveMessage(funMessages[Math.floor(Math.random() * funMessages.length)]);
+                }
+
+                // Find nearest node with bias towards higher contribution counts
+                let minScore = Infinity;
+                let nearest: ContributionDay | null = null;
+
+                const nodesToSearch = remaining as ContributionDay[];
+                for (const node of nodesToSearch) {
+                    const dist = Math.sqrt(Math.pow(node.x - curr.x, 2) + Math.pow(node.y - curr.y, 2));
+                    // Score = distance / (1 + contributionCount * 0.1) -> bias towards higher counts
+                    const score = dist / (1 + node.contributionCount * 0.1);
+                    if (score < minScore) {
+                        minScore = score;
+                        nearest = node;
+                    }
+                }
+
+                if (nearest) {
+                    next = { x: nearest.x, y: nearest.y };
+                    setVisitedDates(prev => {
+                        const nextSet = new Set(prev);
+                        nextSet.add(nearest!.date);
+                        return nextSet;
+                    });
+
+                    if (nearest.contributionCount > 5) {
+                        setHackerMode(true);
+                        addLog(`High Intensity Node: ${nearest.contributionCount} commits detected!`, "success");
+                        setActiveMessage("ALERT: High intensity energy detected!");
+                        setTimeout(() => setHackerMode(false), 2000);
+                    } else {
+                        addLog(`Node [${next.x},${next.y}]: d=${minScore.toFixed(2)}`, "info");
+                    }
                 }
             }
-        }, hackerMode ? 60 : 150);
+
+            if (next) {
+                setCurrentNode(next);
+                setPathHistory(prev => [...prev.slice(-15), next!]);
+            }
+        }, hackerMode ? 100 : 400);
 
         return () => clearInterval(interval);
-    }, [data, isAuto, targetPos, pacmanPos, hackerMode, flattenedDays]);
+    }, [data, currentNode, visitedDates, isAuto, targetNode, contributionNodes, hackerMode]);
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center p-8 h-[200px] border border-dashed border-cyan-500/30 rounded-lg">
-                <div className="text-cyan-400 font-mono animate-pulse">Initializing Neural Link...</div>
+            <div className="flex items-center justify-center p-8 h-[400px] border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm">
+                <div className="relative">
+                    <div className="w-16 h-16 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
+                    <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono text-cyan-400 animate-pulse uppercase">
+                        Syncing...
+                    </div>
+                </div>
             </div>
         );
     }
@@ -149,177 +227,257 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     if (!data) return null;
 
     return (
-        <div className="relative w-full overflow-x-auto pb-4 pt-8 cursor-crosshair">
-            <div className="min-w-[800px] flex gap-[4px] relative">
-                {data.contributions.map((week, weekIdx) => (
-                    <div key={weekIdx} className="flex flex-col gap-[4px]">
-                        {week.map((day, dayIdx) => {
-                            const isEaten = hasEaten.includes(day.date);
-                            const isOccupied = pacmanPos.x === weekIdx && pacmanPos.y === dayIdx;
-                            const isTarget = targetPos?.x === weekIdx && targetPos?.y === dayIdx;
-                            const level = day.contributionLevel;
+        <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/20 rounded-xl border border-white/5 min-h-[450px]">
+            {/* Main Area: Grid & TSP Path */}
+            <div className="flex-1 relative overflow-hidden flex flex-col">
+                <div className="flex-1 relative overflow-x-auto pb-4 custom-scrollbar">
+                    <div className="min-w-[800px] relative pt-6 px-2">
+                        {/* SVG Layer for Path */}
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" style={{ left: 8, top: 24 }}>
+                            <defs>
+                                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="rgba(0, 245, 255, 0)" />
+                                    <stop offset="100%" stopColor="rgba(0, 245, 255, 0.5)" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <path
+                                d={pathHistory.map((p: { x: number; y: number }, i) => `${i === 0 ? 'M' : 'L'} ${p.x * 16 + 6} ${p.y * 16 + 6}`).join(' ')}
+                                fill="none"
+                                stroke="url(#pathGradient)"
+                                strokeWidth="2"
+                                strokeDasharray="4 2"
+                                filter="url(#glow)"
+                            />
+                        </svg>
 
-                            const getBgColor = (lvl: string) => {
-                                switch (lvl) {
-                                    case "FIRST_QUARTILE": return "bg-[#0e4429]";
-                                    case "SECOND_QUARTILE": return "bg-[#006d32]";
-                                    case "THIRD_QUARTILE": return "bg-[#26a641]";
-                                    case "FOURTH_QUARTILE": return "bg-[#39d353]";
-                                    default: return "bg-[#161b22]";
-                                }
-                            };
+                        <div className="flex gap-[4px] relative z-10">
+                            {data.contributions.map((week, weekIdx) => (
+                                <div key={weekIdx} className="flex flex-col gap-[4px]">
+                                    {week.map((day, dayIdx) => {
+                                        const isVisited = visitedDates.has(day.date);
+                                        const isCurrent = currentNode?.x === weekIdx && currentNode?.y === dayIdx;
+                                        const level = day.contributionLevel;
 
-                            return (
-                                <div
-                                    key={day.date}
-                                    onMouseEnter={(e) => {
-                                        setHoveredDay(day);
-                                        const rect = e.currentTarget.getBoundingClientRect();
-                                        setTooltipPos({ x: rect.left, y: rect.top });
-                                    }}
-                                    onMouseLeave={() => setHoveredDay(null)}
-                                    onClick={() => {
-                                        setIsAuto(false);
-                                        setTargetPos({ x: weekIdx, y: dayIdx });
-                                    }}
+                                        const getBgColor = (lvl: string) => {
+                                            switch (lvl) {
+                                                case "FIRST_QUARTILE": return "bg-emerald-900/40";
+                                                case "SECOND_QUARTILE": return "bg-emerald-700/60";
+                                                case "THIRD_QUARTILE": return "bg-emerald-500/80";
+                                                case "FOURTH_QUARTILE": return "bg-emerald-400";
+                                                default: return "bg-white/5";
+                                            }
+                                        };
+
+                                        return (
+                                            <div
+                                                key={day.date}
+                                                onMouseEnter={(e) => {
+                                                    setHoveredDay(day);
+                                                    const rect = e.currentTarget.getBoundingClientRect();
+                                                    setTooltipPos({ x: rect.left, y: rect.top });
+                                                }}
+                                                onMouseLeave={() => setHoveredDay(null)}
+                                                onClick={() => {
+                                                    setIsAuto(false);
+                                                    setTargetNode({ x: weekIdx, y: dayIdx });
+                                                }}
+                                                className={cn(
+                                                    "w-[12px] h-[12px] rounded-[2px] transition-all duration-300 relative group cursor-pointer",
+                                                    getBgColor(level),
+                                                    isVisited && "ring-1 ring-cyan-500/50 shadow-[0_0_8px_rgba(0,245,255,0.2)]",
+                                                    day.contributionCount > 0 && "hover:scale-125 hover:z-20",
+                                                    isCurrent && "z-30"
+                                                )}
+                                            >
+                                                {isCurrent && (
+                                                    <motion.div
+                                                        layoutId="cyber-probe"
+                                                        className="absolute -inset-1 z-40"
+                                                    >
+                                                        <div className="w-full h-full relative">
+                                                            <div className={cn(
+                                                                "absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-75"
+                                                            )} />
+                                                            <div className={cn(
+                                                                "w-full h-full rounded-sm bg-cyan-400 shadow-[0_0_15px_rgba(0,245,255,0.8)] flex items-center justify-center",
+                                                                hackerMode && "bg-white animate-pulse shadow-[0_0_20px_#fff]"
+                                                            )}>
+                                                                <div className="w-1 h-1 bg-black rounded-full" />
+                                                            </div>
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Fun Messages Area */}
+                <div className="h-10 flex items-center justify-center bg-cyan-500/5 border-y border-cyan-500/10 mt-4 overflow-hidden">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeMessage}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="text-[10px] font-mono text-cyan-400 uppercase tracking-[0.2em] italic text-center w-full"
+                        >
+                            &gt; {activeMessage}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+
+                {/* Console Log */}
+                <div className="flex flex-col gap-1.5 h-[120px] bg-black/40 p-3 mt-4 rounded-lg border border-white/5 font-mono overflow-hidden">
+                    <div className="text-[8px] text-white/40 mb-2 border-b border-white/10 pb-1 flex justify-between">
+                        <span>LIVE_CALC_STREAM_V4.2</span>
+                        <span className="animate-pulse">STREAMING_ACTIVE</span>
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                        <AnimatePresence initial={false}>
+                            {logs.map((log) => (
+                                <motion.div
+                                    key={log.id}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
                                     className={cn(
-                                        "w-[12px] h-[12px] rounded-sm transition-all duration-300 relative group cursor-pointer",
-                                        getBgColor(level),
-                                        isEaten && "ring-2 ring-cyan-400 shadow-[0_0_10px_rgba(0,245,255,0.5)] scale-110",
-                                        isTarget && "animate-ping ring-1 ring-yellow-400"
+                                        "text-[9px] leading-tight mb-1",
+                                        log.type === "success" ? "text-emerald-400" :
+                                            log.type === "warning" ? "text-yellow-400" :
+                                                log.type === "error" ? "text-rose-400" : "text-cyan-400"
                                     )}
                                 >
-                                    {isOccupied && (
-                                        <motion.div
-                                            layoutId="pacman"
-                                            className="absolute inset-0 z-10 flex items-center justify-center"
-                                        >
-                                            <div className={cn(
-                                                "w-[16px] h-[16px] rounded-full relative transition-colors duration-300",
-                                                hackerMode ? "bg-cyan-400 shadow-[0_0_15px_#00f5ff]" : "bg-yellow-400",
-                                                pacmanDir === "right" && "rotate-0",
-                                                pacmanDir === "down" && "rotate-90",
-                                                pacmanDir === "left" && "rotate-180",
-                                                pacmanDir === "up" && "rotate-270",
-                                            )}>
-                                                <div className="absolute top-[2px] right-[4px] w-[2px] h-[2px] bg-black rounded-full" />
-                                                <motion.div
-                                                    className={cn("absolute inset-0", hackerMode ? "bg-cyan-400" : "bg-yellow-400")}
-                                                    style={{
-                                                        clipPath: "polygon(50% 50%, 100% 25%, 100% 0, 0 0, 0 100%, 100% 100%, 100% 75%)"
-                                                    }}
-                                                    animate={{
-                                                        clipPath: [
-                                                            "polygon(50% 50%, 100% 25%, 100% 0, 0 0, 0 100%, 100% 100%, 100% 75%)",
-                                                            "polygon(50% 50%, 100% 50%, 100% 0, 0 0, 0 100%, 100% 100%, 100% 50%)"
-                                                        ]
-                                                    }}
-                                                    transition={{ repeat: Infinity, duration: 0.2, ease: "linear" }}
-                                                />
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </div>
-                            );
-                        })}
+                                    <span className="opacity-40 mr-1">[{new Date(log.timestamp).toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}]</span>
+                                    {log.msg}
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
                     </div>
-                ))}
+                </div>
             </div>
 
-            {/* Intel Tooltip */}
+            {/* Sidebar: Neural Calc Lab */}
+            <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6 bg-gradient-to-b from-transparent to-black/10 shrink-0">
+                <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_5px_#00f5ff]" />
+                        <h3 className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold">Neural Calc Lab</h3>
+                    </div>
+                </div>
+
+                {/* Contribution Guide (Legend) */}
+                <div className="flex flex-col gap-2 p-2 bg-white/5 rounded border border-white/5">
+                    <div className="text-[7px] font-mono text-white/60 uppercase tracking-widest">Contribution Intensity</div>
+                    <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-white/5" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-900/40" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-700/60" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-400" />
+                        <div className="ml-auto text-[7px] font-mono text-white/40 uppercase">Low &rarr; High</div>
+                    </div>
+                </div>
+
+                {/* Main Controls Section */}
+                <div className="flex flex-col gap-2">
+                    <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest mb-1">Control Interface</div>
+                    <div className="flex flex-col gap-2">
+                        <button
+                            onClick={() => setIsAuto(!isAuto)}
+                            className={cn(
+                                "text-[9px] font-mono px-3 py-2 rounded border transition-all uppercase tracking-widest text-center font-bold",
+                                isAuto ? "bg-cyan-500/10 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-white/60"
+                            )}
+                        >
+                            {isAuto ? "Auto-Pilot: ACTIVE" : "Manual: STANDBY"}
+                        </button>
+                        {!isAuto && (
+                            <button
+                                onClick={() => {
+                                    setIsAuto(true);
+                                    setVisitedDates(new Set());
+                                    setPathHistory([]);
+                                }}
+                                className="text-[9px] font-mono px-3 py-2 rounded border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all uppercase tracking-widest text-center font-bold"
+                            >
+                                Re-Calibrate System
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* Metrics Grid */}
+                <div className="flex flex-col gap-2">
+                    <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest mb-1">System Metrics</div>
+                    <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                            <div className="text-white/60 text-[7px] mb-1">VELOCITY</div>
+                            <div className="text-white font-bold">{hackerMode ? "42.0 GB/s" : "12.5 GB/s"}</div>
+                        </div>
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                            <div className="text-white/60 text-[7px] mb-1">LATENCY</div>
+                            <div className="text-white font-bold">1ms</div>
+                        </div>
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                            <div className="text-white/60 text-[7px] mb-1">NODES</div>
+                            <div className="text-white font-bold">{contributionNodes.length}</div>
+                        </div>
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                            <div className="text-white/60 text-[7px] mb-1">CLEARANCE</div>
+                            <div className="text-white font-bold">{Math.round((visitedDates.size / contributionNodes.length) * 100) || 0}%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-auto pt-4 text-[8px] font-mono text-white/30 italic leading-relaxed border-t border-white/10">
+                    Analyzing multidimensional contribution vectors using localized TSP heuristics... Optimized path found.
+                </div>
+            </div>
+
+            {/* Intel Tooltip (Fixed) */}
             <AnimatePresence>
                 {hoveredDay && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                        initial={{ opacity: 0, scale: 0.95, y: 5 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
                         style={{
                             position: "fixed",
                             left: tooltipPos.x,
-                            top: tooltipPos.y - 70,
+                            top: tooltipPos.y - 80,
                             zIndex: 100,
                         }}
-                        className="pointer-events-none bg-black/90 backdrop-blur-md border border-cyan-500/50 p-3 rounded-md font-mono text-[10px] text-cyan-400 shadow-[0_0_20px_rgba(0,245,255,0.3)] min-w-[120px]"
+                        className="pointer-events-none bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-[170px]"
                     >
-                        <div className="flex flex-col gap-1.5">
-                            <div className="flex justify-between gap-4">
-                                <span className="text-muted-foreground uppercase text-[8px]">Intel Date</span>
-                                <span>{hoveredDay.date}</span>
-                            </div>
-                            <div className="flex justify-between gap-4 text-white">
-                                <span className="text-muted-foreground uppercase text-[8px]">Payload Size</span>
-                                <span className="text-cyan-400">{hoveredDay.contributionCount} Commits</span>
-                            </div>
-                            <div className="h-[1px] w-full bg-cyan-500/20 mt-1" />
-                            <div className="text-[8px] text-cyan-400/60 flex items-center gap-1">
-                                <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse" />
-                                SCANNING DIRECTORY...
+                        <div className="relative">
+                            <div className="flex flex-col gap-2">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Packet Origin</span>
+                                    <span className="text-white/90">{hoveredDay.date}</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Payload</span>
+                                    <span className="text-cyan-400 font-bold">{hoveredDay.contributionCount} Commits</span>
+                                </div>
+                                <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-cyan-400/60 animate-pulse">
+                                    [ DECRYPTING_CONTRIBUTION_METADATA... ]
+                                </div>
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* Controls Info */}
-            <div className="mt-8 flex flex-wrap gap-6 items-center px-4">
-                <div className="flex gap-3">
-                    {[
-                        { color: hackerMode ? "bg-cyan-500 animate-pulse" : "bg-red-500", name: "Blinky" },
-                        { color: hackerMode ? "bg-cyan-400 animate-pulse" : "bg-pink-400", name: "Pinky" },
-                        { color: hackerMode ? "bg-cyan-300 animate-pulse" : "bg-cyan-400", name: "Inky" },
-                        { color: hackerMode ? "bg-cyan-200 animate-pulse" : "bg-orange-400", name: "Clyde" },
-                    ].map(ghost => (
-                        <div key={ghost.name} className="flex items-center gap-2 group">
-                            <div className={cn("w-4 h-5 rounded-t-full relative transition-all duration-500", ghost.color)}>
-                                <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-white rounded-full flex items-center justify-center">
-                                    <div className="w-0.5 h-0.5 bg-blue-800 rounded-full" />
-                                </div>
-                                <div className="absolute top-1 right-1 w-1.5 h-1.5 bg-white rounded-full flex items-center justify-center">
-                                    <div className="w-0.5 h-0.5 bg-blue-800 rounded-full" />
-                                </div>
-                                <div className="absolute -bottom-1 left-0 right-0 flex justify-around">
-                                    <div className={cn("w-1 h-1 rounded-full", ghost.color)} />
-                                    <div className={cn("w-1 h-1 rounded-full", ghost.color)} />
-                                    <div className={cn("w-1 h-1 rounded-full", ghost.color)} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="flex gap-3 text-[10px] font-mono uppercase tracking-tighter">
-                    <div className="flex flex-col gap-1">
-                        <span className="text-muted-foreground text-[8px]">System State</span>
-                        <div className="flex gap-2">
-                            <span className={cn("px-2 py-0.5 border rounded transition-colors", isAuto ? "border-cyan-500 bg-cyan-500/10 text-cyan-400" : "border-muted text-muted-foreground text-[8px]")}>Auto</span>
-                            <span className={cn("px-2 py-0.5 border rounded transition-colors", !isAuto ? "border-yellow-500 bg-yellow-500/10 text-yellow-400" : "border-muted text-muted-foreground text-[8px]")}>Manual</span>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                        <span className="text-muted-foreground text-[8px]">Navigation</span>
-                        <div className="flex gap-2">
-                            <kbd className="px-1.5 py-0.5 border border-muted rounded bg-muted/20 text-[8px]">WASD</kbd>
-                            <kbd className="px-1.5 py-0.5 border border-muted rounded bg-muted/20 text-[8px]">CLICK</kbd>
-                        </div>
-                    </div>
-
-                    <button
-                        onClick={() => setIsAuto(true)}
-                        className="self-end px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded hover:bg-cyan-500/20 text-cyan-400 transition-all font-bold text-[9px] h-fit"
-                    >
-                        RESET AUTO-PILOT
-                    </button>
-                </div>
-
-                <div className="ml-auto text-[10px] font-mono text-cyan-400/50 uppercase tracking-widest hidden lg:block border-l border-cyan-500/20 pl-6">
-                    {hackerMode ? (
-                        <span className="text-cyan-400 animate-pulse">&gt;&gt; T-MODE ACTIVE: NEURAL OVERDRIVE ENGAGED &lt;&lt;</span>
-                    ) : (
-                        "Bypassing contribution firewalls... [OK]"
-                    )}
-                </div>
-            </div>
         </div>
     );
 }
