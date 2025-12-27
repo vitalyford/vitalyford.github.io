@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
+import HexRoulette from "@/components/HexRoulette";
 
 interface Project {
   title: string;
@@ -115,7 +116,7 @@ export default function Home() {
                 }}
               />
               <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                Status: Human-in-the-loop
+                Status: Zero Trust, Zero Hype
               </span>
             </div>
 
@@ -147,7 +148,9 @@ export default function Home() {
               }}
             >
               &gt;&gt; Discover Innovation → Deliver Success
-              <span className="cyber-indicator" />
+              <div style={{ marginLeft: "1rem" }}>
+                <HexRoulette showFact={true} displayMode="tooltip-top-right" />
+              </div>
             </h2>
 
             <p
@@ -225,7 +228,7 @@ export default function Home() {
                 }}
               >
                 <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
-                <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>AI Agentic Architectures</span>
+                <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>AI, Security, and Uncomfortable Edge Cases</span>
               </div>
             </div>
           </div>

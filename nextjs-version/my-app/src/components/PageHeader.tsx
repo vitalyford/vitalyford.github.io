@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HexRoulette from "./HexRoulette";
 
 interface PageHeaderProps {
   title: string;
@@ -36,21 +37,35 @@ export default function PageHeader({ title, subtitle, imageSrc, altText }: PageH
           </div>
         )}
         <div style={{ flex: 1, minWidth: "250px" }}>
-          <h1
-            className="page-header-title"
+          <div
             style={{
-              fontFamily: "var(--font-mono), monospace",
-              fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
-              color: "var(--cyber-cyan)",
               display: "flex",
-              alignItems: "center",
-              gap: "0.75rem",
+              alignItems: "flex-start",
+              gap: "1rem",
               marginBottom: subtitle ? "0.75rem" : "0",
+              flexWrap: "wrap",
+              width: "100%"
             }}
           >
-            {title}
-            <span className="cyber-indicator" />
-          </h1>
+            <h1
+              className="page-header-title"
+              style={{
+                fontFamily: "var(--font-mono), monospace",
+                fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
+                color: "var(--cyber-cyan)",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                margin: 0,
+                flexShrink: 0
+              }}
+            >
+              {title}
+            </h1>
+            <div style={{ flex: 1, minWidth: "250px" }}>
+              <HexRoulette showFact={true} displayMode="inline" />
+            </div>
+          </div>
           {subtitle && (
             <p
               style={{

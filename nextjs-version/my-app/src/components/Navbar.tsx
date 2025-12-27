@@ -56,7 +56,6 @@ const pentestDropdown: NavDropdown = {
 };
 
 const endLinks: NavLink[] = [
-  { href: "/et", label: "Meet" },
   { href: "/contact", label: "Contact" },
 ];
 

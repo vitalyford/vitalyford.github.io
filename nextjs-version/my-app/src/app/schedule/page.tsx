@@ -43,7 +43,7 @@ export default function Schedule() {
           </p>
 
           <div style={{ display: "flex", gap: "1rem" }}>
-            <a href="/et" className="cyber-btn cyber-btn-primary">
+            <a href="/et" className="cyber-btn cyber-btn-primary" target="_blank" rel="noopener noreferrer">
               <span>Schedule Meeting</span>
             </a>
           </div>

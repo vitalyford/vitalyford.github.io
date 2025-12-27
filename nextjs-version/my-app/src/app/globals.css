@@ -350,11 +350,7 @@ samp {
   vertical-align: middle;
   position: relative;
   overflow: hidden;
-}
-
-.cyber-indicator::after {
-  content: '0x' attr(data-hex);
-  animation: hex-flicker 0.4s infinite;
+  padding: 0 4px;
 }
 
 @keyframes hex-flicker {

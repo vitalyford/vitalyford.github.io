@@ -61,8 +61,6 @@ export default function Contact() {
         >
           {/* Contact Info Card */}
           <div className="cyber-card">
-            <h3 className="section-heading" style={{ marginBottom: "1.5rem" }}>Contact Information</h3>
-
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {contactInfo.map((item) => (
                 <div key={item.label} className="contact-row" style={{ padding: "0", borderBottom: "none" }}>
@@ -118,8 +116,6 @@ export default function Contact() {
 
           {/* Connect Card */}
           <div className="cyber-card">
-            <h3 className="section-heading" style={{ marginBottom: "1.5rem" }}>Let&apos;s Connect</h3>
-
             <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem", lineHeight: 1.7 }}>
               I&apos;m always interested in discussing research collaborations, cybersecurity education,
               and innovative projects. Feel free to reach out!
