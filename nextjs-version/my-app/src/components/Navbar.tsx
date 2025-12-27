@@ -23,8 +23,8 @@ interface NavDropdown {
 
 const mainLinks: NavLink[] = [
   { href: "/research", label: "Research" },
-  { href: "/publications", label: "Publications" },
-  { href: "/docs/VitalyFordResume.pdf", label: "Resume", external: true },
+  { href: "/publications", label: "Pubs" },
+  { href: "/docs/VitalyFordResume.pdf", label: "CV", external: true },
   { href: "/schedule", label: "Schedule" },
 ];
 

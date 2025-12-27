@@ -1,13 +1,14 @@
 import PageHeader from "@/components/PageHeader";
 import { publications } from "@/data/publications";
+import { getPublicationStats } from "@/utils/academicUtils";
 
 export default function Publications() {
-  const totalPapers = publications.reduce((acc, pub) => acc + pub.papers.length, 0);
+  const { totalPapers, yearsActive } = getPublicationStats();
 
   return (
     <div className="animate-fade-in">
-      <PageHeader 
-        title="Publications" 
+      <PageHeader
+        title="Publications"
         subtitle={`${totalPapers} peer-reviewed publications across cybersecurity, ML, and education`}
       />
 
@@ -42,7 +43,7 @@ export default function Publications() {
                 color: "var(--cyber-cyan)",
               }}
             >
-              {publications.length}
+              {yearsActive}
             </span>
             <span style={{ color: "var(--text-muted)", marginLeft: "0.5rem" }}>Years Active</span>
           </div>
