@@ -5,6 +5,7 @@ import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
 import HexRoulette from "@/components/HexRoulette";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
+import QuotesStream from "@/components/QuotesStream";
 import { getPublicationStats } from "@/utils/academicUtils";
 
 interface Project {
@@ -439,24 +440,7 @@ export default function Home() {
 
       <div className="cyber-divider" />
 
-      {/* Quotes */}
-      <section style={{ padding: "2rem 0" }}>
-        <div style={{ display: "grid", gap: "1.5rem" }}>
-          <blockquote>
-            <p style={{ fontSize: "1.1rem", margin: 0, marginBottom: "0.75rem" }}>
-              &ldquo;Teach me and I will forget. Show me and I may remember. Involve me and I&apos;ll understand.&rdquo;
-            </p>
-            <cite>— Xun Kuang</cite>
-          </blockquote>
-
-          <blockquote>
-            <p style={{ fontSize: "1.1rem", margin: 0, marginBottom: "0.75rem" }}>
-              &ldquo;Reach for the stars, and you won&apos;t even notice when you pass the sky.&rdquo;
-            </p>
-            <cite>— Vitaly Ford</cite>
-          </blockquote>
-        </div>
-      </section>
+      <QuotesStream />
     </div>
   );
 }
