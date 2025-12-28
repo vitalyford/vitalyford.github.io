@@ -121,6 +121,13 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
         </motion.div>
     );
 
+    const handleReroll = () => {
+        if (isStopped) {
+            setIsStopped(false);
+            setFact("");
+        }
+    };
+
     return (
         <div
             style={{
@@ -134,12 +141,11 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
         >
             <span
                 className="cyber-indicator"
+                onClick={handleReroll}
+                title="Click to roll again"
                 style={{
                     animation: isStopped ? "none" : undefined,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0
+                    cursor: isStopped ? "pointer" : "wait",
                 }}
             >
                 {hexValue}
