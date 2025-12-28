@@ -196,10 +196,10 @@ export default function Home() {
               Associate Professor and Program Coordinator at{" "}
               <a href="https://www.arcadia.edu/profile/vitaly-ford" target="_blank" rel="noopener noreferrer">
                 Arcadia University
-              </a>, WiCyS Global Chapter Coordinator, and CTO at Citodex Technology Ltd.
+              </a>, <a href="https://wicys.org" target="_blank" rel="noopener noreferrer">WiCyS</a> Global Chapter Coordinator, and Co-Founder/CTO at <a href="https://citodex.com" target="_blank" rel="noopener noreferrer">Citodex Technology Ltd.</a>
               <br />
               <span style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginTop: "1rem", display: "block" }}>
-                Specializing in Smart Grid Security, Machine Learning, and Cybersecurity Education.
+                Specializing in Cybersecurity Research and Education, Machine Learning, and Infrastructure.
               </span>
             </p>
 
