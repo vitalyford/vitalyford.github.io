@@ -31,6 +31,9 @@ const funFacts = [
     { hex: "0x12", text: "Wait, it's all just 'if' statements? Always has been. — Unknown" },
     { hex: "0x9D", text: "Programming is 10% writing code and 90% understanding why the code you wrote isn't working. — Unknown" },
     { hex: "0xA0", text: "Software is like entropy: It is difficult to grasp, weighs nothing, and obeys the Second Law of Thermodynamics. — Norman Augustine" },
+    { hex: "0x72", text: "Rust: Because memory safety should be a right, not a privilege. Also, iterators are life." },
+    { hex: "0x25", text: "Advent of Code 2022: 25 days, 50 stars, and 100% pure Rust iterator chains." },
+    { hex: "0x31", text: "Any complex problem can be solved in one line of Rust if you have enough iterators and a complete lack of fear." },
 ];
 
 interface HexRouletteProps {

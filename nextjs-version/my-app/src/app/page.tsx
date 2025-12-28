@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
 import HexRoulette from "@/components/HexRoulette";
+import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
 import { getPublicationStats } from "@/utils/academicUtils";
 
 interface Project {
@@ -29,13 +30,13 @@ const featuredProjects: Project[] = [
   },
   {
     title: "Pragmatic Cyber Academy",
-    description: "Virtual labs and interactive modules designed to transform cybersecurity learning into practical career skills",
+    description: "Quick knowledge modules and quizzes, designed to get folks interested in cybersecurity (part of NSF grant)",
     href: "https://cysia.vford.com/",
     badge: "Education",
   },
   {
     title: "Engineering Pathways",
-    description: "A comprehensive navigator for dual-degree engineering programs with Columbia, Dartmouth, and other top universities",
+    description: "A comprehensive navigator for Arcadia University dual-degree engineering programs with the University of Pittsburgh, Drexel University, Washington University in St. Louis, and others",
     href: "https://areng.vford.com",
     badge: "Academic",
   },
@@ -47,13 +48,13 @@ const featuredProjects: Project[] = [
   },
   {
     title: "GenCyberCoin",
-    description: "Gamified web platform teaching blockchain, digital currency, and cybersecurity principles",
+    description: "Gamified web platform teaching blockchain, digital currency, and cybersecurity principles (part of NSA/NSF grant)",
     href: "https://gencybercoin.vford.com",
     badge: "Open Source",
   },
   {
     title: "Zero-trust Infrastructure",
-    description: "Zero-trust network with 30+ applications across 10 servers secured via Cloudflare Access",
+    description: "Zero-trust network with 30+ applications across 10 servers secured via Cloudflare Access and with its own Wazuh XDR to monitor and respond to security events",
     href: "https://vford.cloudflareaccess.com",
     badge: "Security",
   },
@@ -62,7 +63,8 @@ const featuredProjects: Project[] = [
 const achievements: Achievement[] = [
   {
     title: "CCSC-Eastern Co-Chair",
-    description: "General Chair for the 38th Annual Eastern Regional Conference",
+    description: "Conference Chair for the 41st Annual Eastern Regional Conference",
+    href: "https://ccsc-eastern.org",
     year: "2025",
   },
   {
@@ -74,24 +76,25 @@ const achievements: Achievement[] = [
   {
     title: "NSF SaTC: EDU Grant Co-PI",
     description: "Cybersecurity Faculty Development for High School Teachers",
-    href: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2225470&HistoricalAwards=false",
+    href: "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2225470",
     year: "2023-2026",
   },
   {
     title: "WiCyS Global Chapter Coordinator",
     description: "Leading and coordinating Women in Cybersecurity student chapters globally",
     href: "https://www.wicys.org/initiatives/student-chapters/",
-    year: "2023-Present",
+    year: "2018-Present",
   },
   {
     title: "Professor of the Year",
-    description: "Arcadia University's most prestigious teaching award",
+    description: "The purpose of the award is to recognize people who, through their outstanding teaching skills, affect the lives and careers of students and contribute to the overall welfare of our society.",
+    href: "https://www.arcadia.edu/about-arcadia/leadership/office-provost/faculty-awards/",
     year: "2022",
   },
   {
     title: "NSF Cyberinfrastructure Grant Co-PI",
-    description: "New Campus Science & Education Network at Arcadia",
-    href: "https://www.arcadia.edu/news/2018/09/margolis-dr-ford-awarded-nsf-grant-new-campus-science-education-network-0",
+    description: "NSF CC* Cyberinfrastructure Grant to Advance Arcadia's Research Network, Innovation, and Collaboration",
+    href: "https://www.arcadia.edu/academics/college-arts-sciences/computer-science-mathematics/science-dmz/",
     year: "2018-2020",
   },
 ];
@@ -325,6 +328,11 @@ export default function Home() {
 
       <div className="cyber-divider" />
 
+      {/* Advent of Rust Showcase */}
+      <AdventOfRustShowcase />
+
+      <div className="cyber-divider" />
+
       {/* Featured Projects */}
       <section style={{ padding: "2rem 0" }}>
         <h2 className="section-heading">Featured Projects</h2>
@@ -372,7 +380,7 @@ export default function Home() {
 
       {/* Achievements */}
       <section style={{ padding: "2rem 0" }}>
-        <h2 className="section-heading">Achievements &amp; Grants</h2>
+        <h2 className="section-heading">Featured Achievements &amp; Grants</h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {achievements.map((item) => (
@@ -425,9 +433,7 @@ export default function Home() {
         <h2 className="section-heading">Beyond the Code</h2>
 
         <p style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
-          When not teaching or building AI agents, I enjoy playing table tennis and chess. I am an active{" "}
-          <span style={{ color: "var(--text-primary)" }}>bug bounty hunter</span> (Oracle Cloud) and
-          mentor student cybersecurity teams for the National Cyber League.
+          When not playing with my kids or working, I enjoy playing table tennis and chess.
         </p>
       </section>
 
