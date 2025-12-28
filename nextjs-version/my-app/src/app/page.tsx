@@ -60,6 +60,12 @@ const achievements: Achievement[] = [
     year: "2023-2026",
   },
   {
+    title: "WiCyS Global Chapter Coordinator",
+    description: "Leading and coordinating Women in Cybersecurity student chapters globally",
+    href: "https://www.wicys.org/initiatives/student-chapters/",
+    year: "2023-Present",
+  },
+  {
     title: "Professor of the Year",
     description: "Arcadia University's most prestigious teaching award",
     year: "2022",
@@ -168,7 +174,7 @@ export default function Home() {
               Associate Professor and Program Coordinator at{" "}
               <a href="https://www.arcadia.edu/profile/vitaly-ford" target="_blank" rel="noopener noreferrer">
                 Arcadia University
-              </a>. Co-founder and CTO at Citodex Technology Ltd.
+              </a>, WiCyS Global Chapter Coordinator, and CTO at Citodex Technology Ltd.
               <br />
               <span style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginTop: "1rem", display: "block" }}>
                 Specializing in Smart Grid Security, Machine Learning, and Cybersecurity Education.

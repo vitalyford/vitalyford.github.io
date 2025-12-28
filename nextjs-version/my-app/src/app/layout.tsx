@@ -20,9 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Vitaly Ford | Cybersecurity Researcher & Educator",
-  description: "Associate Professor, Cybersecurity Researcher, and Educator specializing in Smart Grid Security, Machine Learning, and CS Education",
+  description: "Associate Professor, WiCyS Global Chapter Coordinator, and CTO specializing in Smart Grid Security, Machine Learning, and CS Education",
   authors: [{ name: "Vitaly Ford" }],
-  keywords: ["cybersecurity", "smart grid", "machine learning", "computer science", "education", "researcher"],
+  keywords: ["cybersecurity", "WiCyS", "smart grid", "machine learning", "computer science", "education", "researcher"],
   icons: {
     icon: "/assets/images/favicon.gif",
   },

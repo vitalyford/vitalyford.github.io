@@ -91,9 +91,9 @@ export default function Footer() {
               <span style={{ color: "var(--cyber-cyan)" }}>/&gt;</span>
             </div>
             <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.6 }}>
-              Cybersecurity Researcher & Educator
+              Associate Professor, WiCyS Global Chapter Coordinator, and CTO
               <br />
-              Associate Professor at Arcadia University
+              Cybersecurity Researcher & Educator
             </p>
           </div>
 
