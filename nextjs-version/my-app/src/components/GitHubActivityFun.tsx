@@ -396,7 +396,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                         <button
                             onClick={() => setIsAuto(!isAuto)}
                             className={cn(
-                                "text-[9px] font-mono px-3 py-2 rounded border transition-all uppercase tracking-widest text-center font-bold",
+                                "text-[9px] font-mono px-3 py-2 rounded border transition-all uppercase tracking-widest text-center font-bold cursor-pointer",
                                 isAuto ? "bg-cyan-500/10 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-white/60"
                             )}
                         >
@@ -409,7 +409,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                     setVisitedDates(new Set());
                                     setPathHistory([]);
                                 }}
-                                className="text-[9px] font-mono px-3 py-2 rounded border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all uppercase tracking-widest text-center font-bold"
+                                className="text-[9px] font-mono px-3 py-2 rounded border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all uppercase tracking-widest text-center font-bold cursor-pointer"
                             >
                                 Re-Calibrate System
                             </button>
