@@ -35,7 +35,7 @@ const featuredProjects: Project[] = [
   },
   {
     title: "Zero-trust Infrastructure",
-    description: "Zero-trust network with 30+ applications secured via Cloudflare Access",
+    description: "Zero-trust network with 30+ applications across 10 servers secured via Cloudflare Access",
     href: "https://vford.cloudflareaccess.com",
     badge: "Security",
   },
