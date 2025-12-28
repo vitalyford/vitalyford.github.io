@@ -22,6 +22,24 @@ interface Achievement {
 
 const featuredProjects: Project[] = [
   {
+    title: "Netflow",
+    description: "Interactive network flow visualization for mastering DNS, web communication, and cybersecurity concepts",
+    href: "https://netflow.vford.com/",
+    badge: "Interactive",
+  },
+  {
+    title: "Pragmatic Cyber Academy",
+    description: "Virtual labs and interactive modules designed to transform cybersecurity learning into practical career skills",
+    href: "https://cysia.vford.com/",
+    badge: "Education",
+  },
+  {
+    title: "Engineering Pathways",
+    description: "A comprehensive navigator for dual-degree engineering programs with Columbia, Dartmouth, and other top universities",
+    href: "https://areng.vford.com",
+    badge: "Academic",
+  },
+  {
     title: "TeachCyber",
     description: "A library of resources to teach and learn cybersecurity",
     href: "https://teachcyber.vford.com",
@@ -30,7 +48,7 @@ const featuredProjects: Project[] = [
   {
     title: "GenCyberCoin",
     description: "Gamified web platform teaching blockchain, digital currency, and cybersecurity principles",
-    href: "https://github.com/vitalyford/gencybercoin",
+    href: "https://gencybercoin.vford.com",
     badge: "Open Source",
   },
   {

@@ -47,6 +47,39 @@ const interests = [
 
 const projects: Project[] = [
   {
+    title: "Netflow",
+    description: "Interactive network flow visualization for mastering DNS, web communication, and cybersecurity concepts.",
+    href: "https://netflow.vford.com/",
+    highlights: [
+      "Interactive network visualization",
+      "Real-time packet flow simulation",
+      "Educational modules for DNS and Web traffic",
+      "Multi-panel management for complex scenarios",
+    ],
+  },
+  {
+    title: "Pragmatic Cyber Academy",
+    description: "Virtual labs and interactive modules designed to transform cybersecurity learning into practical career skills.",
+    href: "https://cysia.vford.com/",
+    highlights: [
+      "Hands-on virtual labs",
+      "Expert-led cybersecurity content",
+      "Progress tracking and career readiness",
+      "Comprehensive learning modules",
+    ],
+  },
+  {
+    title: "Engineering Pathways",
+    description: "A comprehensive navigator for dual-degree engineering programs with top-tier institutions.",
+    href: "https://areng.vford.com",
+    highlights: [
+      "Collaborations with Columbia, Drexel, and Dartmouth",
+      "Interactive degree requirement tracking",
+      "GPA and credit transfer guides",
+      "Streamlined application processes for STEM students",
+    ],
+  },
+  {
     title: "GenCyberCoin",
     description:
       "NSA/NSF GenCyber program sponsored platform to encourage student participation in camp activities.",
