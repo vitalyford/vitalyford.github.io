@@ -49,7 +49,7 @@ export default function Contact() {
 
   return (
     <div className="animate-fade-in">
-      <PageHeader title="Contact" subtitle="Let's connect and collaborate" />
+      <PageHeader title="Contact" />
 
       <section style={{ padding: "2rem 0" }}>
         <div
