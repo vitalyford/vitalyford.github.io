@@ -172,4 +172,13 @@ export const publications: PublicationYear[] = [
       },
     ],
   },
+  {
+    year: 2013,
+    papers: [
+      {
+        name: 'V. Ford and A. Siraj, "Clustering of smart meter data for disaggregation", in Proceedings of IEEE Global Conference on Signal and Information Processing, December 3-5, 2013.',
+        url: "/papers/Ford Siraj GlobalSIP Clustering for disaggregation of smart meter data.pdf",
+      },
+    ],
+  },
 ];
