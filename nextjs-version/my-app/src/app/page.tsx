@@ -378,46 +378,66 @@ export default function Home() {
         <h2 className="section-heading">Featured Achievements &amp; Grants</h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          {achievements.map((item) => (
-            <div
-              key={item.title}
-              className="cyber-card"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                gap: "1rem",
-                flexWrap: "wrap",
-              }}
-            >
-              <div style={{ flex: 1, minWidth: "200px" }}>
-                <h3 style={{ color: "var(--text-primary)", fontSize: "1rem", marginBottom: "0.25rem" }}>
-                  {item.href ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer">
-                      {item.title}
-                    </a>
-                  ) : (
-                    item.title
-                  )}
-                </h3>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", margin: 0 }}>
-                  {item.description}
-                </p>
+          {achievements.map((item) => {
+            const content = (
+              <>
+                <div style={{ flex: 1, minWidth: "200px" }}>
+                  <h3 className="project-card-title" style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>
+                    {item.title}
+                  </h3>
+                  <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", margin: 0 }}>
+                    {item.description}
+                  </p>
+                </div>
+                {item.year && (
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono), monospace",
+                      color: "var(--text-muted)",
+                      fontSize: "0.85rem",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item.year}
+                  </span>
+                )}
+              </>
+            );
+
+            return item.href ? (
+              <a
+                key={item.title}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cyber-card project-card-link"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  gap: "1rem",
+                  flexWrap: "wrap",
+                  textDecoration: "none",
+                }}
+              >
+                {content}
+              </a>
+            ) : (
+              <div
+                key={item.title}
+                className="cyber-card"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  gap: "1rem",
+                  flexWrap: "wrap",
+                }}
+              >
+                {content}
               </div>
-              {item.year && (
-                <span
-                  style={{
-                    fontFamily: "var(--font-mono), monospace",
-                    color: "var(--text-muted)",
-                    fontSize: "0.85rem",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.year}
-                </span>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
