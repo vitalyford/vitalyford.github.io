@@ -135,7 +135,7 @@ export default function QuotesStream() {
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => setActiveIndex(i)}
                             />
-                            <AnimatePresence>
+                            <AnimatePresence mode="wait">
                                 {activeIndex === i && (
                                     <motion.circle
                                         key={`pulse-${q.id}`}

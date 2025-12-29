@@ -118,7 +118,7 @@ export default function Home() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "4rem",
             alignItems: "center",
           }}
@@ -147,7 +147,7 @@ export default function Home() {
                 }}
               />
               <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                Status: Zero Trust, Zero Hype
+                Security: Zero Trust, Zero Hype
               </span>
             </div>
 
@@ -173,14 +173,13 @@ export default function Home() {
                 fontWeight: 500,
                 display: "flex",
                 alignItems: "center",
-                whiteSpace: "nowrap",
-                flexWrap: "nowrap",
+                flexWrap: "wrap",
                 width: "fit-content",
               }}
             >
               &gt;&gt; Discover Innovation → Deliver Success
               <div style={{ marginLeft: "1rem" }}>
-                <HexRoulette showFact={true} displayMode="tooltip-top-right" />
+                <HexRoulette showFact={true} displayMode="inline" />
               </div>
             </h2>
 
@@ -243,31 +242,19 @@ export default function Home() {
 
               {/* Decorative Tech Overlay Tags */}
               <div
-                style={{
-                  position: "absolute",
-                  bottom: "-20px",
-                  right: "-20px",
-                  background: "var(--cyber-surface)",
-                  border: "1px solid var(--cyber-border)",
-                  padding: "0.75rem 1rem",
-                  borderRadius: "8px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.25rem",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                  backdropFilter: "blur(10px)",
-                }}
+                className="profile-overlay-card"
               >
                 <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
-                <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>AI, Security, and Uncomfortable Edge Cases</span>
+                <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>Security, AI, and Uncomfortable Edge Cases</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Stats Section */}
-      <section style={{ padding: "2rem 0" }}>
+      < section style={{ padding: "2rem 0" }
+      }>
         <div
           style={{
             display: "grid",
@@ -315,7 +302,7 @@ export default function Home() {
             );
           })}
         </div>
-      </section>
+      </section >
 
       <div className="cyber-divider" />
 
@@ -441,6 +428,6 @@ export default function Home() {
       <div className="cyber-divider" />
 
       <QuotesStream />
-    </div>
+    </div >
   );
 }

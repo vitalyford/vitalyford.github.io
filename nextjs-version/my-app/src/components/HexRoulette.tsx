@@ -25,7 +25,6 @@ const funFacts = [
     { hex: "0x0D", text: "Computer science is no more about computers than astronomy is about telescopes. — Edsger W. Dijkstra" },
     { hex: "0x2C", text: "Walking on water and developing software from a specification are easy if both are frozen. — Edward V. Berard" },
     { hex: "0x6F", text: "The gap between theory and practice is smaller in theory than in practice. — Unknown" },
-    { hex: "0x8B", text: "Documentation is like sex: when it is good, it is very, very good; and when it is bad, it is better than nothing. — Dick Brandon" },
     { hex: "0x3E", text: "The most disastrous thing you can ever learn is your first programming language. — Alan Kay" },
     { hex: "0x5F", text: "Real programmers count from 0. — Unknown" },
     { hex: "0x12", text: "Wait, it's all just 'if' statements? Always has been. — Unknown" },
@@ -45,14 +44,6 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
     const [isStopped, setIsStopped] = useState(false);
     const [hexValue, setHexValue] = useState("0x??");
     const [fact, setFact] = useState("");
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        handleResize(); // Check initial
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -81,60 +72,61 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
 
     const isTooltip = displayMode === "tooltip-bottom" || displayMode === "tooltip-top-right";
 
-    const factContent = isStopped && showFact && fact && (
-        <motion.div
-            initial={{
-                opacity: 0,
-                scale: 0.9,
-                y: isMobile && isTooltip ? 20 : (displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0)),
-                x: isTooltip ? "-50%" : 0
-            }}
-            animate={{ opacity: 1, scale: 1, y: 0, x: isTooltip ? "-50%" : 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: isMobile && isTooltip ? 20 : 0, x: isTooltip ? "-50%" : 0 }}
-            className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
-            style={{
-                fontSize: "0.85rem",
-                color: "var(--text-muted)",
-                fontFamily: "var(--font-mono), monospace",
-                borderLeft: isTooltip ? "none" : "1px solid var(--cyber-border)",
-                paddingLeft: isTooltip ? "0" : "1rem",
-                maxWidth: isTooltip ? "350px" : "none",
-                lineHeight: "1.4",
-                whiteSpace: "normal",
-                flex: isTooltip ? "none" : "1",
-                ...(isTooltip ? {
-                    position: isMobile ? "fixed" : "absolute",
-                    background: "rgba(10, 10, 15, 0.95)",
-                    backdropFilter: "blur(8px)",
-                    padding: "0.75rem 1rem",
-                    borderRadius: "8px",
-                    border: "1px solid var(--cyber-cyan-glow)",
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
-                    zIndex: 100,
-                    width: isMobile ? "90vw" : "max-content",
-                    minWidth: "200px",
-                    ...(isMobile ? {
-                        bottom: "20px",
-                        left: "50%",
-                        top: "auto",
-                        margin: 0,
-                    } : (displayMode === "tooltip-bottom" ? {
-                        top: "100%",
-                        left: "50%",
-                        marginTop: "0.75rem",
-                    } : {
-                        bottom: "100%",
-                        left: "50%",
-                        marginBottom: "0.75rem",
-                    }))
-                } : {})
-            }}
-        >
-            <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
-                <span style={{ color: "var(--cyber-cyan)", fontWeight: "bold" }}>&gt;</span>
-                {fact}
-            </div>
-        </motion.div>
+    // Standard rendering for all devices
+    const content = (
+        <AnimatePresence>
+            {isStopped && showFact && fact && (
+                <motion.div
+                    key="tooltip-standard"
+                    initial={{
+                        opacity: 0,
+                        scale: 0.9,
+                        y: displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0),
+                        x: isTooltip ? "-50%" : 0
+                    }}
+                    animate={{ opacity: 1, scale: 1, y: 0, x: isTooltip ? "-50%" : 0 }}
+                    exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
+                    className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
+                    style={{
+                        fontSize: "0.85rem",
+                        color: "var(--text-muted)",
+                        fontFamily: "var(--font-mono), monospace",
+                        borderLeft: isTooltip ? "none" : "1px solid var(--cyber-border)",
+                        paddingLeft: isTooltip ? "0" : "1rem",
+                        maxWidth: isTooltip ? "350px" : "none",
+                        lineHeight: "1.4",
+                        whiteSpace: "normal",
+                        flex: isTooltip ? "none" : "1",
+                        ...(isTooltip ? {
+                            position: "absolute",
+                            background: "rgba(10, 10, 15, 0.95)",
+                            backdropFilter: "blur(8px)",
+                            padding: "0.75rem 1rem",
+                            borderRadius: "8px",
+                            border: "1px solid var(--cyber-cyan-glow)",
+                            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                            zIndex: 100,
+                            width: "max-content",
+                            minWidth: "200px",
+                            ...(displayMode === "tooltip-bottom" ? {
+                                top: "100%",
+                                left: "50%",
+                                marginTop: "0.75rem",
+                            } : {
+                                bottom: "100%",
+                                left: "50%",
+                                marginBottom: "0.75rem",
+                            })
+                        } : {})
+                    }}
+                >
+                    <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
+                        <span style={{ color: "var(--cyber-cyan)", fontWeight: "bold" }}>&gt;</span>
+                        {fact}
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 
     const handleReroll = () => {
@@ -152,7 +144,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                 gap: "1rem",
                 position: "relative",
                 flexWrap: "wrap",
-                width: isTooltip ? "auto" : "100%"
+                width: isTooltip ? "auto" : "auto"
             }}
         >
             <span
@@ -166,9 +158,12 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
             >
                 {hexValue}
             </span>
-            <AnimatePresence>
-                {factContent}
-            </AnimatePresence>
+            {content}
         </div>
     );
 }
+
+// Helper to keep formatting, never used but prevents errors if I deleted too much
+const _unused = null;
+
+

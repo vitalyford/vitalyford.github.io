@@ -62,6 +62,7 @@ export default function Footer() {
       <div className="container-cyber">
         {/* Top Section */}
         <div
+          className="footer-top-container"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -72,7 +73,7 @@ export default function Footer() {
           }}
         >
           {/* Brand Section */}
-          <div style={{ flex: 1, minWidth: "280px" }}>
+          <div className="footer-brand" style={{ flex: 1, minWidth: "280px" }}>
             <div
               style={{
                 fontFamily: "var(--font-mono), monospace",
@@ -94,7 +95,7 @@ export default function Footer() {
           </div>
 
           {/* Connect */}
-          <div style={{ textAlign: "right" }}>
+          <div className="footer-connect" style={{ textAlign: "right" }}>
             <h4
               style={{
                 color: "var(--cyber-cyan)",
@@ -106,7 +107,7 @@ export default function Footer() {
             >
               Connect
             </h4>
-            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
+            <div className="footer-connect-links" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
               {socialLinks.map((link) => (
                 <a
                   key={link.href}
