@@ -199,7 +199,7 @@ export default function Home() {
               </a>, <a href="https://wicys.org" target="_blank" rel="noopener noreferrer">WiCyS</a> Global Chapter Coordinator, and Co-Founder/CTO at <a href="https://citodex.com" target="_blank" rel="noopener noreferrer">Citodex Technology Ltd.</a>
               <br />
               <span style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginTop: "1rem", display: "block" }}>
-                Specializing in Cybersecurity Research and Education, Machine Learning, and Infrastructure.
+                Specializing in Cybersecurity/CS Research and Education, Machine Learning, and Infrastructure.
               </span>
             </p>
 

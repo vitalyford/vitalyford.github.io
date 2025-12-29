@@ -15,11 +15,11 @@ export default function AdventOfRustShowcase() {
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
                 gap: "2.5rem",
-                alignItems: "start"
+                alignItems: "stretch"
             }}>
                 {/* Left side: Context & Stats */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                    <div className="cyber-card" style={{ padding: "2rem" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div className="cyber-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", height: "100%" }}>
                         <h3 style={{ fontSize: "1.5rem", color: "var(--text-primary)", marginBottom: "1rem" }}>
                             Building & Breaking Software
                         </h3>
@@ -29,25 +29,28 @@ export default function AdventOfRustShowcase() {
                         <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" }}>
                             I am also working with many <a href="https://www.wicys.org/" target="_blank" rel="noopener noreferrer">Women in Cybersecurity</a> student chapters globally to help recruit, retain, and advance women in cybersecurity as part of a workforce solution.
                         </p>
+                        <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" }}>
+                            I also love building startups. As a co-founder and CTO of <a href="https://citodex.com" target="_blank" rel="noopener noreferrer">Citodex</a>, I have been working extensively with diverse tech stacks, AI, security, and cloud infrastructure.
+                        </p>
                         <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.5rem" }}>
                             I enjoy contributing to open-source software and occasionally engaging in bug bounty hunting. I also love solving puzzles, like <a href="https://adventofcode.com/" target="_blank" rel="noopener noreferrer">Advent of Code</a> in <b>Rust</b> was a blast, especially playing with the power of functional chains.
                         </p>
-
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-                            <motion.div
-                                animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                style={{ position: "absolute", top: "1rem", right: "1rem", fontSize: "1.5rem", opacity: 0.3 }}
-                            >
-                                🦀
-                            </motion.div>
-                        </div>
+                        <motion.div
+                            animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            style={{ position: "absolute", top: "1rem", right: "1rem", fontSize: "1.5rem", opacity: 0.3 }}
+                        >
+                            🦀
+                        </motion.div>
                     </div>
                 </div>
 
                 {/* Right side: Code Window */}
-                <div style={{ position: "relative" }}>
+                <div className="h-96 md:h-0 md:min-h-full" style={{ position: "relative" }}>
                     <div className="cyber-card" style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
                         padding: "0",
                         overflow: "hidden",
                         background: "#0d1117",
@@ -75,7 +78,8 @@ export default function AdventOfRustShowcase() {
                         {/* Code Content */}
                         <div style={{
                             padding: "1.5rem",
-                            maxHeight: "500px",
+                            flex: 1,
+                            minHeight: 0,
                             overflowY: "auto",
                             fontFamily: "var(--font-mono), monospace",
                             fontSize: "0.85rem",
