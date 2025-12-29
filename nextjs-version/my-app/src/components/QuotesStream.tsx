@@ -202,24 +202,7 @@ export default function QuotesStream() {
                     <button
                         onClick={() => handlePaginate(-1)}
                         className="nav-arrow left"
-                        style={{
-                            position: "absolute",
-                            left: "-5vw",
-                            background: "rgba(10, 10, 15, 0.95)",
-                            backdropFilter: "blur(12px)",
-                            border: "2px solid var(--cyber-cyan)",
-                            borderRadius: "50%",
-                            color: "var(--cyber-cyan)",
-                            cursor: "pointer",
-                            zIndex: 100,
-                            width: "64px",
-                            height: "64px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
-                            boxShadow: "0 0 30px rgba(0, 245, 255, 0.2)"
-                        }}
+                        aria-label="Previous quote"
                     >
                         <ChevronLeft size={36} strokeWidth={2.5} />
                     </button>
@@ -227,24 +210,7 @@ export default function QuotesStream() {
                     <button
                         onClick={() => handlePaginate(1)}
                         className="nav-arrow right"
-                        style={{
-                            position: "absolute",
-                            right: "-5vw",
-                            background: "rgba(10, 10, 15, 0.95)",
-                            backdropFilter: "blur(12px)",
-                            border: "2px solid var(--cyber-cyan)",
-                            borderRadius: "50%",
-                            color: "var(--cyber-cyan)",
-                            cursor: "pointer",
-                            zIndex: 100,
-                            width: "64px",
-                            height: "64px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            transition: "all 0.3s cubic-bezier(0.19, 1, 0.22, 1)",
-                            boxShadow: "0 0 30px rgba(0, 245, 255, 0.2)"
-                        }}
+                        aria-label="Next quote"
                     >
                         <ChevronRight size={36} strokeWidth={2.5} />
                     </button>
@@ -311,16 +277,16 @@ export default function QuotesStream() {
                                     </div>
                                 </div>
 
-                                <div style={{ padding: "4rem 3rem", position: "relative" }}>
+                                <div className="quote-body">
                                     {/* Quote Watermark Icon */}
-                                    <div style={{ position: "absolute", top: "1.5rem", left: "1rem", color: "var(--cyber-cyan)", opacity: 0.15, userSelect: "none", pointerEvents: "none", zIndex: 0 }}>
-                                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
+                                    <div className="quote-watermark">
+                                        <svg className="quote-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
                                             <path d="M3 21c3 0 7-1 7-8V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4c0 3.5-3 4.5-5 5" />
                                             <path d="M14 21c3 0 7-1 7-8V5c0-1.1-.9-2-2-2h-3c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4c0 3.5-3 4.5-5 5" />
                                         </svg>
                                     </div>
 
-                                    <div style={{ position: "relative", zIndex: 1, paddingLeft: "8rem", paddingRight: "1.5rem" }}>
+                                    <div className="quote-text-container">
                                         <p style={{
                                             fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)",
                                             lineHeight: 1.6,
@@ -333,13 +299,13 @@ export default function QuotesStream() {
                                             &quot;{quote.text}&quot;
                                         </p>
 
-                                        <div style={{ marginTop: "3rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                                            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                                                <div style={{ width: "32px", height: "2px", background: "var(--cyber-cyan)", boxShadow: "0 0 10px var(--cyber-cyan)", borderRadius: "4px" }} />
-                                                <cite style={{ fontSize: "1.2rem", fontWeight: 600, color: "var(--cyber-cyan)", fontStyle: "normal" }}>{quote.author}</cite>
+                                        <div className="quote-author-block">
+                                            <div className="author-row">
+                                                <div className="author-dash" />
+                                                <cite className="author-name">{quote.author}</cite>
                                             </div>
                                             {quote.context && (
-                                                <div style={{ marginLeft: "3rem", fontFamily: "var(--font-mono), monospace", fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "1.5px" }}>
+                                                <div className="quote-context">
                                                     {quote.context}
                                                 </div>
                                             )}
@@ -380,32 +346,185 @@ export default function QuotesStream() {
                         linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
                     background-size: 100px 100px;
                 }
+                .nav-arrow {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(10, 10, 15, 0.95);
+                    backdrop-filter: blur(12px);
+                    border: 2px solid var(--cyber-cyan);
+                    border-radius: 50%;
+                    color: var(--cyber-cyan);
+                    cursor: pointer;
+                    z-index: 100;
+                    width: 64px;
+                    height: 64px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+                    box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+                }
+                .nav-arrow.left {
+                    left: 2rem; /* Inside the container */
+                }
+                .nav-arrow.right {
+                    right: 2rem; /* Inside the container */
+                }
                 .nav-arrow:hover {
-                    background: var(--cyber-cyan) !important;
-                    color: var(--cyber-black) !important;
-                    transform: scale(1.1) !important;
-                    box-shadow: 0 0 50px var(--cyber-cyan) !important;
+                    background: var(--cyber-cyan);
+                    color: var(--cyber-black);
+                    transform: translateY(-50%) scale(1.1);
+                    box-shadow: 0 0 50px var(--cyber-cyan);
                 }
                 .nav-arrow:active {
-                    transform: scale(0.9) !important;
+                    transform: translateY(-50%) scale(0.9);
                 }
                 .preview:hover {
                     border-color: rgba(0, 245, 255, 0.5) !important;
                     opacity: 0.6 !important;
                 }
+
+                /* Default / Desktop Styles */
+                .quote-body {
+                    padding: 4rem 3rem;
+                    position: relative;
+                }
+                .quote-watermark {
+                    position: absolute;
+                    top: 1.5rem;
+                    left: 1rem;
+                    color: var(--cyber-cyan);
+                    opacity: 0.15;
+                    user-select: none;
+                    pointer-events: none;
+                    z-index: 0;
+                }
+                .quote-svg {
+                    width: 120px;
+                    height: 120px;
+                }
+                .quote-text-container {
+                    position: relative;
+                    z-index: 1;
+                    padding-left: 8rem;
+                    padding-right: 1.5rem;
+                }
+                .quote-author-block {
+                    margin-top: 3rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.6rem;
+                }
+                .author-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                .author-dash {
+                    width: 32px;
+                    height: 2px;
+                    background: var(--cyber-cyan);
+                    box-shadow: 0 0 10px var(--cyber-cyan);
+                    border-radius: 4px;
+                }
+                .author-name {
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--cyber-cyan);
+                    font-style: normal;
+                }
+                .quote-context {
+                    margin-left: 3rem;
+                    font-family: var(--font-mono), monospace;
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
+                }
+
+                /* Tablet/Smaller Desktop Styles */
                 @media (max-width: 1024px) {
                     .nav-arrow {
-                        width: 48px !important;
-                        height: 48px !important;
-                        left: 1rem !important;
-                        right: auto !important;
+                        width: 48px;
+                        height: 48px;
+                    }
+                    .nav-arrow.left {
+                        left: 1rem;
                     }
                     .nav-arrow.right {
-                        right: 1rem !important;
-                        left: auto !important;
+                        right: 1rem;
+                    }
+                }
+
+                /* Mobile Optimizations */
+                /* Mobile Optimizations */
+                @media (max-width: 768px) {
+                    .quote-body {
+                        padding: 2rem 1.5rem;
+                    }
+                    .quote-svg {
+                        width: 60px;
+                        height: 60px;
+                    }
+                    .quote-text-container {
+                        padding-left: 4.5rem;
+                        padding-right: 0;
+                    }
+                    .quote-author-block {
+                        margin-top: 1.5rem;
+                    }
+                    .author-name {
+                        font-size: 1rem;
+                    }
+                    .quote-context {
+                        margin-left: 3rem; 
+                    }
+                    
+                    /* Move arrows to bottom on mobile */
+                    .nav-arrow {
+                        top: auto;
+                        bottom: -5rem; /* Positioned relative to the container height */
+                        transform: none;
+                        width: 40px;
+                        height: 40px;
+                        background: rgba(10, 10, 15, 0.8);
+                    }
+                    .nav-arrow:hover {
+                        transform: scale(1.1);
+                    }
+                    .nav-arrow:active {
+                        transform: scale(0.9);
+                    }
+                    .nav-arrow.left {
+                        left: 25%;
+                        margin-left: -60px; /* Offset from center area */
+                    }
+                    .nav-arrow.right {
+                        right: 25%;
+                        margin-right: -60px; /* Offset from center area */
+                        left: auto;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .quote-watermark {
+                        top: 1rem;
+                        left: 1rem;
+                    }
+                    .quote-svg {
+                        width: 40px;
+                        height: 40px;
+                    }
+                    .quote-text-container {
+                        padding-left: 0; /* Stack layout for very small screens */
+                        padding-top: 4.5rem; /* Make room for icon at top-left */
+                    }
+                    .quote-context {
+                         margin-left: 2rem;
                     }
                 }
             `}</style>
-        </section>
+        </section >
     );
 }
