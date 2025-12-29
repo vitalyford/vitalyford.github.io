@@ -24,20 +24,20 @@ interface NavDropdown {
 const mainLinks: NavLink[] = [
   { href: "/research", label: "Research" },
   { href: "/publications", label: "Pubs" },
-  { href: "/docs/VitalyFordResume.pdf", label: "CV", external: true },
+  { href: "/view?url=/docs/VitalyFordResume.pdf&title=CV", label: "CV" },
   { href: "/schedule", label: "Schedule" },
 ];
 
 const talksDropdown: NavDropdown = {
   label: "Talks",
   items: [
-    { href: "/docs/obscurity-in-cybersecurity.pdf", label: "Obscurity in Cybersecurity", external: true },
-    { href: "/docs/VitalyFord-ML-and-AI.pdf", label: "ML & AI", external: true },
-    { href: "/docs/aws.pdf", label: "Cloud (AWS) Workshop", external: true },
-    { href: "/docs/VitalyFord-AMI-PrivacyDataMining.pdf", label: "AMI Privacy Data Mining", external: true },
-    { href: "/docs/VitalyFord-Energy-Fraud-Detection.pdf", label: "Energy Fraud Detection", external: true },
-    { href: "/docs/VitalyFord-GenCyberCoin-and-Cybersecurity-Principles.pdf", label: "GenCyberCoin", external: true },
-    { href: "/docs/VitalyFord-NSF-CC-Arcadia-Case-Study.pdf", label: "NSF CC* Case Study", external: true },
+    { href: "/view?url=/docs/obscurity-in-cybersecurity.pdf&title=Obscurity in Cybersecurity", label: "Obscurity in Cybersecurity" },
+    { href: "/view?url=/docs/VitalyFord-ML-and-AI.pdf&title=ML & AI", label: "ML & AI" },
+    { href: "/view?url=/docs/aws.pdf&title=Cloud (AWS) Workshop", label: "Cloud (AWS) Workshop" },
+    { href: "/view?url=/docs/VitalyFord-AMI-PrivacyDataMining.pdf&title=AMI Privacy Data Mining", label: "AMI Privacy Data Mining" },
+    { href: "/view?url=/docs/VitalyFord-Energy-Fraud-Detection.pdf&title=Energy Fraud Detection", label: "Energy Fraud Detection" },
+    { href: "/view?url=/docs/VitalyFord-GenCyberCoin-and-Cybersecurity-Principles.pdf&title=GenCyberCoin", label: "GenCyberCoin" },
+    { href: "/view?url=/docs/VitalyFord-NSF-CC-Arcadia-Case-Study.pdf&title=NSF CC* Case Study", label: "NSF CC* Case Study" },
   ],
 };
 
@@ -163,15 +163,13 @@ export default function Navbar() {
               </button>
               <div className="dropdown-menu-cyber">
                 {talksDropdown.items.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="dropdown-item"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -265,15 +263,13 @@ export default function Navbar() {
           </button>
           <div className={`mobile-dropdown-content ${expandedDropdown === "talks" ? "expanded" : ""}`}>
             {talksDropdown.items.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="nav-link"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
