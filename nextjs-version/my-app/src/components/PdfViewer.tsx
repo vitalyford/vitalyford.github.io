@@ -4,84 +4,83 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface PdfViewerProps {
-    url: string;
-    title: string;
+  url: string;
+  title: string;
 }
 
 export default function PdfViewer({ url, title }: PdfViewerProps) {
-    const [loading, setLoading] = useState(true);
-    const [scanProgress, setScanProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [scanProgress, setScanProgress] = useState(0);
 
-    useEffect(() => {
-        if (loading) {
-            const interval = setInterval(() => {
-                setScanProgress((prev) => {
-                    if (prev >= 100) {
-                        setLoading(false);
-                        clearInterval(interval);
-                        return 100;
-                    }
-                    return prev + Math.random() * 15;
-                });
-            }, 100);
-            return () => clearInterval(interval);
-        }
-    }, [loading]);
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setScanProgress((prev) => {
+          if (prev >= 100) {
+            setLoading(false);
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + Math.random() * 15;
+        });
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
 
-    return (
-        <div className="pdf-viewer-container">
-            <div className="pdf-header">
-                <div className="pdf-header-tag">
-                    <span className="blink">●</span> SECURE_DOC_ACCESS
-                </div>
-                <div className="pdf-title-container">
-                    <h1 className="pdf-title">{title}</h1>
-                    <div className="pdf-meta">
-                        <span className="pdf-meta-label">STATUS:</span>
-                        <span className="pdf-meta-value">{loading ? "DECRYPTING..." : "VERIFIED"}</span>
-                        <span className="pdf-meta-sep">|</span>
-                        <span className="pdf-meta-label">TYPE:</span>
-                        <span className="pdf-meta-value">PDF/LEVEL_4</span>
-                    </div>
-                </div>
-                <div className="pdf-actions">
-                    <a href={url} download className="pdf-action-btn download">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4a2 2 0 0 1 2 2h14a2 2 0 0 0 2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                        DOWNLOAD
-                    </a>
-                    <Link href="/" className="pdf-action-btn close">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                        EXIT
-                    </Link>
-                </div>
+  return (
+    <div className="pdf-viewer-container">
+      <div className="pdf-header">
+        <div className="pdf-header-tag">
+          <span className="blink">●</span> SECURE_DOC_ACCESS
+        </div>
+        <div className="pdf-title-container">
+          <h1 className="pdf-title">{title}</h1>
+          <div className="pdf-meta">
+            <span className="pdf-meta-label">STATUS:</span>
+            <span className="pdf-meta-value">{loading ? "DECRYPTING..." : "VERIFIED"}</span>
+            <span className="pdf-meta-sep">|</span>
+            <span className="pdf-meta-label">TYPE:</span>
+            <span className="pdf-meta-value">PDF</span>
+          </div>
+        </div>
+        <div className="pdf-actions">
+          <a href={url} download className="pdf-action-btn download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4a2 2 0 0 1 2 2h14a2 2 0 0 0 2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+            DOWNLOAD
+          </a>
+          <Link href="/" className="pdf-close-btn" aria-label="Exit Viewer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+          </Link>
+        </div>
+      </div>
+
+      <div className="pdf-main-area">
+        {loading && (
+          <div className="pdf-loading-overlay">
+            <div className="scan-line" />
+            <div className="loading-content">
+              <div className="loading-text">SCANNING_DATA_STREAM... {Math.round(scanProgress)}%</div>
+              <div className="loading-bar-container">
+                <div className="loading-bar" style={{ width: `${scanProgress}%` }} />
+              </div>
+              <div className="loading-subtext">INTEGRITY_CHECK_IN_PROGRESS</div>
             </div>
+          </div>
+        )}
 
-            <div className="pdf-main-area">
-                {loading && (
-                    <div className="pdf-loading-overlay">
-                        <div className="scan-line" />
-                        <div className="loading-content">
-                            <div className="loading-text">SCANNING_DATA_STREAM... {Math.round(scanProgress)}%</div>
-                            <div className="loading-bar-container">
-                                <div className="loading-bar" style={{ width: `${scanProgress}%` }} />
-                            </div>
-                            <div className="loading-subtext">INTEGRITY_CHECK_IN_PROGRESS</div>
-                        </div>
-                    </div>
-                )}
+        <iframe
+          src={`${url}#toolbar=0&navpanes=0&scrollbar=0`}
+          className={`pdf-iframe ${loading ? "hidden" : "visible"}`}
+          title={title}
+          onLoad={() => {
+            // Give a little extra time for the animation to feel real
+            setTimeout(() => setLoading(false), 500);
+          }}
+        />
+      </div>
 
-                <iframe
-                    src={`${url}#toolbar=0&navpanes=0&scrollbar=0`}
-                    className={`pdf-iframe ${loading ? "hidden" : "visible"}`}
-                    title={title}
-                    onLoad={() => {
-                        // Give a little extra time for the animation to feel real
-                        setTimeout(() => setLoading(false), 500);
-                    }}
-                />
-            </div>
-
-            <style jsx>{`
+      <style jsx>{`
         .pdf-viewer-container {
           display: flex;
           flex-direction: column;
@@ -166,7 +165,8 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
 
         .pdf-actions {
           display: flex;
-          gap: 0.75rem;
+          align-items: center;
+          gap: 1.25rem;
         }
 
         .pdf-action-btn {
@@ -191,18 +191,30 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
         .pdf-action-btn.download:hover {
           background: var(--cyber-cyan);
           color: #000;
-          box-shadow: 0 0 15px var(--cyber-cyan-40);
+          box-shadow: 0 0 20px var(--cyber-cyan-40);
+          transform: translateY(-1px);
         }
 
-        .pdf-action-btn.close {
-          background: rgba(255, 255, 255, 0.05);
-          color: var(--text-secondary);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+        .pdf-close-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          background: rgba(255, 68, 68, 0.1);
+          color: rgba(255, 68, 68, 0.7);
+          border: 1px solid rgba(255, 68, 68, 0.2);
+          border-radius: 50%;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
         }
 
-        .pdf-action-btn.close:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: var(--text-primary);
+        .pdf-close-btn:hover {
+          background: rgba(255, 68, 68, 0.9);
+          color: #fff;
+          border-color: #ff4444;
+          box-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+          transform: rotate(90deg);
         }
 
         .pdf-main-area {
@@ -304,6 +316,6 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
