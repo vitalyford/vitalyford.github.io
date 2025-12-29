@@ -448,7 +448,7 @@ export default function Home() {
         <h2 className="section-heading">Beyond the Code</h2>
 
         <p style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
-          When not playing with my kids or hanging out with my wife and friends, I enjoy playing table tennis and chess.
+          When not playing with my kids or hanging out with my wife and friends, I enjoy playing table tennis, chess, and travel.
         </p>
       </section>
 
