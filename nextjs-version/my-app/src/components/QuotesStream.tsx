@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Quote {
@@ -44,8 +44,8 @@ const quotes: Quote[] = [
     },
     {
         id: 5,
-        text: "Complexity is the enemy of security.",
-        author: "Gary McGraw",
+        text: "Complexity is the worst enemy of security.",
+        author: "Bruce Schneier",
         context: "System Design",
         x: 80, y: 80
     }
@@ -76,12 +76,17 @@ export default function QuotesStream() {
     };
 
     return (
-        <section className="quotes-section" style={{
-            padding: "10rem 0",
-            position: "relative",
-            overflow: "hidden",
-            background: "radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.05) 0%, transparent 80%)"
-        }}>
+        <section
+            className="quotes-section"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+                padding: "10rem 0",
+                position: "relative",
+                overflow: "hidden",
+                background: "radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.05) 0%, transparent 80%)"
+            }}
+        >
             {/* Knowledge Graph Background */}
             <div className="quotes-graph-container" style={{
                 position: "absolute",
@@ -118,7 +123,7 @@ export default function QuotesStream() {
                             <motion.circle
                                 cx={q.x}
                                 cy={q.y}
-                                r={activeIndex === i ? 2.2 : 0.8}
+                                r={activeIndex === i ? 2.5 : 1}
                                 fill={activeIndex === i ? "var(--cyber-cyan)" : "transparent"}
                                 stroke="var(--cyber-cyan)"
                                 strokeWidth="0.2"
@@ -126,22 +131,30 @@ export default function QuotesStream() {
                                     opacity: activeIndex === i ? 1 : 0.4,
                                     r: activeIndex === i ? 2.5 : 1
                                 }}
+                                transition={{ duration: 0.4 }}
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => setActiveIndex(i)}
                             />
-                            {activeIndex === i && (
-                                <motion.circle
-                                    cx={q.x}
-                                    cy={q.y}
-                                    r={q.x > 50 ? 5 : 4}
-                                    fill="transparent"
-                                    stroke="var(--cyber-cyan)"
-                                    strokeWidth="0.1"
-                                    initial={{ scale: 0.5, opacity: 0.8 }}
-                                    animate={{ scale: 2.5, opacity: 0 }}
-                                    transition={{ repeat: Infinity, duration: 3, ease: "easeOut" }}
-                                />
-                            )}
+                            <AnimatePresence>
+                                {activeIndex === i && (
+                                    <motion.circle
+                                        key={`pulse-${q.id}`}
+                                        cx={q.x}
+                                        cy={q.y}
+                                        r={q.x > 50 ? 5 : 4}
+                                        fill="transparent"
+                                        stroke="var(--cyber-cyan)"
+                                        strokeWidth="0.1"
+                                        initial={{ scale: 0.5, opacity: 0 }}
+                                        animate={{ scale: 2.5, opacity: 0.8 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{
+                                            opacity: { duration: 0.3 },
+                                            scale: { repeat: Infinity, duration: 3, ease: "easeOut" }
+                                        }}
+                                    />
+                                )}
+                            </AnimatePresence>
                         </g>
                     ))}
                 </svg>
@@ -222,9 +235,9 @@ export default function QuotesStream() {
                                     x: distance * 340,
                                     scale: isCenter ? 1 : 0.82,
                                     rotateY: distance * -25,
-                                    zIndex: isCenter ? 50 : 20 - Math.abs(distance),
+                                    z: isCenter ? 0 : -400, // Denoted 3D depth to prevent Z-fighting
+                                    zIndex: isCenter ? 50 : 10, // Deterministic stacking
                                     opacity: isVisible ? (isCenter ? 1 : 0.3) : 0,
-                                    filter: isCenter ? "none" : "blur(3px)",
                                     backgroundColor: isCenter ? "rgba(10, 10, 15, 0.98)" : "rgba(10, 10, 15, 0.7)",
                                     borderColor: isCenter ? "var(--cyber-cyan)" : "var(--cyber-border)",
                                     boxShadow: isCenter
@@ -234,13 +247,11 @@ export default function QuotesStream() {
                                 }}
                                 transition={{
                                     type: "spring",
-                                    stiffness: 220,
-                                    damping: 24,
-                                    mass: 1,
+                                    stiffness: 150, // Softer springs for more "weight"
+                                    damping: 30,    // High damping prevents overshoot and flicker
+                                    mass: 1.2,
                                     zIndex: { duration: 0 }
                                 }}
-                                onMouseEnter={() => isCenter && setIsHovered(true)}
-                                onMouseLeave={() => isCenter && setIsHovered(false)}
                                 onClick={() => !isCenter && setActiveIndex(idx)}
                                 className={`cyber-card quote-card-3d ${isCenter ? 'active' : 'preview'}`}
                                 style={{
@@ -251,7 +262,9 @@ export default function QuotesStream() {
                                     transformStyle: "preserve-3d",
                                     cursor: isCenter ? "default" : "pointer",
                                     borderWidth: "1px",
-                                    borderStyle: "solid"
+                                    borderStyle: "solid",
+                                    filter: isCenter ? "blur(0px)" : "blur(4px)",
+                                    transition: "filter 0.4s ease-out"
                                 }}
                             >
                                 {/* Clean Header without Title */}
