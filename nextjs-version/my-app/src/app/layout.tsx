@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Vitaly Ford" }],
   keywords: ["cybersecurity", "WiCyS", "smart grid", "machine learning", "computer science", "education", "researcher"],
   icons: {
-    icon: "/assets/images/favicon.gif",
+    icon: "/images/vf-favicon.png",
   },
   openGraph: {
     title: "Vitaly Ford | Cybersecurity Researcher & Educator",
