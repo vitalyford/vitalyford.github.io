@@ -170,6 +170,34 @@ export default function QuotesStream() {
                     perspective: "1200px",
                     transformStyle: "preserve-3d"
                 }}>
+                    {/* Clickable Left/Right Halves for Navigation */}
+                    <div
+                        onClick={() => handlePaginate(-1)}
+                        style={{
+                            position: "absolute",
+                            left: 0,
+                            top: 0,
+                            width: "50%",
+                            height: "100%",
+                            cursor: "pointer",
+                            zIndex: 5
+                        }}
+                        aria-label="Previous slide"
+                    />
+                    <div
+                        onClick={() => handlePaginate(1)}
+                        style={{
+                            position: "absolute",
+                            right: 0,
+                            top: 0,
+                            width: "50%",
+                            height: "100%",
+                            cursor: "pointer",
+                            zIndex: 5
+                        }}
+                        aria-label="Next slide"
+                    />
+
                     {/* Navigation Arrows - Improved contrast and simplified */}
                     <button
                         onClick={() => handlePaginate(-1)}
