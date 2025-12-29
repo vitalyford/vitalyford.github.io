@@ -171,17 +171,24 @@ export default function Home() {
                 color: "var(--cyber-cyan)",
                 marginBottom: "2rem",
                 fontWeight: 500,
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
                 width: "fit-content",
               }}
             >
               &gt;&gt; Discover Innovation → Deliver Success
-              <div style={{ marginLeft: "1rem" }}>
-                <HexRoulette showFact={true} displayMode="inline" />
-              </div>
             </h2>
+
+            <div
+              style={{
+                marginBottom: "2rem",
+                paddingLeft: "1rem",
+                borderLeft: "2px solid var(--cyber-cyan-dim)",
+                display: "flex",
+                alignItems: "center",
+                minHeight: "40px"
+              }}
+            >
+              <HexRoulette showFact={true} displayMode="inline" />
+            </div>
 
             <p
               style={{

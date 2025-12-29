@@ -140,7 +140,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
         <div
             style={{
                 display: "inline-flex",
-                alignItems: isTooltip ? "center" : "flex-start",
+                alignItems: "center",
                 gap: "1rem",
                 position: "relative",
                 flexWrap: "wrap",

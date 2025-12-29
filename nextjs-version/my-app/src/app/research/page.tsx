@@ -121,7 +121,7 @@ const projects: Project[] = [
 export default function Research() {
   return (
     <div className="animate-fade-in">
-      <PageHeader title="Research Interests" subtitle="Exploring the intersection of security, AI, and education" />
+      <PageHeader title="Research Interests" />
 
       {/* Research Areas Grid */}
       <section style={{ padding: "2rem 0" }}>

@@ -37,34 +37,30 @@ export default function PageHeader({ title, subtitle, imageSrc, altText }: PageH
           </div>
         )}
         <div style={{ flex: 1, minWidth: "250px" }}>
-          <div
+          <h1
+            className="page-header-title"
             style={{
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "1rem",
-              marginBottom: subtitle ? "0.75rem" : "0",
-              flexWrap: "wrap",
-              width: "100%"
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
+              color: "var(--cyber-cyan)",
+              marginTop: 0,
+              marginBottom: "1rem",
             }}
           >
-            <h1
-              className="page-header-title"
-              style={{
-                fontFamily: "var(--font-mono), monospace",
-                fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
-                color: "var(--cyber-cyan)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                margin: 0,
-                flexShrink: 0
-              }}
-            >
-              {title}
-            </h1>
-            <div style={{ flex: 1, minWidth: "250px" }}>
-              <HexRoulette showFact={true} displayMode="inline" />
-            </div>
+            {title}
+          </h1>
+
+          <div
+            style={{
+              marginBottom: subtitle ? "0.75rem" : "0",
+              paddingLeft: "1rem",
+              borderLeft: "2px solid var(--cyber-cyan-dim)",
+              display: "flex",
+              alignItems: "center",
+              minHeight: "40px"
+            }}
+          >
+            <HexRoulette showFact={true} displayMode="inline" />
           </div>
           {subtitle && (
             <p
