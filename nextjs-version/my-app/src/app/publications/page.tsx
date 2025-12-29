@@ -7,10 +7,7 @@ export default function Publications() {
 
   return (
     <div className="animate-fade-in">
-      <PageHeader
-        title="Publications"
-        subtitle={`${totalPapers} peer-reviewed publications across cybersecurity, ML, and education`}
-      />
+      <PageHeader title="Publications" />
 
       {/* Stats */}
       <section style={{ padding: "1rem 0 2rem" }}>
