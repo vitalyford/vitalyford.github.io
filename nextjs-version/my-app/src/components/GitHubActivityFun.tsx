@@ -36,6 +36,7 @@ interface LogEntry {
 
 export default function GitHubActivityFun({ username }: GitHubActivityFunProps) {
     const [data, setData] = useState<ContributionsData | null>(null);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(true);
     const [currentNode, setCurrentNode] = useState<{ x: number; y: number } | null>(null);
     const [visitedDates, setVisitedDates] = useState<Set<string>>(new Set());
@@ -211,6 +212,29 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         return () => clearInterval(interval);
     }, [data, currentNode, visitedDates, isAuto, targetNode, contributionNodes, hackerMode]);
 
+    // Auto-scroll to keep Character in center (Camera Follow)
+    useEffect(() => {
+        if (!currentNode || !scrollContainerRef.current) return;
+
+        const container = scrollContainerRef.current;
+        const nodeWidth = 16; // 12px width + 4px gap
+        const paddingLeft = 8; // px-2 (container padding)
+
+        // Calculate the center position of the target node relative to the container content
+        const nodeCenter = paddingLeft + (currentNode.x * nodeWidth) + (nodeWidth / 2);
+
+        // Calculate the desired scroll position to center the node
+        // We want: nodeCenter - scrollLeft = containerWidth / 2
+        // So: scrollLeft = nodeCenter - containerWidth / 2
+        const halfContainer = container.clientWidth / 2;
+        const targetScroll = nodeCenter - halfContainer;
+
+        container.scrollTo({
+            left: targetScroll,
+            behavior: "smooth"
+        });
+    }, [currentNode]);
+
     if (loading) {
         return (
             <div className="flex items-center justify-center p-8 h-[400px] border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm">
@@ -230,7 +254,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/20 rounded-xl border border-white/5 min-h-[450px]">
             {/* Main Area: Grid & TSP Path */}
             <div className="flex-1 relative overflow-hidden flex flex-col">
-                <div className="flex-1 relative overflow-x-auto pb-4 custom-scrollbar">
+                <div ref={scrollContainerRef} className="flex-1 relative overflow-x-auto pb-4 custom-scrollbar">
                     <div className="min-w-[800px] relative pt-6 px-2">
                         {/* SVG Layer for Path */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" style={{ left: 8, top: 24 }}>
