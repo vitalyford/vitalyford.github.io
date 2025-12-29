@@ -17,15 +17,6 @@ export default function NotFound() {
       >
         404
       </div>
-      <h1
-        style={{
-          fontSize: "1.5rem",
-          color: "var(--text-primary)",
-          marginBottom: "2rem",
-        }}
-      >
-        <span style={{ color: "var(--cyber-green)" }}>$</span> Error: Page not found
-      </h1>
 
       <div style={{ maxWidth: "400px", margin: "0 auto 2rem" }}>
         <Image
@@ -38,12 +29,8 @@ export default function NotFound() {
         />
       </div>
 
-      <p style={{ color: "var(--text-secondary)", marginBottom: "2rem" }}>
-        The page you&apos;re looking for doesn&apos;t exist or has been moved.
-      </p>
-
       <Link href="/" className="cyber-btn cyber-btn-primary">
-        <span>Return Home</span>
+        <span>Back to Reality</span>
       </Link>
     </div>
   );
