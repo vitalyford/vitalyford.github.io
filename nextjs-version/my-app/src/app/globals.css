@@ -796,6 +796,7 @@ blockquote cite {
   z-index: 100;
 }
 
+
 .scroll-to-top:hover {
   border-color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
@@ -1331,4 +1332,22 @@ blockquote cite {
     text-align: left;
     white-space: nowrap;
   }
+}
+
+/* ============================================
+   FEATURED PROJECTS
+   ============================================ */
+
+.project-card-link:hover {
+  text-shadow: none !important;
+}
+
+.project-card-title {
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.project-card-link:hover .project-card-title {
+  color: var(--cyber-cyan) !important;
+  text-shadow: 0 0 10px var(--cyber-cyan);
 }

@@ -345,7 +345,7 @@ export default function Home() {
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="cyber-card"
+              className="cyber-card project-card-link"
               style={{ display: "block", textDecoration: "none" }}
             >
               {project.badge && (
@@ -354,8 +354,8 @@ export default function Home() {
                 </span>
               )}
               <h3
+                className="project-card-title"
                 style={{
-                  color: "var(--text-primary)",
                   fontSize: "1.1rem",
                   marginBottom: "0.5rem",
                   marginTop: project.badge ? "0.75rem" : 0,
