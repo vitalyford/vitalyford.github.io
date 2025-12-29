@@ -45,6 +45,14 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
     const [isStopped, setIsStopped] = useState(false);
     const [hexValue, setHexValue] = useState("0x??");
     const [fact, setFact] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize(); // Check initial
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -78,11 +86,11 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
             initial={{
                 opacity: 0,
                 scale: 0.9,
-                y: displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0),
+                y: isMobile && isTooltip ? 20 : (displayMode === "tooltip-bottom" ? 5 : (displayMode === "tooltip-top-right" ? -5 : 0)),
                 x: isTooltip ? "-50%" : 0
             }}
             animate={{ opacity: 1, scale: 1, y: 0, x: isTooltip ? "-50%" : 0 }}
-            exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: isMobile && isTooltip ? 20 : 0, x: isTooltip ? "-50%" : 0 }}
             className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
             style={{
                 fontSize: "0.85rem",
@@ -95,7 +103,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                 whiteSpace: "normal",
                 flex: isTooltip ? "none" : "1",
                 ...(isTooltip ? {
-                    position: "absolute",
+                    position: isMobile ? "fixed" : "absolute",
                     background: "rgba(10, 10, 15, 0.95)",
                     backdropFilter: "blur(8px)",
                     padding: "0.75rem 1rem",
@@ -103,9 +111,14 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     border: "1px solid var(--cyber-cyan-glow)",
                     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
                     zIndex: 100,
-                    width: "max-content",
+                    width: isMobile ? "90vw" : "max-content",
                     minWidth: "200px",
-                    ...(displayMode === "tooltip-bottom" ? {
+                    ...(isMobile ? {
+                        bottom: "20px",
+                        left: "50%",
+                        top: "auto",
+                        margin: 0,
+                    } : (displayMode === "tooltip-bottom" ? {
                         top: "100%",
                         left: "50%",
                         marginTop: "0.75rem",
@@ -113,7 +126,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                         bottom: "100%",
                         left: "50%",
                         marginBottom: "0.75rem",
-                    })
+                    }))
                 } : {})
             }}
         >
