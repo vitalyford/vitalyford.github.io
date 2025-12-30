@@ -29,6 +29,12 @@ const featuredProjects: Project[] = [
     badge: "Interactive",
   },
   {
+    title: "CTF Unplugged",
+    description: "An unplugged version of a Capture The Flag competition for high schools",
+    href: "/ctf-unplugged/CTF_Unplugged_May_2019.docx",
+    badge: "Education",
+  },
+  {
     title: "Pragmatic Cyber Academy",
     description: "Quick knowledge modules and quizzes, designed to get folks interested in cybersecurity (part of NSF grant)",
     href: "https://cysia.vford.com/",

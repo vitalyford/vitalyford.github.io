@@ -252,6 +252,22 @@ export default function Research() {
 
       <div className="cyber-divider" />
 
+      {/* CTF Unplugged */}
+      <section style={{ padding: "2rem 0" }}>
+        <h2 className="section-heading">CTF Unplugged</h2>
+        <div className="cyber-card">
+          <p style={{ margin: 0, color: "var(--text-secondary)", lineHeight: "1.7" }}>
+            Inspired by the Computer Science Unplugged project, a Capture the Flag (CTF) Unplugged was born as an offline cybersecurity competition for high schools.{" "}
+            <a href="/ctf-unplugged/CTF_Unplugged_May_2019.docx" target="_blank" rel="noopener noreferrer">
+              CTF Unplugged
+            </a>{" "}
+            introduces participants to cybersecurity competitions by engaging in a fun team-based competition without a need for technical preparation. If you are interested in the project or would like to receive the answers to the CTF Unplugged, please contact me.
+          </p>
+        </div>
+      </section>
+
+      <div className="cyber-divider" />
+
       {/* Collaboration */}
       <section style={{ padding: "2rem 0" }}>
         <h2 className="section-heading">Collaboration</h2>
