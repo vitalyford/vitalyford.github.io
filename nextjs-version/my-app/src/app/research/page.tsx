@@ -12,6 +12,7 @@ interface Project {
   description: string;
   href?: string;
   highlights?: string[];
+  presenters?: string;
 }
 
 const researchAreas: ResearchArea[] = [
@@ -47,74 +48,82 @@ const interests = [
 
 const projects: Project[] = [
   {
-    title: "Netflow",
-    description: "Interactive network flow visualization for mastering DNS, web communication, and cybersecurity concepts.",
-    href: "https://netflow.vford.com/",
-    highlights: [
-      "Interactive network visualization",
-      "Real-time packet flow simulation",
-      "Educational modules for DNS and Web traffic",
-      "Multi-panel management for complex scenarios",
-    ],
-  },
-  {
-    title: "Pragmatic Cyber Academy",
-    description: "Virtual labs and interactive modules designed to transform cybersecurity learning into practical career skills.",
-    href: "https://cysia.vford.com/",
-    highlights: [
-      "Hands-on virtual labs",
-      "Expert-led cybersecurity content",
-      "Progress tracking and career readiness",
-      "Comprehensive learning modules",
-    ],
-  },
-  {
-    title: "Engineering Pathways",
-    description: "A comprehensive navigator for dual-degree engineering programs with top-tier institutions.",
-    href: "https://areng.vford.com",
-    highlights: [
-      "Collaborations with Columbia, Drexel, and Dartmouth",
-      "Interactive degree requirement tracking",
-      "GPA and credit transfer guides",
-      "Streamlined application processes for STEM students",
-    ],
-  },
-  {
-    title: "GenCyberCoin",
+    title: "An LLM-Augmented AutoML Framework for End-to-End Data Analysis",
     description:
-      "NSA/NSF GenCyber program sponsored platform to encourage student participation in camp activities.",
-    href: "https://github.com/vitalyford/gencybercoin",
-    highlights: [
-      "Cryptocurrency concepts and digital currency trading markets",
-      "Cybersecurity principles",
-      "Bug bounty program and software bugs",
-      "Password management",
-      "Social and ethical norms and values",
-      "Blockchain technology",
-    ],
+      "We propose an AutoML-LLM Data Analysis Platform that streamlines end-to-end data analysis workflows by automating data ingestion, cleaning, feature engineering, and model selection. It uses Large Language Models for task detection and research question generation, supporting classification, regression, and clustering. The platform also features automated task type detection, imbalanced data handling, and multi-model benchmarking.",
+    presenters: "Jie Xu, Xiangchen Jia",
   },
   {
-    title: "CTF Unplugged",
+    title: "Automatic Parking Control System Based on Webots Simulation",
     description:
-      "An offline cybersecurity competition for K-8 and K-12 schools, inspired by CS Unplugged.",
-    href: "/ctf-unplugged/CTF_Unplugged_May_2019.docx",
-    highlights: [
-      "Introduces participants to cybersecurity competitions",
-      "Shows different cybersecurity careers",
-      "Engages in fun team-based competition",
-      "No technical preparation needed",
-    ],
+      "This project constructs a virtual experimental environment for automatic parking control using the Webots simulation platform. It integrates manual driving, GPS/compass-based localization, and a trajectory logging module to support data-driven behavioral modeling. The system allows for both real-time manual teleoperation and trajectory-based autonomous replay in a realistic parking lot environment.",
+    presenters: "Erchen Qu, TianYu Xu, Zy Kang",
   },
   {
-    title: "GenCyber Camp Curriculum",
+    title: "ASTRO (Arcadia Student Transformed Remote Observatory)",
     description:
-      "Developed cybersecurity modules and curriculum for Tennessee Tech's GenCyber Camp.",
-    href: "https://www.tntech.edu/ceroc/outreach/gen-cyber.php",
-    highlights: [
-      "Month-long cybersecurity summer camp for K-12 students",
-      "Week-long GenCyber camp programs",
-      "Hands-on cybersecurity training",
-    ],
+      "The ASTRO project involves designing and implementing a new control system for the observatory on the roof of Boyer Hall. This system enables users to remotely capture astronomical data from the Observatory and control the decades-old dome.",
+    presenters: "Paul Broccardi, Cole Baugh, Ian Sharp",
+  },
+  {
+    title: "Artistic Nexus",
+    description:
+      "Artistic Nexus is a web platform designed to foster a community within the art space by blending traditional art with AI. It allows artists to share their work, network, and utilize AI tools to generate inspiration for future compositions.",
+    presenters: "Erin MacIver, David Cortez",
+  },
+  {
+    title: "CatNip",
+    description:
+      "CatNip is a high-performance password-cracking tool designed to expedite the penetration testing process for Red Teams. It utilizes a High-Performance Computing cluster and a front-end GUI to efficiently process and crack password hashes using Hashcat.",
+    presenters: "Philip Ryskalczyk, Tyler Kuhl, Chloe Fox",
+  },
+  {
+    title: "Caring for Friends Delivery App",
+    description:
+      "This mobile application, built with Flutter and AWS, helps volunteer drivers track deliveries and find efficient routes in a non-profit organization that helps people in need. It leverages Google Maps API for route optimization and provides a user-friendly interface for managing delivery logistics.",
+    presenters: "Jason Thomas, Alyssa Quisito, Dylan Alexander",
+  },
+  {
+    title: "RoundTable Realms",
+    description:
+      "RoundTable Realms is a VR RPG application built in Unreal Engine 5 that combines the convenience of online sessions with the immersion of in-person campaigns. It features customizable 3D environments and an accompanying website for managing character sheets, maps, and campaign materials.",
+    presenters: "Zachary Albone, Abby Bock, Jamie Conlin, Corey Klevan",
+  },
+  {
+    title: "DevSecOps in Government Aerospace Defense",
+    description:
+      "This project integrates automated security vulnerability scanning into DevOps workflows by incorporating Black Duck and Coverity into GitLab CI/CD pipelines. It establishes a framework for nightly security scans in Docker environments to ensure real-time vulnerability detection and remediation.",
+    presenters: "Benjamin Baron",
+  },
+  {
+    title: "Wy-Fried",
+    description:
+      "This project demonstrates different vulnerabilities of WiFi networks by conducting various attacks to show how devices can be compromised. Using tools like WiFi Pineapple and custom scripts, it highlights the importance of network security and the risks of public WiFi usage.",
+    presenters: "Dalton Smyrl, Jarrett Williams",
+  },
+  {
+    title: "LangKnight",
+    description:
+      "LangKnight is an interactive game that challenges users to master English through audio input-based gameplay. It helps players improve their pronunciation, sentence structure, and grammar by using their voice to defeat monsters in various levels.",
+    presenters: "Morlaye Yansaneh",
+  },
+  {
+    title: "Developing a Web-Based System for Remote Collection and Analysis of Vehicle Electrical Systems Over CANBus Using Carloop",
+    description:
+      "This project developed a real-time vehicle monitoring system using Carloop (connected to CAN bus in the vehicle), InfluxDB, and Grafana. It collects and visualizes performance data such as speed, RPM, and coolant temperature, allowing for remote analysis and alerts based on predefined thresholds.",
+    presenters: "Joshua Valle, Alex-Columna Fuentes",
+  },
+  {
+    title: "Outsourced Worker's Pay Discrepancies in Computer Science Fields",
+    description:
+      "This research investigates pay discrepancies between outsourced and insourced workers in data science and cybersecurity. By analyzing wages relative to minimum wage and cost of living, it highlights significant inequities in global compensation practices.",
+    presenters: "Xavier Dube",
+  },
+  {
+    title: "Osmo: an open-source and automated plant care system",
+    description:
+      "Osmo is a low-cost, Raspberry Pi-powered automated plant care system that monitors and adjusts soil moisture levels. It features a web interface for real-time data monitoring and live video streaming, enabling remote plant care from any device.",
+    presenters: "Thomas Hoy, Brian Torres",
   },
 ];
 
@@ -209,6 +218,11 @@ export default function Research() {
                     )}
                   </h3>
                   <p style={{ color: "var(--text-secondary)", margin: 0 }}>{project.description}</p>
+                  {project.presenters && (
+                    <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
+                      <strong>Students:</strong> {project.presenters}
+                    </p>
+                  )}
                 </div>
               </div>
 
