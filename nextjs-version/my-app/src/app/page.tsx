@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
@@ -7,6 +5,7 @@ import HexRoulette from "@/components/HexRoulette";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
 import QuotesStream from "@/components/QuotesStream";
 import { getPublicationStats } from "@/utils/academicUtils";
+import { getScholarCitations } from "@/utils/scholar";
 
 interface Project {
   title: string;
@@ -99,14 +98,15 @@ const achievements: Achievement[] = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
+  const citationCount = await getScholarCitations("49RgkBcAAAAJ");
 
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
-    { label: "Citations", value: "718", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
-    { label: "Education and Tech Focus", value: `${yearsActive} Yrs` },
-    { label: "Funding Awards", value: "8", description: "NSF & Internal" },
+    { label: "Citations", value: citationCount || "719", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
+    { label: "Years in Education and Tech", value: `${yearsActive}` },
+    { label: "NSF, NSA, and Internal Funding Awards", value: "9" },
     { label: "Teams Coached", value: "50+" },
   ];
 
