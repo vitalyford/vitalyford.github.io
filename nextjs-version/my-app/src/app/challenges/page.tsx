@@ -104,7 +104,7 @@ export default function ChallengesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
       <div className="container mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
@@ -172,7 +172,7 @@ export default function ChallengesPage() {
                 href={resource.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+                className="group bg-linear-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
               >
                 <div className="flex items-start gap-4">
                   <div className="text-4xl">{resource.icon}</div>
