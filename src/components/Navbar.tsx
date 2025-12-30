@@ -74,8 +74,11 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setExpandedDropdown(null);
+    // Close mobile menu and dropdowns when navigating
+    return () => {
+      setMobileMenuOpen(false);
+      setExpandedDropdown(null);
+    };
   }, [pathname]);
 
   // Prevent body scroll when mobile menu is open

@@ -163,6 +163,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
 }
 
 // Helper to keep formatting, never used but prevents errors if I deleted too much
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _unused = null;
 
 

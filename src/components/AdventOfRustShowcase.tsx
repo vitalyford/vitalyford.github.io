@@ -91,35 +91,35 @@ export default function AdventOfRustShowcase() {
                                 <span style={{ color: "#79c0ff" }}>use</span> std::fs::read_to_string;{"\n\n"}
                                 <span style={{ color: "#ff7b72" }}>fn</span> <span style={{ color: "#d2a8ff" }}>main</span>() {"{"}{"\n"}
                                 {"    "}<span style={{ color: "#ff7b72" }}>let mut</span> crates = BTreeMap::<span style={{ color: "#d2a8ff" }}>new</span>();{"\n"}
-                                {"    "}read_to_string(<span style={{ color: "#a5d6ff" }}>"./data.txt"</span>){"\n"}
-                                {"        "}.<span style={{ color: "#d2a8ff" }}>expect</span>(<span style={{ color: "#a5d6ff" }}>"File does not exist!"</span>){"\n"}
+                                {"    "}read_to_string(<span style={{ color: "#a5d6ff" }}>&quot;./data.txt&quot;</span>){"\n"}
+                                {"        "}.<span style={{ color: "#d2a8ff" }}>expect</span>(<span style={{ color: "#a5d6ff" }}>&quot;File does not exist!&quot;</span>){"\n"}
                                 {"        "}.<span style={{ color: "#d2a8ff" }}>lines</span>(){"\n"}
-                                {"        "}.<span style={{ color: "#d2a8ff" }}>for_each</span>(|line| {"{"}{"\n"}
+                                {"        "}.<span style={{ color: "#d2a8ff" }}>for_each</span>(|line| &lbrace;{"\n"}
                                 {"            "}<span style={{ color: "#ff7b72" }}>if</span> !line.<span style={{ color: "#d2a8ff" }}>trim</span>().<span style={{ color: "#d2a8ff" }}>is_empty</span>() {"{"}{"\n"}
                                 {"                "}<span style={{ color: "#ff7b72" }}>match</span> &line.<span style={{ color: "#d2a8ff" }}>trim</span>()[<span style={{ color: "#a5d6ff" }}>0..1</span>] {"{"}{"\n"}
-                                {"                    "}<span style={{ color: "#a5d6ff" }}>"["</span> =&gt; line{"\n"}
+                                {"                    "}<span style={{ color: "#a5d6ff" }}>&quot;[&quot;</span> =&gt; line{"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>chars</span>(){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>collect</span>::&lt;Vec&lt;char&gt;&gt;(){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>chunks</span>(<span style={{ color: "#79c0ff" }}>4</span>){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>map</span>(|c| c.<span style={{ color: "#d2a8ff" }}>iter</span>().<span style={{ color: "#d2a8ff" }}>collect</span>::&lt;String&gt;()){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>enumerate</span>(){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>filter_map</span>(|(i, s)| <span style={{ color: "#ff7b72" }}>match</span> s.<span style={{ color: "#d2a8ff" }}>chars</span>().<span style={{ color: "#d2a8ff" }}>nth</span>(<span style={{ color: "#79c0ff" }}>1</span>).<span style={{ color: "#d2a8ff" }}>unwrap</span>() {"{"}{"\n"}
-                                {"                            "}<span style={{ color: "#79c0ff" }}>' '</span> =&gt; <span style={{ color: "#79c0ff" }}>None</span>,{"\n"}
+                                {"                            "}<span style={{ color: "#79c0ff" }}>&apos; &apos;</span> =&gt; <span style={{ color: "#79c0ff" }}>None</span>,{"\n"}
                                 {"                            "}_ =&gt; <span style={{ color: "#79c0ff" }}>Some</span>(((i + <span style={{ color: "#79c0ff" }}>1</span>).<span style={{ color: "#d2a8ff" }}>to_string</span>(), s[<span style={{ color: "#a5d6ff" }}>1..2</span>].<span style={{ color: "#d2a8ff" }}>to_owned</span>())),{"\n"}
                                 {"                        "}{"}"}){"\n"}
                                 {"                        "}.<span style={{ color: "#d2a8ff" }}>for_each</span>(|(i, s)| crates.<span style={{ color: "#d2a8ff" }}>entry</span>(i).<span style={{ color: "#d2a8ff" }}>or_insert</span>(VecDeque::<span style={{ color: "#d2a8ff" }}>new</span>()).<span style={{ color: "#d2a8ff" }}>push_back</span>(s)),{"\n"}
-                                {"                    "}<span style={{ color: "#a5d6ff" }}>"m"</span> =&gt; {"{"}{"\n"}
+                                {"                    "}<span style={{ color: "#a5d6ff" }}>&quot;m&quot;</span> =&gt; &lbrace;{"\n"}
                                 {"                        "}<span style={{ color: "#ff7b72" }}>for</span> i <span style={{ color: "#ff7b72" }}>in</span> <span style={{ color: "#79c0ff" }}>0</span>..line{"\n"}
-                                {"                            "}.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>" "</span>){"\n"}
+                                {"                            "}.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>&quot; &quot;</span>){"\n"}
                                 {"                            "}.<span style={{ color: "#d2a8ff" }}>map</span>(|e| e.<span style={{ color: "#d2a8ff" }}>to_string</span>()){"\n"}
                                 {"                            "}.<span style={{ color: "#d2a8ff" }}>collect</span>::&lt;Vec&lt;String&gt;&gt;()[<span style={{ color: "#79c0ff" }}>1</span>]{"\n"}
                                 {"                            "}.<span style={{ color: "#d2a8ff" }}>parse</span>().<span style={{ color: "#d2a8ff" }}>unwrap</span>(){"\n"}
                                 {"                        "} {"{"}{"\n"}
                                 {"                            "}<span style={{ color: "#ff7b72" }}>let</span> val = crates{"\n"}
-                                {"                                "}.<span style={{ color: "#d2a8ff" }}>get_mut</span>(&line.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>" "</span>).<span style={{ color: "#d2a8ff" }}>map</span>(|e| e.<span style={{ color: "#d2a8ff" }}>to_string</span>()).<code style={{ color: "#d2a8ff" }}>collect</code>::&lt;Vec&lt;String&gt;&gt;()[<span style={{ color: "#79c0ff" }}>3</span>]){"\n"}
+                                {"                                "}.<span style={{ color: "#d2a8ff" }}>get_mut</span>(&line.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>&quot; &quot;</span>).<span style={{ color: "#d2a8ff" }}>map</span>(|e| e.<span style={{ color: "#d2a8ff" }}>to_string</span>()).<code style={{ color: "#d2a8ff" }}>collect</code>::&lt;Vec&lt;String&gt;&gt;()[<span style={{ color: "#79c0ff" }}>3</span>]){"\n"}
                                 {"                                "}.<span style={{ color: "#d2a8ff" }}>unwrap</span>().<span style={{ color: "#d2a8ff" }}>pop_front</span>().<span style={{ color: "#d2a8ff" }}>unwrap</span>();{"\n"}
                                 {"                            "}crates{"\n"}
-                                {"                                "}.<span style={{ color: "#d2a8ff" }}>get_mut</span>(&line.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>" "</span>).<span style={{ color: "#d2a8ff" }}>map</span>(|e| e.<span style={{ color: "#d2a8ff" }}>to_string</span>()).<code style={{ color: "#d2a8ff" }}>collect</code>::&lt;Vec&lt;String&gt;&gt;()[<span style={{ color: "#79c0ff" }}>5</span>]){"\n"}
+                                {"                                "}.<span style={{ color: "#d2a8ff" }}>get_mut</span>(&line.<span style={{ color: "#d2a8ff" }}>split</span>(<span style={{ color: "#a5d6ff" }}>&quot; &quot;</span>).<span style={{ color: "#d2a8ff" }}>map</span>(|e| e.<span style={{ color: "#d2a8ff" }}>to_string</span>()).<code style={{ color: "#d2a8ff" }}>collect</code>::&lt;Vec&lt;String&gt;&gt;()[<span style={{ color: "#79c0ff" }}>5</span>]){"\n"}
                                 {"                                "}.<span style={{ color: "#d2a8ff" }}>unwrap</span>().<span style={{ color: "#d2a8ff" }}>insert</span>(i, val);{"\n"}
                                 {"                        "}{"}"}{"\n"}
                                 {"                    "}{"}"}{"\n"}
@@ -127,11 +127,11 @@ export default function AdventOfRustShowcase() {
                                 {"                "}{"}"}{"\n"}
                                 {"            "}{"}"}{"\n"}
                                 {"        "}{"}"});{"\n\n"}
-                                {"    "}<span style={{ color: "#8b949e" }}>// Part 2</span>{"\n"}
-                                {"    "}<span style={{ color: "#8b949e" }}>// For Part 1, change Line 39 to push_front without the index i</span>{"\n"}
+                                {"    "}<span style={{ color: "#8b949e" }}>{"// Part 2"}</span>{"\n"}
+                                {"    "}<span style={{ color: "#8b949e" }}>{"// For Part 1, change Line 39 to push_front without the index i"}</span>{"\n"}
                                 {"    "}crates{"\n"}
                                 {"        "}.<span style={{ color: "#d2a8ff" }}>iter_mut</span>(){"\n"}
-                                {"        "}.<span style={{ color: "#d2a8ff" }}>for_each</span>(|(_, v)| <span style={{ color: "#d2a8ff" }}>print!</span>(<span style={{ color: "#a5d6ff" }}>"{"{"}{"}"}"</span>, v.<span style={{ color: "#d2a8ff" }}>pop_front</span>().<span style={{ color: "#d2a8ff" }}>unwrap</span>()));{"\n"}
+                                {"        "}.<span style={{ color: "#d2a8ff" }}>for_each</span>(|(_, v)| <span style={{ color: "#d2a8ff" }}>print!</span>(<span style={{ color: "#a5d6ff" }}>&quot;&#123;&#125;&quot;</span>, v.<span style={{ color: "#d2a8ff" }}>pop_front</span>().<span style={{ color: "#d2a8ff" }}>unwrap</span>()));{"\n"}
                                 {"}"}
                             </pre>
                         </div>

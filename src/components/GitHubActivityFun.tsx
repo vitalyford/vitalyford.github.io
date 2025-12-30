@@ -50,7 +50,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
     const [activeMessage, setActiveMessage] = useState("Initializing neural subnet...");
 
-    const funMessages = [
+    const funMessages = useMemo(() => [
         "Decrypting contribution metadata...",
         "Feeding the commit monster...",
         "Recalibrating flux capacitors...",
@@ -84,7 +84,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         "Tracing recursive function echoes...",
         "Compiling destiny from source code...",
         "Mapping the multi-repo multiverse...",
-    ];
+    ], []);
 
     // Derived state for only days with contributions
     const contributionNodes = useMemo<ContributionDay[]>(() => {
@@ -116,14 +116,15 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 const json = await response.json();
 
                 // Add coordinates to each day
-                const enrichedContributions = json.contributions.map((week: any[], x: number) =>
+                const enrichedContributions = json.contributions.map((week: ContributionDay[], x: number) =>
                     week.map((day, y) => ({ ...day, x, y }))
                 );
 
                 setData({ ...json, contributions: enrichedContributions });
                 addLog("Biometric sequence confirmed. Data stream stable.", "success");
-            } catch (error: any) {
-                addLog(`Uplink Error: ${error.message}`, "error");
+            } catch (error) {
+                const errorMessage = error instanceof Error ? error.message : "Unknown error";
+                addLog(`Uplink Error: ${errorMessage}`, "error");
             } finally {
                 setLoading(false);
             }
@@ -210,7 +211,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         }, hackerMode ? 100 : 400);
 
         return () => clearInterval(interval);
-    }, [data, currentNode, visitedDates, isAuto, targetNode, contributionNodes, hackerMode]);
+    }, [data, currentNode, visitedDates, isAuto, targetNode, contributionNodes, hackerMode, funMessages]);
 
     // Auto-scroll to keep Character in center (Camera Follow)
     useEffect(() => {
@@ -237,7 +238,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center p-8 h-[400px] border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm">
+            <div className="flex items-center justify-center p-8 h-100 border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm">
                 <div className="relative">
                     <div className="w-16 h-16 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
                     <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono text-cyan-400 animate-pulse uppercase">
@@ -251,11 +252,11 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     if (!data) return null;
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/20 rounded-xl border border-white/5 min-h-[450px]">
+        <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/20 rounded-xl border border-white/5 min-h-112.5">
             {/* Main Area: Grid & TSP Path */}
             <div className="flex-1 relative overflow-hidden flex flex-col">
                 <div ref={scrollContainerRef} className="flex-1 relative overflow-x-auto pb-4 custom-scrollbar">
-                    <div className="min-w-[800px] relative pt-6 px-2">
+                    <div className="min-w-200 relative pt-6 px-2">
                         {/* SVG Layer for Path */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" style={{ left: 8, top: 24 }}>
                             <defs>
@@ -281,9 +282,9 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                             />
                         </svg>
 
-                        <div className="flex gap-[4px] relative z-10">
+                        <div className="flex gap-1 relative z-10">
                             {data.contributions.map((week, weekIdx) => (
-                                <div key={weekIdx} className="flex flex-col gap-[4px]">
+                                <div key={weekIdx} className="flex flex-col gap-1">
                                     {week.map((day, dayIdx) => {
                                         const isVisited = visitedDates.has(day.date);
                                         const isCurrent = currentNode?.x === weekIdx && currentNode?.y === dayIdx;
@@ -313,7 +314,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                     setTargetNode({ x: weekIdx, y: dayIdx });
                                                 }}
                                                 className={cn(
-                                                    "w-[12px] h-[12px] rounded-[2px] transition-all duration-300 relative group cursor-pointer",
+                                                    "w-3 h-3 rounded-xs transition-all duration-300 relative group cursor-pointer",
                                                     getBgColor(level),
                                                     isVisited && "ring-1 ring-cyan-500/50 shadow-[0_0_8px_rgba(0,245,255,0.2)]",
                                                     day.contributionCount > 0 && "hover:scale-125 hover:z-20",
@@ -363,7 +364,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 </div>
 
                 {/* Console Log */}
-                <div className="flex flex-col gap-1.5 h-[120px] bg-black/40 p-3 mt-4 rounded-lg border border-white/5 font-mono overflow-hidden">
+                <div className="flex flex-col gap-1.5 h-30 bg-black/40 p-3 mt-4 rounded-lg border border-white/5 font-mono overflow-hidden">
                     <div className="text-[8px] text-white/40 mb-2 border-b border-white/10 pb-1 flex justify-between">
                         <span>LIVE_CALC_STREAM_V4.2</span>
                         <span className="animate-pulse">STREAMING_ACTIVE</span>
@@ -392,7 +393,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             </div>
 
             {/* Sidebar: Neural Calc Lab */}
-            <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6 bg-gradient-to-b from-transparent to-black/10 shrink-0">
+            <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6 bg-linear-to-b from-transparent to-black/10 shrink-0">
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_5px_#00f5ff]" />
@@ -445,19 +446,19 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 <div className="flex flex-col gap-2">
                     <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest mb-1">System Metrics</div>
                     <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">VELOCITY</div>
                             <div className="text-white font-bold">{hackerMode ? "42.0 GB/s" : "12.5 GB/s"}</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">LATENCY</div>
                             <div className="text-white font-bold">1ms</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">NODES</div>
                             <div className="text-white font-bold">{contributionNodes.length}</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-[45px]">
+                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">CLEARANCE</div>
                             <div className="text-white font-bold">{Math.round((visitedDates.size / contributionNodes.length) * 100) || 0}%</div>
                         </div>
@@ -482,7 +483,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                             top: tooltipPos.y - 80,
                             zIndex: 100,
                         }}
-                        className="pointer-events-none bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-[170px]"
+                        className="pointer-events-none bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-42.5"
                     >
                         <div className="relative">
                             <div className="flex flex-col gap-2">
