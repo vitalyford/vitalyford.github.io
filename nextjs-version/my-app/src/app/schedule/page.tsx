@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 export default function Schedule() {
   return (
     <div className="animate-fade-in">
-      <PageHeader title="Current Semester Schedule" subtitle="Office hours and availability" />
+      <PageHeader title="Current Semester Schedule" />
 
       <section style={{ padding: "2rem 0" }}>
         <div className="cyber-card">

@@ -27,7 +27,7 @@ const contactInfo: ContactItem[] = [
     copyable: true,
   },
   {
-    label: "Profile",
+    label: "Profile link",
     value: "Arcadia University",
     href: "https://www.arcadia.edu/faculty-and-staff/vitaly-ford/",
   },

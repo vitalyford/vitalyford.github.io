@@ -71,7 +71,6 @@ const achievements: Achievement[] = [
   {
     title: "Ally Award",
     description: "Women in Cybersecurity (WiCyS) Ally Award Winner",
-    href: "https://www.wicys.org/awards/",
     year: "2024",
   },
   {
