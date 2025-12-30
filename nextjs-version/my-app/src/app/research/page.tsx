@@ -43,7 +43,8 @@ const interests = [
   "Data Privacy for Advanced Metering Infrastructure",
   "Energy Fraud Detection",
   "Machine Learning and Artificial Intelligence",
-  "Cybersecurity Education",
+  "Cybersecurity",
+  "CS Education",
 ];
 
 const projects: Project[] = [
@@ -175,6 +176,7 @@ export default function Research() {
           style={{
             display: "flex",
             flexWrap: "wrap",
+            justifyContent: "center",
             gap: "0.75rem",
           }}
         >
