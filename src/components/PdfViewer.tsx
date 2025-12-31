@@ -32,7 +32,7 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
     <div className="pdf-viewer-container">
       <div className="pdf-header">
         <div className="pdf-header-tag">
-          <span className="blink">●</span> SECURE_DOC_ACCESS
+          <span className="blink">●</span> SECURE DOC ACCESS
         </div>
         <div className="pdf-title-container">
           <h1 className="pdf-title">{title}</h1>
@@ -60,11 +60,11 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
           <div className="pdf-loading-overlay">
             <div className="scan-line" />
             <div className="loading-content">
-              <div className="loading-text">SCANNING_DATA_STREAM... {Math.round(scanProgress)}%</div>
+              <div className="loading-text">SCANNING DATA STREAM... {Math.round(scanProgress)}%</div>
               <div className="loading-bar-container">
                 <div className="loading-bar" style={{ width: `${scanProgress}%` }} />
               </div>
-              <div className="loading-subtext">INTEGRITY_CHECK_IN_PROGRESS</div>
+              <div className="loading-subtext">INTEGRITY CHECK IN PROGRESS</div>
             </div>
           </div>
         )}
