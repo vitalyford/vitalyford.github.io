@@ -1049,7 +1049,7 @@ blockquote cite {
   color: var(--cyber-cyan);
   cursor: pointer;
   transition: all var(--transition-base);
-  z-index: 100;
+  z-index: 1002;
 }
 
 .mobile-menu-floating-btn:hover {
@@ -1085,20 +1085,21 @@ blockquote cite {
   .nav-mobile {
     display: flex;
     position: fixed;
-    top: 65px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: rgba(13, 13, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1rem;
+    padding: 5rem 1rem 1rem;
     transform: translateX(100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    z-index: 1001;
   }
 
   .nav-mobile.open {
