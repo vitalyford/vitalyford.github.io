@@ -64,6 +64,22 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
+  const [leftHanded, setLeftHanded] = useState(false);
+
+  // Load hand preference from localStorage
+  useEffect(() => {
+    const savedPreference = localStorage.getItem('handPreference');
+    if (savedPreference === 'left') {
+      setLeftHanded(true);
+    }
+  }, []);
+
+  // Save hand preference to localStorage
+  const toggleHandPreference = () => {
+    const newPreference = !leftHanded;
+    setLeftHanded(newPreference);
+    localStorage.setItem('handPreference', newPreference ? 'left' : 'right');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,6 +96,56 @@ export default function Navbar() {
       setExpandedDropdown(null);
     };
   }, [pathname]);
+
+  // Swipe gesture support for mobile menu
+  useEffect(() => {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX = e.touches[0].clientX;
+      touchEndY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = () => {
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = Math.abs(touchEndY - touchStartY);
+      
+      // Swipe from right edge to open menu
+      if (!mobileMenuOpen && touchStartX > window.innerWidth - 50 && deltaX < -50 && deltaY < 100) {
+        setMobileMenuOpen(true);
+        // Haptic feedback simulation
+        if (navigator.vibrate) {
+          navigator.vibrate(10);
+        }
+      }
+      
+      // Swipe right to close menu
+      if (mobileMenuOpen && deltaX > 50 && deltaY < 100) {
+        setMobileMenuOpen(false);
+        if (navigator.vibrate) {
+          navigator.vibrate(10);
+        }
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [mobileMenuOpen]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -300,12 +366,14 @@ export default function Navbar() {
         ))}
       </div>
 
-      {/* Floating Mobile Menu Button - always visible on mobile */}
+      {/* Floating Mobile Menu Buttons - both left and right handed options */}
       <button
-        className="mobile-menu-floating-btn"
+        className={leftHanded ? "mobile-menu-floating-btn-left" : "mobile-menu-floating-btn"}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         aria-label="Toggle menu"
         aria-expanded={mobileMenuOpen}
+        onDoubleClick={toggleHandPreference}
+        title="Double-tap to switch hand preference"
       >
         <span style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
         <span style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
