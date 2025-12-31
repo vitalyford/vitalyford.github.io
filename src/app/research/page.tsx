@@ -170,8 +170,6 @@ export default function Research() {
 
       {/* Research Interests */}
       <section style={{ padding: "2rem 0" }}>
-        <h2 className="section-heading">Research Focus</h2>
-
         <div
           style={{
             display: "flex",
