@@ -16,6 +16,10 @@ export const publications: PublicationYear[] = [
         name: 'L. Zhang, V. Ford, Z. Chen, and J. Chen, "Automatic Building Energy Model Development and Debugging Using Large Language Models Agentic Workflow", Energy and Buildings: Vol. 327. Jan. 2025.',
         url: "/papers/Automatic Building Energy Model Development and Debugging.pdf",
       },
+      {
+        name: 'J. W. Kim and V. Ford, "An Introduction to the AI Special Issue and a Modern Framework for AI in Sport Management", Journal of Applied Sport Management: Vol. 17: Iss. 4. 2025. https://doi.org/10.7290/jasm17LDQV',
+        url: "https://trace.tennessee.edu/cgi/viewcontent.cgi?article=1712&context=jasm",
+      },
     ],
   },
   {
