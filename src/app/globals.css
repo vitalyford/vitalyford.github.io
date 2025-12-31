@@ -1030,32 +1030,6 @@ blockquote cite {
    MOBILE MENU
    ============================================ */
 
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0.5rem;
-  background: transparent;
-  border: 1px solid var(--cyber-border);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.mobile-menu-btn:hover {
-  border-color: var(--cyber-cyan);
-  background: rgba(0, 245, 255, 0.05);
-}
-
-.mobile-menu-btn span {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: var(--cyber-cyan);
-  transition: all var(--transition-base);
-  transform-origin: center;
-}
-
 /* Floating Mobile Menu Button - appears above scroll-to-top */
 .mobile-menu-floating-btn {
   display: none;
@@ -1092,10 +1066,6 @@ blockquote cite {
   background: var(--cyber-cyan);
   transition: all var(--transition-base);
   transform-origin: center;
-}
-
-.mobile-menu-spacer {
-  display: none;
 }
 
 /* Hide mobile nav by default (desktop) */

@@ -216,9 +216,6 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-
-          {/* Spacer for mobile - no button here anymore */}
-          <div className="mobile-menu-spacer" />
         </div>
       </div>
 
