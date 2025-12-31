@@ -1,0 +1,188 @@
+export interface Paper {
+  name: string;
+  url: string;
+}
+
+export interface PublicationYear {
+  year: number;
+  papers: Paper[];
+}
+
+export const publications: PublicationYear[] = [
+  {
+    year: 2025,
+    papers: [
+      {
+        name: 'L. Zhang, V. Ford, Z. Chen, and J. Chen, "Automatic Building Energy Model Development and Debugging Using Large Language Models Agentic Workflow", Energy and Buildings: Vol. 327. Jan. 2025.',
+        url: "/papers/Automatic Building Energy Model Development and Debugging.pdf",
+      },
+      {
+        name: 'J. W. Kim and V. Ford, "An Introduction to the AI Special Issue and a Modern Framework for AI in Sport Management", Journal of Applied Sport Management: Vol. 17: Iss. 4. 2025. https://doi.org/10.7290/jasm17LDQV',
+        url: "https://trace.tennessee.edu/cgi/viewcontent.cgi?article=1712&context=jasm",
+      },
+    ],
+  },
+  {
+    year: 2024,
+    papers: [
+      {
+        name: 'A. Ibrahim and V. Ford, "Developing More Usable and Effective Hands-on Cybersecurity Education Materials", 2024 National Initiative for Cybersecurity Education Conference and Expo, June 4-5, 2024.',
+        url: "#",
+      },
+      {
+        name: 'L. Zhang, Z. Chen, V. Ford, P. Xu, "Advancing Building Energy Modeling with Large Language Models: Exploration and Case Studies", IBPSA USA SimBuild, May 2024.',
+        url: "/papers/Advancing Building Energy Modeling with Large Language Models.pdf",
+      },
+    ],
+  },
+  {
+    year: 2023,
+    papers: [
+      {
+        name: 'A. Ibrahim and V. Ford, "Recommendations for Developing More Usable and Effective Hands-on Cybersecurity Education Materials Based on Critical Evaluation Criteria," Cybersecurity Pedagogy and Practice Journal: Vol. 2, No. 2. URL: Sep. 2023.',
+        url: "/papers/Recommendations for Developing More Usable and Effective Cybersecurity Materials.pdf",
+      },
+      {
+        name: 'J. Collins and V. Ford, "Teaching by Practice: Shaping Secure Coding Mentalities through Cybersecurity CTFs," Journal of Cybersecurity Education, Research and Practice: Vol. 2022. Jan. 2023.',
+        url: "/papers/Shaping Secure Coding Mentalities through Cybersecurity CTFs.pdf",
+      },
+    ],
+  },
+  {
+    year: 2022,
+    papers: [
+      {
+        name: 'L. Zhang, R. Kong, H. Wang, and V. Ford, "Demystifying Long-Short Term Memory Model to Predict Stock Prices," poster presentation and extended abstract publication, 38th CCSC Eastern Regional Conference 2022.',
+        url: "/papers/Demystifying Long-Short Term Memory to Predict Stock Prices.pdf",
+      },
+    ],
+  },
+  {
+    year: 2021,
+    papers: [
+      {
+        name: 'A. Ibrahim and V. Ford, "Observations, Evaluations, and Recommendations for DETERLab from an Educational Perspective", Journal of Cybersecurity Education, Research and Practice: Vol. 2021: No. 1, Article 4.',
+        url: "/papers/ibrahim-ford-deterlab-eval.pdf",
+      },
+      {
+        name: 'M. Zhang, G. Zhang, S. Zhang, Z. Liu, V. Ford, V. Turygina, "Application of Data-Driven Measures for Impeding COVID-19 Spread at an Academic Institution", in Proceedings of IVUS 2021: 26th International Conference Information Society and University Studies, April 23, 2021.',
+        url: "/papers/Data-driven-Measures-COVID-19.pdf",
+      },
+      {
+        name: 'M. Zhang, G. Zhang, S. Zhang, Z. Liu, V. Ford, V. Turygina, "Analysis and Methodology of Inhibiting COVID-19 Spread on a University Campus", in Proceedings of IVUS 2021: 26th International Conference Information Society and University Studies, April 23, 2021.',
+        url: "/papers/Analysis-and-Methodology-COVID-19.pdf",
+      },
+    ],
+  },
+  {
+    year: 2020,
+    papers: [
+      {
+        name: 'C. Kolb, J. Strouse, J. Palmer, V. Ford, V. Turygina, "Cyber Securing the Future", in Proceedings of the 18th International Conference of Numerical Analysis and Applied Mathematics, the 4th Symposium on Mathematical Methods in Economics and Nature Use, September 21, 2020.',
+        url: "/papers/ICNAAM_CyberSecuringTheFuture.pdf",
+      },
+      {
+        name: 'A. Pressman, T. Ramdass, P. Walls, V. Ford, V. Turygina, "Utilizing Virtual Reality Game Design to Improve Problem Solving and Logical Thinking Skills", in Proceedings of the 18th International Conference of Numerical Analysis and Applied Mathematics, the 4th Symposium on Mathematical Methods in Economics and Nature Use, September 21, 2020.',
+        url: "/papers/ICNAAM_VirtualReality.pdf",
+      },
+      {
+        name: 'D. Brown, V. Ford, S. Ghafoor, "A Framework for the Evaluation of Parallel and Distributed Computing Education Resources", in Proceedings of the 34th IEEE International Parallel and Distributed Processing Symposium, EduPar NSF/TCPP Workshop on Parallel and Distributed Computing Education, May 18, 2020.',
+        url: "/papers/pdc-framework.pdf",
+      },
+    ],
+  },
+  {
+    year: 2019,
+    papers: [
+      {
+        name: 'I. Sachkov, V. Turygina, and V. Ford, "Development of FEM Programs for Assessing the Risk of Electrical Breakdown of Devices Operating in High Humidity Conditions", in Proceedings of the 45th International Conference on Application of Mathematics in Engineering and Economics, 2172, 080013 (2019).',
+        url: "/papers/FEM-programs.pdf",
+      },
+      {
+        name: 'V. Ford and A. Siraj, "GenCyberCoin: An Engaging, Customizable, and Gamified Web Platform for Cybersecurity Summer Camps and Classrooms", the Journal of Computing Sciences in Colleges, 35th CCSC-EA, 35.3 (2019): 87-96.',
+        url: "/papers/Ford Siraj GenCyberCoin.pdf",
+      },
+      {
+        name: 'EPOC, Arcadia University, KINBER, PennState, "White Paper: Arcadia University Bioinformatics Application Deep Dive", July 2019.',
+        url: "/papers/20190722-EPOC-Report-Arcadia.pdf",
+      },
+      {
+        name: 'Addleman, H., Bare, Z., Flint, M., Ford, V., Hamm, K., Margolis, L., Miller, K., Oxenford, J., Reinhard, S., Zottola, J. and Zurawski, J., "Arcadia University Bioinformatics Application Deep Dive". 2019. (No. UCPMS-2568399; LBNL-2001317). Lawrence Berkeley National Lab.(LBNL), Berkeley, CA',
+        url: "https://escholarship.org/content/qt1196z33x/qt1196z33x.pdf",
+      },
+    ],
+  },
+  {
+    year: 2018,
+    papers: [
+      {
+        name: 'A. Tarasyev, V. Ford, V. Turygina, and A. Dolganov, "Optimization of Information Resources in The Industrial Ecology", in Proceedings of the 17th IFAC Workshop on Control Applications of Optimization, Yekaterinburg, Russia, October 15-19, 2018.',
+        url: "/papers/Optimization fo Information Resources in the Industrial Ecology.pdf",
+      },
+      {
+        name: 'I. Sachkov, A. Dolganov, V. Ford, and V. Turygina, "The Features of the Presentation of the Topic "Synergism of the Economics" For Students of Information Technologies", in Proceedings of the 17th IFAC Workshop on Control Applications of Optimization, Yekaterinburg, Russia, October 15-19, 2018.',
+        url: "/papers/The Features of the Presentation of the Topic Synergism of the Economics.pdf",
+      },
+      {
+        name: 'V. Ford, D. Tyler, and A. Siraj, "AMIsim: Application-layer Advanced Metering Infrastructure Simulation Framework for Secure Communication Protocol Performance Evaluation", in Proceedings of the 11th USENIX Workshop on Cyber Security Experimentation and Test (CSET), August 2018.',
+        url: "/papers/Ford Tyler Siraj AMIsim.pdf",
+      },
+      {
+        name: 'K. Rabieh, M. Pan, Z. Han, and V. Ford, "SRPV: A Scalable Revocation Scheme for Pseudonyms-based Vehicular Ad Hoc Networks", in Proceedings of the IEEE ICC 2018 Communication and Information Systems Security Symposium, May 2018.',
+        url: "/papers/A Scalable Revocation Scheme for Pseudonyms-based Vehicular Ad Hoc Networks.pdf",
+      },
+    ],
+  },
+  {
+    year: 2017,
+    papers: [
+      {
+        name: 'V. Ford, A. Siraj, A. Haynes, and E. L. Brown, "Capture the Flag Unplugged: An Offline Cyber Competition", in Proceedings of the ACM Special Interest Group on Computer Science Education (SIGCSE) 2017.',
+        url: "/papers/Ford Siraj CTF-unplugged.pdf",
+      },
+      {
+        name: 'V. Ford, A. Siraj, and M. A. Rahman, "Secure and Efficient Protection of Consumer Privacy in Advanced Metering Infrastructure Supporting Fine-grained Data Analysis", Journal of Computer and System Sciences (Rank A*), 83.1 (2017): 84-100.',
+        url: "/papers/Ford Siraj Rahman Privacy-Preserving Protocol for AMI.pdf",
+      },
+    ],
+  },
+  {
+    year: 2015,
+    papers: [
+      {
+        name: 'V. Ford and A. Siraj, "POSTER: Reliable and efficient protection of consumer privacy in Advanced Metering Infrastructure", Institute for Computer Sciences, Social Informatics and Telecommunications Engineering 2015 B. Thuraisingham et al. (Eds.): SecureComm 2015, LNICST 164, pp. 563–566, 2015.',
+        url: "/papers/Ford Siraj SecureComm 2015 extended abstract.pdf",
+      },
+      {
+        name: 'C. Cody, V. Ford, and A. Siraj, "Decision Tree Learning for Fraud Detection in Consumer Energy Consumption", in Proceedings of the 14th IEEE International Conference on Machine Learning and Applications, December 9-11, 2015.',
+        url: "/papers/Cody Ford Siraj fraud detection.pdf",
+      },
+      {
+        name: 'V. Ford, "POSTER: Reliable and efficient protection of consumer privacy in Advanced Metering Infrastructure", New York Institute of Technology Annual Cybersecurity Conference, September 24, 2015.',
+        url: "",
+      },
+    ],
+  },
+  {
+    year: 2014,
+    papers: [
+      {
+        name: 'V. Ford, A. Siraj, and W. Eberle, "Smart Grid Energy Fraud Detection Using Artificial Neural Networks", in Proceedings of the 2014 IEEE Symposium Series on Computational Intelligence, December 9-12, 2014.',
+        url: "/papers/IEEE SSCI CIASG proceedings Ford Siraj Eberle.pdf",
+      },
+      {
+        name: 'V. Ford and A. Siraj, "Applications of Machine Learning in Cyber Security", in Proceedings of the 27th International Conference on Computer Applications in Industry and Engineering, October 13-15, 2014.',
+        url: "/papers/Ford Siraj Applications of Machine Learning in Cyber Security.pdf",
+      },
+    ],
+  },
+  {
+    year: 2013,
+    papers: [
+      {
+        name: 'V. Ford and A. Siraj, "Clustering of smart meter data for disaggregation", in Proceedings of IEEE Global Conference on Signal and Information Processing, December 3-5, 2013.',
+        url: "/papers/Ford Siraj GlobalSIP Clustering for disaggregation of smart meter data.pdf",
+      },
+    ],
+  },
+];
