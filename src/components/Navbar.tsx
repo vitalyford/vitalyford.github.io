@@ -64,10 +64,12 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      setIsVisible(window.scrollY >= 200);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -215,17 +217,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <span style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
-            <span style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
-            <span style={{ transform: mobileMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
-          </button>
+          {/* Spacer for mobile - no button here anymore */}
+          <div className="mobile-menu-spacer" />
         </div>
       </div>
 
@@ -311,6 +304,23 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
+
+      {/* Floating Mobile Menu Button - appears on scroll */}
+      <button
+        className="mobile-menu-floating-btn"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+        aria-expanded={mobileMenuOpen}
+        style={{
+          opacity: isVisible ? 1 : 0,
+          visibility: isVisible ? "visible" : "hidden",
+          transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        }}
+      >
+        <span style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+        <span style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
+        <span style={{ transform: mobileMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+      </button>
     </nav>
   );
 }
