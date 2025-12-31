@@ -1092,12 +1092,13 @@ blockquote cite {
     background: rgba(13, 13, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 5rem 1rem 1rem;
+    padding: 1rem 1rem 8rem;
     transform: translateX(100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 0.25rem;
     z-index: 1001;
   }
