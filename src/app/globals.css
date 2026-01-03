@@ -771,6 +771,19 @@ blockquote cite {
   transition: all var(--transition-base);
 }
 
+@media (max-width: 1024px) {
+  .nav-cyber {
+    top: auto;
+    bottom: 0;
+    border-bottom: none;
+    border-top: 1px solid rgba(42, 42, 58, 0.5);
+  }
+
+  .nav-cyber.scrolled {
+    border-top-color: var(--cyber-border);
+  }
+}
+
 .nav-cyber.scrolled {
   background: rgba(10, 10, 15, 0.95);
   border-bottom-color: var(--cyber-border);
@@ -1143,6 +1156,12 @@ blockquote cite {
   display: none;
 }
 
+@media (min-width: 1025px) {
+  .nav-mobile {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .mobile-menu-btn {
     display: flex;
@@ -1153,12 +1172,17 @@ blockquote cite {
   }
 
   .nav-mobile {
-    display: flex;
+    display: flex !important;
+    flex-direction: column;
     position: fixed;
-    top: 65px;
+    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    width: 100%;
     background: rgba(13, 13, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -1166,13 +1190,47 @@ blockquote cite {
     transform: translateX(100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
     gap: 0.25rem;
+    z-index: 999;
+    box-sizing: border-box;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-menu-close {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 1rem;
+    background: transparent;
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+    color: var(--cyber-cyan);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-menu-close:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: var(--cyber-cyan);
+  }
+
+  .mobile-menu-close:active {
+    transform: scale(0.95);
   }
 
   .nav-mobile.open {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .nav-mobile .nav-link {
@@ -1181,6 +1239,14 @@ blockquote cite {
     border-radius: 8px;
     border-bottom: none;
     font-size: 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .nav-mobile .nav-link.active {
+    color: var(--cyber-cyan);
   }
 
   .nav-mobile .nav-link:hover {

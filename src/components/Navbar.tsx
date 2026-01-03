@@ -74,23 +74,12 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Close mobile menu and dropdowns when navigating
-    return () => {
-      setMobileMenuOpen(false);
-      setExpandedDropdown(null);
-    };
+    setMobileMenuOpen(false);
+    setExpandedDropdown(null);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
 
   const isActive = (path: string) => pathname === path;
@@ -101,9 +90,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`nav-cyber ${scrolled ? "scrolled" : ""}`}>
-      <div className="container-cyber">
-        <div className="nav-inner">
+    <>
+      <nav className={`nav-cyber ${scrolled ? "scrolled" : ""}`}>
+        <div className="container-cyber">
+          <div className="nav-inner">
           {/* Logo */}
           <Link
             href="/"
@@ -228,9 +218,22 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+    </nav>
 
       {/* Mobile Navigation */}
       <div className={`nav-mobile ${mobileMenuOpen ? "open" : ""}`}>
+        {/* Close button inside mobile menu */}
+        <button
+          className="mobile-menu-close"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
         {mainLinks.map((link) =>
           link.external ? (
             <a
@@ -311,6 +314,6 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-    </nav>
+    </>
   );
 }
