@@ -117,6 +117,18 @@ export default async function Home() {
     { label: "Teams Coached", value: "50+" },
   ];
 
+  const securityRecs = [
+    { label: "VPN", name: "ProtonVPN", url: "https://protonvpn.com/" },
+    { label: "Antivirus", name: "BitDefender", url: "https://www.bitdefender.com/en-us/consumer/free-antivirus" },
+    { label: "Zero-trust", name: "Cloudflare Access", url: "https://www.cloudflare.com/zero-trust/products/access/" },
+    { label: "DNS", name: "NextDNS", url: "https://nextdns.io/" },
+    { label: "Passwords", name: "Bitwarden", url: "https://bitwarden.com/" },
+    { label: "PwnCheck", name: "Have I Been Pwned", url: "https://haveibeenpwned.com/" },
+    { label: "Browser", name: "Brave Browser", url: "https://brave.com/" },
+    { label: "Privacy", name: "Operation Privacy", url: "https://www.operationprivacy.com/" },
+    { label: "XDR", name: "Wazuh", url: "https://wazuh.com/" },
+  ];
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -132,6 +144,7 @@ export default async function Home() {
           {/* Left Column: Content */}
           <div className="animate-slide-up">
             <div
+              className="security-badge-wrapper"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -141,6 +154,8 @@ export default async function Home() {
                 border: "1px solid var(--cyber-cyan-glow)",
                 borderRadius: "50px",
                 marginBottom: "1.5rem",
+                position: "relative",
+                cursor: "help",
               }}
             >
               <div
@@ -155,6 +170,20 @@ export default async function Home() {
               <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Security: Zero Trust, Zero Hype
               </span>
+              <div className="security-tooltip">
+                <strong style={{ fontSize: "0.8rem", color: "var(--cyber-cyan)", display: "block", marginBottom: "0.75rem", paddingBottom: "0.5rem", borderBottom: "1px solid var(--cyber-border)" }}>
+                  My personal security & privacy recommendations:
+                </strong>
+                {securityRecs.map(rec => (
+                  <div key={rec.label} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.7rem", minWidth: "70px" }}>{rec.label}:</span>
+                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="security-tooltip-link">{rec.name}</a>
+                  </div>
+                ))}
+                <em style={{ fontSize: "0.65rem", color: "var(--text-muted)", display: "block", marginTop: "0.75rem", paddingTop: "0.5rem", borderTop: "1px solid var(--cyber-border)" }}>
+                  Not sponsored, not affiliated with. Personal preferences only.
+                </em>
+              </div>
             </div>
 
             <h1
