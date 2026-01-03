@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface NavLink {
   href: string;
@@ -65,6 +65,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
   const [scrollSide, setScrollSide] = useState<'left' | 'right'>('right');
+  const prevPathname = useRef(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,8 +76,11 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setExpandedDropdown(null);
+    if (prevPathname.current !== pathname) {
+      prevPathname.current = pathname;
+      setMobileMenuOpen(false);
+      setExpandedDropdown(null);
+    }
   }, [pathname]);
 
   useEffect(() => {
