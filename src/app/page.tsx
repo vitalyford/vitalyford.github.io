@@ -172,7 +172,7 @@ export default async function Home() {
               </span>
               <div className="security-tooltip">
                 <strong style={{ fontSize: "0.8rem", color: "var(--cyber-cyan)", display: "block", marginBottom: "0.75rem", paddingBottom: "0.5rem", borderBottom: "1px solid var(--cyber-border)" }}>
-                  My personal security & privacy recommendations:
+                  My personal free security recommendations:
                 </strong>
                 {securityRecs.map(rec => (
                   <div key={rec.label} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
