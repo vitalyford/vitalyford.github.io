@@ -25,7 +25,7 @@ const quotes: Quote[] = [
         id: 2,
         text: "Reach for the stars, and you won't even notice when you pass the sky.",
         author: "Vitaly Ford",
-        context: "Core Directive",
+        context: "Inspiration",
         x: 85, y: 15
     },
     {
