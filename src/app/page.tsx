@@ -5,7 +5,8 @@ import HexRoulette from "@/components/HexRoulette";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
 import QuotesStream from "@/components/QuotesStream";
 import { getPublicationStats } from "@/utils/academicUtils";
-import { getScholarCitations } from "@/utils/scholar";
+
+export const dynamic = 'force-dynamic';
 
 interface Project {
   title: string;
@@ -106,11 +107,11 @@ const achievements: Achievement[] = [
 
 export default async function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
-  const citationCount = await getScholarCitations("49RgkBcAAAAJ");
+  const citationCount = process.env.NEXT_PUBLIC_SCHOLAR_CITATIONS || "721";
 
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
-    { label: "Citations", value: citationCount || "719", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
+    { label: "Citations", value: citationCount, href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
     { label: "Years in Education and Tech", value: `${yearsActive}` },
     { label: "NSF, NSA, and Internal Funding Awards", value: "9" },
     { label: "Teams Coached", value: "50+" },
