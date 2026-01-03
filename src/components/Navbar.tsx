@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 interface NavLink {
   href: string;
@@ -65,7 +65,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
   const [scrollSide, setScrollSide] = useState<'left' | 'right'>('right');
-  const prevPathname = useRef(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,14 +73,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (prevPathname.current !== pathname) {
-      prevPathname.current = pathname;
-      setMobileMenuOpen(false);
-      setExpandedDropdown(null);
-    }
-  }, [pathname]);
 
   useEffect(() => {
     const handleScrollSideChange = (e: Event) => {
@@ -96,6 +87,11 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
+
+  const handleMobileLinkClick = () => {
+    setMobileMenuOpen(false);
+    setExpandedDropdown(null);
+  };
 
   const isActive = (path: string) => pathname === path;
   const isPentestActive = () => pathname.startsWith("/pentest");
@@ -258,6 +254,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link"
+              onClick={handleMobileLinkClick}
             >
               {link.label}
             </a>
@@ -266,6 +263,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`nav-link ${isActive(link.href) ? "active" : ""}`}
+              onClick={handleMobileLinkClick}
             >
               {link.label}
             </Link>
@@ -289,6 +287,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
+                onClick={handleMobileLinkClick}
               >
                 {item.label}
               </Link>
@@ -313,6 +312,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
+                onClick={handleMobileLinkClick}
               >
                 {item.label}
               </Link>
@@ -325,6 +325,7 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className={`nav-link ${isActive(link.href) ? "active" : ""}`}
+            onClick={handleMobileLinkClick}
           >
             {link.label}
           </Link>
