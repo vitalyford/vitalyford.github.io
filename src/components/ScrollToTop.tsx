@@ -4,19 +4,49 @@ import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollSide, setScrollSide] = useState<'left' | 'right'>('right');
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY >= 200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      setIsVisible(window.scrollY >= 200);
+    };
+
+    let touchStartX = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.scrollY < 200) return;
+      
+      const touchCurrentX = e.touches[0].clientX;
+      const screenWidth = window.innerWidth;
+      const midPoint = screenWidth / 2;
+      
+      // Detect which side user is scrolling on
+      if (Math.abs(touchCurrentX - touchStartX) > 10) {
+        setScrollSide(touchCurrentX < midPoint ? 'left' : 'right');
       }
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, []);
+
+  // Notify navbar about scroll side
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('scrollSideChange', { detail: scrollSide }));
+    }
+  }, [scrollSide]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,7 +57,7 @@ export default function ScrollToTop() {
 
   return (
     <button
-      className="scroll-to-top"
+      className={`scroll-to-top ${scrollSide}`}
       onClick={scrollToTop}
       aria-label="Scroll to top"
       style={{

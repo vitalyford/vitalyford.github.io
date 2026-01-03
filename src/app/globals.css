@@ -875,7 +875,7 @@ blockquote cite {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
   width: 48px;
   height: 48px;
@@ -888,15 +888,25 @@ blockquote cite {
   color: var(--cyber-cyan);
   cursor: pointer;
   transition: all var(--transition-base);
-  z-index: 100;
+  z-index: 1001;
 }
 
+.scroll-to-top.left {
+  right: auto;
+  left: 2rem;
+}
 
 .scroll-to-top:hover {
   border-color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
   box-shadow: 0 0 20px var(--cyber-cyan-glow);
   transform: translateY(-2px);
+}
+
+@media (min-width: 1025px) {
+  .scroll-to-top {
+    bottom: 2rem;
+  }
 }
 
 /* ============================================
@@ -1169,6 +1179,11 @@ blockquote cite {
 
   .nav-desktop {
     display: none !important;
+  }
+
+  /* Swap logo and menu button based on scroll side */
+  .nav-cyber.left .nav-inner {
+    flex-direction: row-reverse;
   }
 
   .nav-mobile {

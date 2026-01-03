@@ -64,6 +64,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
+  const [scrollSide, setScrollSide] = useState<'left' | 'right'>('right');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,6 +80,16 @@ export default function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
+    const handleScrollSideChange = (e: Event) => {
+      const customEvent = e as CustomEvent<'left' | 'right'>;
+      setScrollSide(customEvent.detail);
+    };
+    
+    window.addEventListener('scrollSideChange', handleScrollSideChange);
+    return () => window.removeEventListener('scrollSideChange', handleScrollSideChange);
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
 
@@ -91,12 +102,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`nav-cyber ${scrolled ? "scrolled" : ""}`}>
+      <nav className={`nav-cyber ${scrolled ? "scrolled" : ""} ${scrollSide}`}>
         <div className="container-cyber">
           <div className="nav-inner">
           {/* Logo */}
           <Link
             href="/"
+            className="nav-logo"
             style={{
               fontFamily: "var(--font-mono), monospace",
               fontSize: "1.125rem",
