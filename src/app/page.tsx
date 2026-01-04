@@ -132,7 +132,7 @@ export default async function Home() {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section style={{ padding: "4rem 0 6rem" }}>
+      <section style={{ padding: "0 0 6rem" }}>
         <div
           style={{
             display: "grid",

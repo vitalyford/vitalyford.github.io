@@ -43,7 +43,7 @@ export default function RootLayout({
       <body style={{ fontFamily: "var(--font-inter), sans-serif" }} suppressHydrationWarning>
         <CyberBackground />
         <Navbar />
-        <main className="container-cyber" style={{ paddingTop: "88px", paddingBottom: "4rem", minHeight: "100vh" }}>
+        <main className="container-cyber" style={{ paddingTop: "clamp(60px, 10vw, 88px)", paddingBottom: "4rem", minHeight: "100vh" }}>
           {children}
         </main>
         <Footer />
