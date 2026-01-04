@@ -802,6 +802,13 @@ blockquote cite {
   transition: height var(--transition-base);
 }
 
+@media (max-width: 1024px) {
+  .nav-inner {
+    height: 72px;
+    padding: 0.75rem 0;
+  }
+}
+
 .nav-link {
   color: var(--text-secondary);
   font-size: 0.875rem;
@@ -875,8 +882,8 @@ blockquote cite {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 6rem;
-  right: 2rem;
+  bottom: 5.5rem;
+  right: 1rem;
   width: 48px;
   height: 48px;
   background: var(--cyber-surface);
@@ -893,7 +900,7 @@ blockquote cite {
 
 .scroll-to-top.left {
   right: auto;
-  left: 2rem;
+  left: 1rem;
 }
 
 .scroll-to-top:hover {
@@ -906,6 +913,11 @@ blockquote cite {
 @media (min-width: 1025px) {
   .scroll-to-top {
     bottom: 2rem;
+    right: 2rem;
+  }
+  
+  .scroll-to-top.left {
+    left: 2rem;
   }
 }
 
@@ -1139,17 +1151,22 @@ blockquote cite {
   display: none;
   flex-direction: column;
   gap: 5px;
-  padding: 0.5rem;
-  background: transparent;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: var(--cyber-surface);
   border: 1px solid var(--cyber-border);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .mobile-menu-btn:hover {
   border-color: var(--cyber-cyan);
-  background: rgba(0, 245, 255, 0.05);
+  background: var(--cyber-cyan-glow);
+  box-shadow: 0 0 20px var(--cyber-cyan-glow);
 }
 
 .mobile-menu-btn span {
