@@ -64,6 +64,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState<string | null>(null);
+  const [scrollSide, setScrollSide] = useState<'left' | 'right'>('right');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,24 +75,31 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Close mobile menu and dropdowns when navigating
-    return () => {
-      setMobileMenuOpen(false);
-      setExpandedDropdown(null);
+    const handleScrollSideChange = (e: Event) => {
+      const customEvent = e as CustomEvent<'left' | 'right'>;
+      setScrollSide(customEvent.detail);
     };
-  }, [pathname]);
+    
+    window.addEventListener('scrollSideChange', handleScrollSideChange);
+    return () => window.removeEventListener('scrollSideChange', handleScrollSideChange);
+  }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, [mobileMenuOpen]);
+
+  const handleMobileLinkClick = () => {
+    setMobileMenuOpen(false);
+    setExpandedDropdown(null);
+  };
 
   const isActive = (path: string) => pathname === path;
   const isPentestActive = () => pathname.startsWith("/pentest");
@@ -101,12 +109,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`nav-cyber ${scrolled ? "scrolled" : ""}`}>
-      <div className="container-cyber">
-        <div className="nav-inner">
+    <>
+      <nav className={`nav-cyber ${scrolled ? "scrolled" : ""} ${scrollSide}`}>
+        <div className="container-cyber">
+          <div className="nav-inner">
           {/* Logo */}
           <Link
             href="/"
+            className="nav-logo"
             style={{
               fontFamily: "var(--font-mono), monospace",
               fontSize: "1.125rem",
@@ -228,9 +238,22 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+    </nav>
 
       {/* Mobile Navigation */}
       <div className={`nav-mobile ${mobileMenuOpen ? "open" : ""}`}>
+        {/* Close button inside mobile menu */}
+        <button
+          className="mobile-menu-close"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
         {mainLinks.map((link) =>
           link.external ? (
             <a
@@ -239,6 +262,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link"
+              onClick={handleMobileLinkClick}
             >
               {link.label}
             </a>
@@ -247,6 +271,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`nav-link ${isActive(link.href) ? "active" : ""}`}
+              onClick={handleMobileLinkClick}
             >
               {link.label}
             </Link>
@@ -270,6 +295,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
+                onClick={handleMobileLinkClick}
               >
                 {item.label}
               </Link>
@@ -294,6 +320,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
+                onClick={handleMobileLinkClick}
               >
                 {item.label}
               </Link>
@@ -306,11 +333,12 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className={`nav-link ${isActive(link.href) ? "active" : ""}`}
+            onClick={handleMobileLinkClick}
           >
             {link.label}
           </Link>
         ))}
       </div>
-    </nav>
+    </>
   );
 }

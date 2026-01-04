@@ -548,6 +548,88 @@ blockquote cite {
   box-shadow: 0 0 20px var(--cyber-cyan-glow);
 }
 
+/* Security Badge Tooltip */
+.security-badge-wrapper {
+  transition: all var(--transition-base);
+}
+
+.security-badge-wrapper:hover {
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
+}
+
+.security-tooltip {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  width: max-content;
+  max-width: 350px;
+  padding: 1rem;
+  background: var(--cyber-surface);
+  border: 1px solid var(--cyber-cyan-glow);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 255, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 200ms ease, visibility 200ms ease, transform 200ms ease;
+  transition-delay: 0ms, 0ms, 0ms;
+  pointer-events: none;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.security-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: var(--cyber-surface);
+  border-left: 1px solid var(--cyber-cyan-glow);
+  border-top: 1px solid var(--cyber-cyan-glow);
+  transform: rotate(45deg);
+}
+
+/* Bridge the gap between badge and tooltip */
+.security-tooltip::after {
+  content: '';
+  position: absolute;
+  top: -0.25rem;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background: transparent;
+}
+
+/* Keep tooltip visible when hovering over badge OR tooltip itself */
+.security-badge-wrapper:hover .security-tooltip,
+.security-tooltip:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0ms, 0ms, 0ms;
+}
+
+/* Add delay when leaving to prevent accidental dismissal */
+.security-badge-wrapper .security-tooltip {
+  transition-delay: 0ms, 150ms, 0ms;
+}
+
+.security-tooltip-link {
+  color: var(--cyber-cyan);
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.security-tooltip-link:hover {
+  text-decoration: underline;
+  color: var(--cyber-green);
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */
@@ -689,6 +771,19 @@ blockquote cite {
   transition: all var(--transition-base);
 }
 
+@media (max-width: 1024px) {
+  .nav-cyber {
+    top: auto;
+    bottom: 0;
+    border-bottom: none;
+    border-top: 1px solid rgba(42, 42, 58, 0.5);
+  }
+
+  .nav-cyber.scrolled {
+    border-top-color: var(--cyber-border);
+  }
+}
+
 .nav-cyber.scrolled {
   background: rgba(10, 10, 15, 0.95);
   border-bottom-color: var(--cyber-border);
@@ -705,6 +800,13 @@ blockquote cite {
   justify-content: space-between;
   height: 64px;
   transition: height var(--transition-base);
+}
+
+@media (max-width: 1024px) {
+  .nav-inner {
+    height: 72px;
+    padding: 0.75rem 0;
+  }
 }
 
 .nav-link {
@@ -780,8 +882,8 @@ blockquote cite {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 5.5rem;
+  right: 1rem;
   width: 48px;
   height: 48px;
   background: var(--cyber-surface);
@@ -793,15 +895,30 @@ blockquote cite {
   color: var(--cyber-cyan);
   cursor: pointer;
   transition: all var(--transition-base);
-  z-index: 100;
+  z-index: 1001;
 }
 
+.scroll-to-top.left {
+  right: auto;
+  left: 1rem;
+}
 
 .scroll-to-top:hover {
   border-color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
   box-shadow: 0 0 20px var(--cyber-cyan-glow);
   transform: translateY(-2px);
+}
+
+@media (min-width: 1025px) {
+  .scroll-to-top {
+    bottom: 2rem;
+    right: 2rem;
+  }
+  
+  .scroll-to-top.left {
+    left: 2rem;
+  }
 }
 
 /* ============================================
@@ -1034,17 +1151,22 @@ blockquote cite {
   display: none;
   flex-direction: column;
   gap: 5px;
-  padding: 0.5rem;
-  background: transparent;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: var(--cyber-surface);
   border: 1px solid var(--cyber-border);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .mobile-menu-btn:hover {
   border-color: var(--cyber-cyan);
-  background: rgba(0, 245, 255, 0.05);
+  background: var(--cyber-cyan-glow);
+  box-shadow: 0 0 20px var(--cyber-cyan-glow);
 }
 
 .mobile-menu-btn span {
@@ -1061,6 +1183,12 @@ blockquote cite {
   display: none;
 }
 
+@media (min-width: 1025px) {
+  .nav-mobile {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .mobile-menu-btn {
     display: flex;
@@ -1070,13 +1198,20 @@ blockquote cite {
     display: none !important;
   }
 
+  /* Swap logo and menu button based on scroll side */
+  .nav-cyber.left .nav-inner {
+    flex-direction: row-reverse;
+  }
+
   .nav-mobile {
-    display: flex;
+    display: flex !important;
+    flex-direction: column;
     position: fixed;
-    top: 65px;
+    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 64px;
+    width: 100%;
     background: rgba(13, 13, 20, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -1084,13 +1219,46 @@ blockquote cite {
     transform: translateX(100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
     gap: 0.25rem;
+    z-index: 999;
+    box-sizing: border-box;
+  }
+
+  .mobile-menu-close {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 1rem;
+    background: transparent;
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+    color: var(--cyber-cyan);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-menu-close:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: var(--cyber-cyan);
+  }
+
+  .mobile-menu-close:active {
+    transform: scale(0.95);
   }
 
   .nav-mobile.open {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .nav-mobile .nav-link {
@@ -1099,6 +1267,14 @@ blockquote cite {
     border-radius: 8px;
     border-bottom: none;
     font-size: 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .nav-mobile .nav-link.active {
+    color: var(--cyber-cyan);
   }
 
   .nav-mobile .nav-link:hover {
@@ -1350,4 +1526,28 @@ blockquote cite {
 .project-card-link:hover .project-card-title {
   color: var(--cyber-cyan) !important;
   text-shadow: 0 0 10px var(--cyber-cyan);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: var(--cyber-cyan);
+  margin-left: 6px;
+  animation: blink 1s step-end infinite;
+  vertical-align: baseline;
+  transform: translateY(0.1em);
 }

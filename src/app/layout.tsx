@@ -40,10 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body style={{ fontFamily: "var(--font-inter), sans-serif" }}>
+      <body style={{ fontFamily: "var(--font-inter), sans-serif" }} suppressHydrationWarning>
         <CyberBackground />
         <Navbar />
-        <main className="container-cyber" style={{ paddingTop: "88px", paddingBottom: "4rem", minHeight: "100vh" }}>
+        <main className="container-cyber" style={{ paddingTop: "clamp(60px, 10vw, 88px)", paddingBottom: "4rem", minHeight: "100vh" }}>
           {children}
         </main>
         <Footer />

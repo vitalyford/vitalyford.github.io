@@ -5,7 +5,8 @@ import HexRoulette from "@/components/HexRoulette";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
 import QuotesStream from "@/components/QuotesStream";
 import { getPublicationStats } from "@/utils/academicUtils";
-import { getScholarCitations } from "@/utils/scholar";
+
+export const dynamic = 'force-dynamic';
 
 interface Project {
   title: string;
@@ -106,20 +107,32 @@ const achievements: Achievement[] = [
 
 export default async function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
-  const citationCount = await getScholarCitations("49RgkBcAAAAJ");
+  const citationCount = process.env.NEXT_PUBLIC_SCHOLAR_CITATIONS || "721";
 
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
-    { label: "Citations", value: citationCount || "719", href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
+    { label: "Citations", value: citationCount, href: "https://scholar.google.com/citations?user=49RgkBcAAAAJ&hl=en" },
     { label: "Years in Education and Tech", value: `${yearsActive}` },
     { label: "NSF, NSA, and Internal Funding Awards", value: "9" },
     { label: "Teams Coached", value: "50+" },
   ];
 
+  const securityRecs = [
+    { label: "VPN", name: "ProtonVPN", url: "https://protonvpn.com/" },
+    { label: "Antivirus", name: "BitDefender", url: "https://www.bitdefender.com/en-us/consumer/free-antivirus" },
+    { label: "Zero-trust", name: "Cloudflare Access", url: "https://www.cloudflare.com/zero-trust/products/access/" },
+    { label: "DNS", name: "NextDNS", url: "https://nextdns.io/" },
+    { label: "Passwords", name: "Bitwarden", url: "https://bitwarden.com/" },
+    { label: "PwnCheck", name: "Have I Been Pwned", url: "https://haveibeenpwned.com/" },
+    { label: "Browser", name: "Brave Browser", url: "https://brave.com/" },
+    { label: "Privacy", name: "Operation Privacy", url: "https://www.operationprivacy.com/" },
+    { label: "XDR", name: "Wazuh", url: "https://wazuh.com/" },
+  ];
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section style={{ padding: "4rem 0 6rem" }}>
+      <section style={{ padding: "0 0 6rem" }}>
         <div
           style={{
             display: "grid",
@@ -131,6 +144,7 @@ export default async function Home() {
           {/* Left Column: Content */}
           <div className="animate-slide-up">
             <div
+              className="security-badge-wrapper"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -140,6 +154,8 @@ export default async function Home() {
                 border: "1px solid var(--cyber-cyan-glow)",
                 borderRadius: "50px",
                 marginBottom: "1.5rem",
+                position: "relative",
+                cursor: "help",
               }}
             >
               <div
@@ -154,6 +170,21 @@ export default async function Home() {
               <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Security: Zero Trust, Zero Hype
               </span>
+              <span style={{ fontSize: "1rem", color: "var(--cyber-cyan)", opacity: 0.7 }}>ⓘ</span>
+              <div className="security-tooltip">
+                <strong style={{ fontSize: "0.8rem", color: "var(--cyber-cyan)", display: "block", marginBottom: "0.75rem", paddingBottom: "0.5rem", borderBottom: "1px solid var(--cyber-border)" }}>
+                  Free security tools I recommend:
+                </strong>
+                {securityRecs.map(rec => (
+                  <div key={rec.label} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.7rem", minWidth: "70px" }}>{rec.label}:</span>
+                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="security-tooltip-link">{rec.name}</a>
+                  </div>
+                ))}
+                <em style={{ fontSize: "0.65rem", color: "var(--text-muted)", display: "block", marginTop: "0.75rem", paddingTop: "0.5rem", borderTop: "1px solid var(--cyber-border)" }}>
+                  Not sponsored, not affiliated with. Personal preferences only.
+                </em>
+              </div>
             </div>
 
             <h1
@@ -164,9 +195,12 @@ export default async function Home() {
                 lineHeight: 1.05,
                 marginBottom: "1.5rem",
                 letterSpacing: "-0.03em",
+                fontFamily: "var(--font-mono), monospace",
               }}
             >
-              Vitaly Ford
+              <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
+              whoami
+              <span className="terminal-cursor" />
             </h1>
 
             <h2
