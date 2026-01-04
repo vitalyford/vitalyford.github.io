@@ -1193,10 +1193,7 @@ blockquote cite {
     top: 0;
     left: 0;
     right: 0;
-    height: calc(100vh - 64px);
-    height: calc(100dvh - 64px);
-    max-height: calc(100vh - 64px);
-    max-height: calc(100dvh - 64px);
+    bottom: 64px;
     width: 100%;
     background: rgba(13, 13, 20, 0.98);
     backdrop-filter: blur(20px);
@@ -1208,14 +1205,13 @@ blockquote cite {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    touch-action: pan-y;
     align-items: stretch;
     justify-content: flex-start;
     align-content: flex-start;
     gap: 0.25rem;
     z-index: 999;
     box-sizing: border-box;
-    visibility: visible;
-    pointer-events: auto;
   }
 
   .mobile-menu-close {
