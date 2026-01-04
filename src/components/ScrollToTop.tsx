@@ -11,10 +11,15 @@ export default function ScrollToTop() {
       setIsVisible(window.scrollY >= 200);
     };
 
-    let touchStartX = 0;
-
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX;
+      if (window.scrollY < 200) return;
+      
+      const touchCurrentX = e.touches[0].clientX;
+      const screenWidth = window.innerWidth;
+      const midPoint = screenWidth / 2;
+      
+      // Update side immediately on touch
+      setScrollSide(touchCurrentX < midPoint ? 'left' : 'right');
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -24,15 +29,13 @@ export default function ScrollToTop() {
       const screenWidth = window.innerWidth;
       const midPoint = screenWidth / 2;
       
-      // Detect which side user is scrolling on
-      if (Math.abs(touchCurrentX - touchStartX) > 10) {
-        setScrollSide(touchCurrentX < midPoint ? 'left' : 'right');
-      }
+      // Update side based on current touch position
+      setScrollSide(touchCurrentX < midPoint ? 'left' : 'right');
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     
     return () => {
       window.removeEventListener("scroll", toggleVisibility);
