@@ -146,17 +146,31 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                 width: isTooltip ? "auto" : "auto"
             }}
         >
-            <span
-                className="cyber-indicator"
-                onClick={handleReroll}
-                title="Click to roll again"
-                style={{
-                    animation: isStopped ? "none" : undefined,
-                    cursor: isStopped ? "pointer" : "wait",
-                }}
-            >
-                {hexValue}
-            </span>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.25rem" }}>
+                <span
+                    className="cyber-indicator"
+                    onClick={handleReroll}
+                    title="Click to roll again"
+                    style={{
+                        animation: isStopped ? "none" : undefined,
+                        cursor: isStopped ? "pointer" : "wait",
+                    }}
+                >
+                    {hexValue}
+                </span>
+                <span
+                    style={{
+                        fontSize: "0.65rem",
+                        color: "var(--text-muted)",
+                        opacity: 0.7,
+                        fontFamily: "var(--font-mono), monospace",
+                        letterSpacing: "0.05em",
+                        marginLeft: "0.45rem"
+                    }}
+                >
+                    roll
+                </span>
+            </div>
             {content}
         </div>
     );

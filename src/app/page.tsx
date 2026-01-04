@@ -199,7 +199,7 @@ export default async function Home() {
               }}
             >
               <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
-              whoami<span style={{ color: "var(--cyber-cyan)" }}>()</span>
+              whoami
               <span className="terminal-cursor" />
             </h1>
 
