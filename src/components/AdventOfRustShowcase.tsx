@@ -2,6 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import ExternalLink from "./ExternalLink";
+
+const paragraphStyle = { color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" };
 
 export default function AdventOfRustShowcase() {
     return (
@@ -23,17 +26,17 @@ export default function AdventOfRustShowcase() {
                         <h3 style={{ fontSize: "1.5rem", color: "var(--text-primary)", marginBottom: "1rem" }}>
                             Building & Breaking Software
                         </h3>
-                        <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" }}>
-                            Back in the day I competed in <a href="https://nationalcyberleague.org/" target="_blank" rel="noopener noreferrer">NCL</a>, <a href="https://icpc.global/" target="_blank" rel="noopener noreferrer">ICPC</a>, <a href="https://cp-tc.org/" target="_blank" rel="noopener noreferrer">CPTC</a>, <a href="https://www.nationalccdc.org/" target="_blank" rel="noopener noreferrer">CCDC</a>, and OWASP Secure Coding. Building on those experiences, I have been training teams in NCL and ICPC ever since.
+                        <p style={paragraphStyle}>
+                            Past competitions include <ExternalLink href="https://nationalcyberleague.org/">NCL</ExternalLink>, <ExternalLink href="https://icpc.global/">ICPC</ExternalLink>, <ExternalLink href="https://cp-tc.org/">CPTC</ExternalLink>, <ExternalLink href="https://www.nationalccdc.org/">CCDC</ExternalLink>, and OWASP Secure Coding. Building on those experiences, now training teams in NCL and ICPC.
                         </p>
-                        <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" }}>
-                            I am also working with many <a href="https://www.wicys.org/" target="_blank" rel="noopener noreferrer">Women in Cybersecurity</a> student chapters globally to help recruit, retain, and advance women in cybersecurity as part of a workforce solution.
+                        <p style={paragraphStyle}>
+                            Working with <ExternalLink href="https://www.wicys.org/">Women in Cybersecurity</ExternalLink> student chapters globally to help recruit, retain, and advance women in cybersecurity as part of a workforce solution.
                         </p>
-                        <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.2rem" }}>
-                            I also love building startups. As a co-founder and CTO of <a href="https://citodex.com" target="_blank" rel="noopener noreferrer">Citodex</a>, I have been working extensively with diverse tech stacks, AI, security, and cloud infrastructure.
+                        <p style={paragraphStyle}>
+                            Passionate about building startups. As co-founder and CTO of <ExternalLink href="https://citodex.com">Citodex</ExternalLink>, working extensively with diverse tech stacks, AI, security, and cloud infrastructure.
                         </p>
-                        <p style={{ color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.5rem" }}>
-                            I enjoy contributing to open-source software and occasionally engaging in bug bounty hunting. I also love solving puzzles, like <a href="https://adventofcode.com/" target="_blank" rel="noopener noreferrer">Advent of Code</a> in <b>Rust</b> was a blast, especially playing with the power of functional chains.
+                        <p style={{ ...paragraphStyle, marginBottom: "1.5rem" }}>
+                            Contributing to open-source software and occasionally engaging in bug bounty hunting. Solving puzzles like <ExternalLink href="https://adventofcode.com/">Advent of Code</ExternalLink> in <b>Rust</b> was a blast, especially playing with the power of functional chains.
                         </p>
                         <motion.div
                             animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}

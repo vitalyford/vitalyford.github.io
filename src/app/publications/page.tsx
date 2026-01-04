@@ -1,5 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import { publications } from "@/data/publications";
+import ExternalLink from "@/components/ExternalLink";
 import { getPublicationStats } from "@/utils/academicUtils";
 
 export default function Publications() {
@@ -76,14 +77,9 @@ export default function Publications() {
                     }}
                   >
                     {paper.url && paper.url !== "" && paper.url !== "#" ? (
-                      <a
-                        href={paper.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ fontWeight: 500 }}
-                      >
+                      <ExternalLink href={paper.url} style={{ fontWeight: 500 }}>
                         {paper.name}
-                      </a>
+                      </ExternalLink>
                     ) : (
                       <span style={{ color: "var(--text-primary)" }}>{paper.name}</span>
                     )}

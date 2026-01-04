@@ -1,4 +1,5 @@
 import PageHeader from "@/components/PageHeader";
+import ExternalLink from "@/components/ExternalLink";
 
 export default function Schedule() {
   return (
@@ -43,9 +44,9 @@ export default function Schedule() {
           </p>
 
           <div style={{ display: "flex", gap: "1rem" }}>
-            <a href="/et" className="cyber-btn cyber-btn-primary" target="_blank" rel="noopener noreferrer">
+            <ExternalLink href="/et" className="cyber-btn cyber-btn-primary">
               <span>Schedule Meeting</span>
-            </a>
+            </ExternalLink>
           </div>
         </div>
       </section>
