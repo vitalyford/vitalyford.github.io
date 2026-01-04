@@ -170,9 +170,10 @@ export default async function Home() {
               <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono), monospace", color: "var(--cyber-cyan)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Security: Zero Trust, Zero Hype
               </span>
+              <span style={{ fontSize: "1rem", color: "var(--cyber-cyan)", opacity: 0.7 }}>ⓘ</span>
               <div className="security-tooltip">
                 <strong style={{ fontSize: "0.8rem", color: "var(--cyber-cyan)", display: "block", marginBottom: "0.75rem", paddingBottom: "0.5rem", borderBottom: "1px solid var(--cyber-border)" }}>
-                  My personal free security recommendations:
+                  Free security tools I recommend:
                 </strong>
                 {securityRecs.map(rec => (
                   <div key={rec.label} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
