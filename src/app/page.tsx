@@ -195,9 +195,12 @@ export default async function Home() {
                 lineHeight: 1.05,
                 marginBottom: "1.5rem",
                 letterSpacing: "-0.03em",
+                fontFamily: "var(--font-mono), monospace",
               }}
             >
-              Vitaly Ford
+              <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
+              whoami<span style={{ color: "var(--cyber-cyan)" }}>()</span>
+              <span className="terminal-cursor" />
             </h1>
 
             <h2
