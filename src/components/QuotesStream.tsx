@@ -15,6 +15,13 @@ interface Quote {
 
 const quotes: Quote[] = [
     {
+        id: 0,
+        text: "And now these three remain: faith, hope and love. But the greatest of these is love.",
+        author: "1 Corinthians 13:13",
+        context: "Wisdom",
+        x: 90, y: 30
+    },
+    {
         id: 1,
         text: "Teach me and I will forget. Show me and I may remember. Involve me and I'll understand.",
         author: "Xun Kuang",
@@ -33,7 +40,7 @@ const quotes: Quote[] = [
         text: "Security is not a product, but a process.",
         author: "Bruce Schneier",
         context: "Security Philosophy",
-        x: 50, y: 50
+        x: 50, y: 20
     },
     {
         id: 4,
