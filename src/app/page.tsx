@@ -238,7 +238,7 @@ export default async function Home() {
                 marginBottom: "2.5rem",
               }}
             >
-              Associate Professor and Program Coordinator at{" "}
+              Associate Professor and Program Director at{" "}
               <a href="https://www.arcadia.edu/profile/vitaly-ford" target="_blank" rel="noopener noreferrer">
                 Arcadia University
               </a>, <a href="https://wicys.org" target="_blank" rel="noopener noreferrer">WiCyS</a> Global Chapter Coordinator, and Co-Founder/CTO at <a href="https://citodex.com" target="_blank" rel="noopener noreferrer">Citodex Technology Ltd.</a>
