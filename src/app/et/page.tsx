@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function ET() {
-  redirect("https://calendar.google.com/calendar/selfsched?sstoken=UUlPYXh3RlRxeWZufGRlZmF1bHR8ZjFiNGViNmNlYmJmNGIyMzk3M2QzZDNmZmUwMjBmYTE");
+  redirect(process.env.NEXT_PUBLIC_BOOKING_PAGE || "https://calendar.app.google/aHackGAhEtDC9EAW9");
 }
