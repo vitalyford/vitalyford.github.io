@@ -109,7 +109,7 @@ const achievements: Achievement[] = [
 
 export default function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
-  const citationCount = process.env.NEXT_PUBLIC_SCHOLAR_CITATIONS || "721";
+  const citationCount = process.env.SCHOLAR_CITATIONS || "721";
 
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
