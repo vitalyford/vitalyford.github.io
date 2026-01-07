@@ -35,13 +35,16 @@ export default function AdventOfRustShowcase() {
                         <p style={paragraphStyle}>
                             Passionate about building startups. As co-founder and CTO of <ExternalLink href="https://citodex.com">Citodex</ExternalLink>, working extensively with diverse tech stacks, AI, security, and cloud infrastructure.
                         </p>
-                        <p style={{ ...paragraphStyle, marginBottom: "1.5rem" }}>
+                        <p style={paragraphStyle}>
+                            Consulting organizations on secure infrastructure design, zero-trust integration, OSINT & incident response engagements, and the resolution of complex system issues.
+                        </p>
+                        <p style={paragraphStyle}>
                             Contributing to open-source software and occasionally engaging in bug bounty hunting. Solving puzzles like <ExternalLink href="https://adventofcode.com/">Advent of Code</ExternalLink> in <b>Rust</b> was a blast, especially playing with the power of functional chains.
                         </p>
                         <motion.div
                             animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            style={{ position: "absolute", top: "1rem", right: "1rem", fontSize: "1.5rem", opacity: 0.3 }}
+                            style={{ position: "absolute", top: "1.8rem", right: "1rem", fontSize: "1.5rem", opacity: 0.3 }}
                         >
                             🦀
                         </motion.div>
