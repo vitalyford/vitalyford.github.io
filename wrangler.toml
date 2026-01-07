@@ -7,6 +7,6 @@ compatibility_flags = ["nodejs_compat"]
 directory = ".open-next/assets"
 binding = "ASSETS"
 
-[vars]
-NEXT_PUBLIC_SCHOLAR_CITATIONS = "721"
-NEXT_PUBLIC_BOOKING_PAGE = "https://calendar.app.google/aHackGAhEtDC9EAW9"
+# [vars]
+# NEXT_PUBLIC_SCHOLAR_CITATIONS = "721"
+# NEXT_PUBLIC_BOOKING_PAGE = "https://calendar.app.google/aHackGAhEtDC9EAW9"
