@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
 import HexRoulette from "@/components/HexRoulette";
