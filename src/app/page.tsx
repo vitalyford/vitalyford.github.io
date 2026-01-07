@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
 import HexRoulette from "@/components/HexRoulette";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
@@ -270,7 +271,7 @@ export default function Home() {
                   boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
                 }}
               >
-                <img
+                <Image
                   src="/images/profile.jpg"
                   alt="Profile"
                   width={320}
