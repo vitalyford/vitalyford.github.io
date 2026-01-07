@@ -1,5 +1,3 @@
-'use client';
-
 import Link from "next/link";
 import Image from "next/image";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
@@ -109,7 +107,7 @@ const achievements: Achievement[] = [
 
 export default function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
-  const citationCount = process.env.SCHOLAR_CITATIONS || process.env.NEXT_PUBLIC_SCHOLAR_CITATIONS || "721";
+  const citationCount = process.env.SCHOLAR_CITATIONS || "721";
 
   const stats = [
     { label: "Publications", value: totalPapers.toString() },
