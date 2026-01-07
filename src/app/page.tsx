@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
@@ -105,7 +107,7 @@ const achievements: Achievement[] = [
   },
 ];
 
-export default async function Home() {
+export default function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
   const citationCount = process.env.NEXT_PUBLIC_SCHOLAR_CITATIONS || "721";
 
@@ -270,19 +272,21 @@ export default async function Home() {
                   boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
                 }}
               >
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Vitaly Ford"
+                <video
+                  src="/images/media.mp4"
                   width={320}
                   height={320}
-                  className="profile-image"
+                  autoPlay
+                  muted
+                  playsInline
+                  onClick={(e) => { e.currentTarget.currentTime = 0; e.currentTarget.play(); }}
                   style={{
                     objectFit: "cover",
                     width: "320px",
                     height: "320px",
                     borderRadius: "12px",
+                    cursor: "pointer",
                   }}
-                  priority
                 />
               </div>
 
