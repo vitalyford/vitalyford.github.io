@@ -8,6 +8,7 @@ keep_vars = true
 directory = ".open-next/assets"
 binding = "ASSETS"
 
-[vars]
-SCHOLAR_CITATIONS = "721"
-BOOKING_PAGE = "https://calendar.app.google/aHackGAhEtDC9EAW9"
+# [vars]
+# SCHOLAR_CITATIONS = "721"
+# BOOKING_PAGE = "https://calendar.app.google/aHackGAhEtDC9EAW9"
+# Note: Set these in Cloudflare dashboard instead
