@@ -261,9 +261,8 @@ export default function Home() {
 
           {/* Right Column: Profile Image */}
           <div className="animate-fade-in" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
-            <div className="circuit-glow">
+            <div style={{ position: "relative" }}>
               <div
-                className="profile-image-wrapper"
                 style={{
                   padding: "6px",
                   background: "var(--cyber-surface)",
@@ -271,28 +270,22 @@ export default function Home() {
                   boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
                 }}
               >
-                <video
-                  src="/images/media.mp4"
+                <img
+                  src="/images/profile.jpg"
+                  alt="Profile"
                   width={320}
                   height={320}
-                  autoPlay
-                  muted
-                  playsInline
-                  onClick={(e) => { e.currentTarget.currentTime = 0; e.currentTarget.play(); }}
                   style={{
                     objectFit: "cover",
                     width: "320px",
                     height: "320px",
                     borderRadius: "12px",
-                    cursor: "pointer",
                   }}
                 />
               </div>
 
               {/* Decorative Tech Overlay Tags */}
-              <div
-                className="profile-overlay-card"
-              >
+              <div className="profile-overlay-card">
                 <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
                 <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>Security, AI, and Uncomfortable Edge Cases</span>
               </div>
