@@ -600,7 +600,7 @@ blockquote cite {
 .security-tooltip {
   position: absolute;
   top: calc(100% + 0.25rem);
-  left: 0;
+  left: 50%;
   width: max-content;
   max-width: 350px;
   padding: 1rem;
@@ -610,7 +610,7 @@ blockquote cite {
   box-shadow: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-4px);
+  transform: translate(-50%, -4px);
   transition: opacity 200ms ease, visibility 200ms ease, transform 200ms ease;
   transition-delay: 0ms, 0ms, 0ms;
   pointer-events: none;
@@ -622,13 +622,13 @@ blockquote cite {
   content: '';
   position: absolute;
   top: -6px;
-  left: 20px;
+  left: 50%;
   width: 12px;
   height: 12px;
   background: var(--cyber-surface);
   border-left: 1px solid var(--cyber-cyan-glow);
   border-top: 1px solid var(--cyber-cyan-glow);
-  transform: rotate(45deg);
+  transform: translateX(-50%) rotate(45deg);
 }
 
 /* Bridge the gap between badge and tooltip */
@@ -647,7 +647,7 @@ blockquote cite {
 .security-tooltip:hover {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
   pointer-events: auto;
   transition-delay: 0ms, 0ms, 0ms;
 }
