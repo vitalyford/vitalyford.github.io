@@ -103,7 +103,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                             padding: "1rem",
                             borderRadius: "0",
                             border: "1px solid var(--cyber-cyan)",
-                            boxShadow: "0 0 30px rgba(0, 240, 255, 0.2)",
+                            boxShadow: "none",
                             clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
                             zIndex: 100,
                             width: "max-content",

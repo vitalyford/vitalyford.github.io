@@ -142,7 +142,7 @@ a {
 
 a:hover {
   color: var(--text-primary);
-  text-shadow: 0 0 10px var(--cyber-cyan);
+  text-shadow: none;
 }
 
 /* ============================================
@@ -290,7 +290,7 @@ samp {
 .cyber-btn:hover {
   color: var(--cyber-black);
   background: var(--cyber-cyan);
-  box-shadow: 0 0 30px var(--cyber-cyan-glow);
+  box-shadow: none;
   text-shadow: none;
 }
 
@@ -313,7 +313,7 @@ samp {
 .cyber-btn-primary:hover {
   background: var(--text-primary);
   border-color: var(--text-primary);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  box-shadow: none;
 }
 
 /* Cyber Divider */
@@ -402,7 +402,7 @@ samp {
 .cyber-indicator:hover {
   background: rgba(0, 245, 255, 0.25);
   border-color: var(--cyber-cyan);
-  box-shadow: 0 0 15px var(--cyber-cyan-glow);
+  box-shadow: none;
   transform: scale(1.05);
 }
 
@@ -594,7 +594,7 @@ blockquote cite {
 
 .security-badge-wrapper:hover {
   border-color: var(--cyber-cyan);
-  box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
+  box-shadow: none;
 }
 
 .security-tooltip {
@@ -607,7 +607,7 @@ blockquote cite {
   background: var(--cyber-surface);
   border: 1px solid var(--cyber-cyan-glow);
   border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 255, 0.1);
+  box-shadow: none;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
@@ -912,7 +912,7 @@ blockquote cite {
   border-color: var(--cyber-cyan);
   color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
-  box-shadow: 0 0 20px var(--cyber-cyan-glow);
+  box-shadow: none;
 }
 
 /* ============================================
@@ -945,7 +945,7 @@ blockquote cite {
 .scroll-to-top:hover {
   border-color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
-  box-shadow: 0 0 20px var(--cyber-cyan-glow);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
@@ -1205,7 +1205,7 @@ blockquote cite {
 .mobile-menu-btn:hover {
   border-color: var(--cyber-cyan);
   background: var(--cyber-cyan-glow);
-  box-shadow: 0 0 20px var(--cyber-cyan-glow);
+  box-shadow: none;
 }
 
 .mobile-menu-btn span {
@@ -1529,7 +1529,6 @@ blockquote cite {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   z-index: 10;
   white-space: nowrap;

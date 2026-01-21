@@ -27,7 +27,7 @@ export default function AdventOfRustShowcase() {
                 </div>
 
                 <div className="h-96 md:h-0 md:min-h-full" style={{ position: "relative" }}>
-                    <div className="cyber-card" style={{ height: "100%", display: "flex", flexDirection: "column", padding: "0", overflow: "hidden", background: "#0d1117", border: "1px solid var(--cyber-border)", boxShadow: "0 20px 50px rgba(0,0,0,0.5)" }}>
+                    <div className="cyber-card" style={{ height: "100%", display: "flex", flexDirection: "column", padding: "0", overflow: "hidden", background: "#0d1117", border: "1px solid var(--cyber-border)", boxShadow: "none" }}>
                         <div style={{ background: "#161b22", padding: "0.75rem 1rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--cyber-border)" }}>
                             <div style={{ display: "flex", gap: "6px" }}>
                                 {["#ff5f56", "#ffbd2e", "#27c93f"].map((c, i) => <div key={i} style={{ width: "10px", height: "10px", borderRadius: "50%", background: c }} />)}
@@ -85,7 +85,7 @@ export default function AdventOfRustShowcase() {
                             </pre>
                         </div>
                     </div>
-                    <div style={{ position: "absolute", zIndex: -1, top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "120%", height: "120%", background: "radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 70%)" }} />
+
                 </div>
             </div>
         </section>

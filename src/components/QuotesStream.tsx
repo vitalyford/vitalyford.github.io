@@ -91,7 +91,7 @@ export default function QuotesStream() {
                 padding: "10rem 0",
                 position: "relative",
                 overflow: "hidden",
-                background: "radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.05) 0%, transparent 80%)"
+                background: "transparent"
             }}
         >
             {/* Knowledge Graph Background */}
@@ -101,7 +101,7 @@ export default function QuotesStream() {
                 zIndex: 0,
                 opacity: 0.8
             }}>
-                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: 'drop-shadow(0 0 8px var(--cyber-cyan-glow))' }}>
+                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: 'none' }}>
                     {quotes.map((q, i) => (
                         quotes.map((nextQ, j) => {
                             if (i >= j) return null;
@@ -241,9 +241,7 @@ export default function QuotesStream() {
                                     opacity: isVisible ? (isCenter ? 1 : 0.3) : 0,
                                     backgroundColor: isCenter ? "rgba(10, 10, 15, 0.98)" : "rgba(10, 10, 15, 0.7)",
                                     borderColor: isCenter ? "var(--cyber-cyan)" : "var(--cyber-border)",
-                                    boxShadow: isCenter
-                                        ? "0 40px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 245, 255, 0.25)"
-                                        : "0 10px 40px rgba(0, 0, 0, 0.5)",
+                                    boxShadow: 'none',
                                     pointerEvents: isVisible ? "auto" : "none"
                                 }}
                                 transition={{
@@ -370,7 +368,7 @@ export default function QuotesStream() {
                     align-items: center;
                     justify-content: center;
                     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-                    box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+                    box-shadow: none;
                 }
                 .nav-arrow.left {
                     left: 2rem; /* Inside the container */
@@ -382,7 +380,7 @@ export default function QuotesStream() {
                     background: var(--cyber-cyan);
                     color: var(--cyber-black);
                     transform: translateY(-50%) scale(1.1);
-                    box-shadow: 0 0 50px var(--cyber-cyan);
+                    box-shadow: none;
                 }
                 .nav-arrow:active {
                     transform: translateY(-50%) scale(0.9);
@@ -432,7 +430,7 @@ export default function QuotesStream() {
                     width: 32px;
                     height: 2px;
                     background: var(--cyber-cyan);
-                    box-shadow: 0 0 10px var(--cyber-cyan);
+                    box-shadow: none;
                     border-radius: 4px;
                 }
                 .author-name {
