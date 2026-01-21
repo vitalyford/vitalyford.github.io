@@ -87,10 +87,10 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
                     className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
                     style={{
-                        fontSize: "0.85rem",
-                        color: "var(--text-muted)",
-                        fontFamily: "var(--font-mono), monospace",
-                        borderLeft: isTooltip ? "none" : "1px solid var(--cyber-border)",
+                        fontSize: "0.9rem",
+                        color: "var(--text-primary)",
+                        fontFamily: "var(--font-rajdhani)",
+                        borderLeft: isTooltip ? "none" : "2px solid var(--cyber-cyan)",
                         paddingLeft: isTooltip ? "0" : "1rem",
                         maxWidth: isTooltip ? "350px" : "none",
                         lineHeight: "1.4",
@@ -99,22 +99,23 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                         ...(isTooltip ? {
                             position: "absolute",
                             background: "rgba(10, 10, 15, 0.95)",
-                            backdropFilter: "blur(8px)",
-                            padding: "0.75rem 1rem",
-                            borderRadius: "8px",
-                            border: "1px solid var(--cyber-cyan-glow)",
-                            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                            backdropFilter: "blur(12px)",
+                            padding: "1rem",
+                            borderRadius: "0",
+                            border: "1px solid var(--cyber-cyan)",
+                            boxShadow: "none",
+                            clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
                             zIndex: 100,
                             width: "max-content",
                             minWidth: "200px",
                             ...(displayMode === "tooltip-bottom" ? {
                                 top: "100%",
                                 left: "50%",
-                                marginTop: "0.75rem",
+                                marginTop: "1rem",
                             } : {
                                 bottom: "100%",
                                 left: "50%",
-                                marginBottom: "0.75rem",
+                                marginBottom: "1rem",
                             })
                         } : {})
                     }}

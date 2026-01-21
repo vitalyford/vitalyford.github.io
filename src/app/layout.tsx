@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Rajdhani, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import CyberBackground from "@/components/CyberBackground";
 
-const inter = Inter({
+
+const rajdhani = Rajdhani({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rajdhani",
   display: "swap",
 });
 
@@ -39,9 +40,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body style={{ fontFamily: "var(--font-inter), sans-serif" }} suppressHydrationWarning>
-        <CyberBackground />
+    <html lang="en" className={`${rajdhani.variable} ${jetbrainsMono.variable}`}>
+      <body style={{ fontFamily: "var(--font-rajdhani), sans-serif" }} suppressHydrationWarning>
+
         <Navbar />
         <main className="container-cyber" style={{ paddingTop: "clamp(60px, 10vw, 88px)", paddingBottom: "4rem", minHeight: "100vh" }}>
           {children}

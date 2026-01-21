@@ -266,7 +266,6 @@ export default function Home() {
                   padding: "6px",
                   background: "var(--cyber-surface)",
                   borderRadius: "16px",
-                  boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
                 }}
               >
                 <Image
@@ -288,6 +287,7 @@ export default function Home() {
                 <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
                 <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>Security, AI, and Uncomfortable Edge Cases</span>
               </div>
+
             </div>
           </div>
         </div>

@@ -79,7 +79,7 @@ export default function Navbar() {
       const customEvent = e as CustomEvent<'left' | 'right'>;
       setScrollSide(customEvent.detail);
     };
-    
+
     window.addEventListener('scrollSideChange', handleScrollSideChange);
     return () => window.removeEventListener('scrollSideChange', handleScrollSideChange);
   }, []);
@@ -113,39 +113,110 @@ export default function Navbar() {
       <nav className={`nav-cyber ${scrolled ? "scrolled" : ""} ${scrollSide}`}>
         <div className="container-cyber">
           <div className="nav-inner">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="nav-logo"
-            style={{
-              fontFamily: "var(--font-mono), monospace",
-              fontSize: "1.125rem",
-              fontWeight: 700,
-              color: isActive("/") ? "var(--cyber-cyan)" : "var(--text-primary)",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.25rem",
-            }}
-          >
-            <span style={{ color: "var(--cyber-cyan)" }}>&lt;</span>
-            Vitaly Ford
-            <span style={{ color: "var(--cyber-cyan)" }}>/&gt;</span>
-          </Link>
+            {/* Logo */}
+            <Link
+              href="/"
+              className="nav-logo"
+              style={{
+                fontFamily: "var(--font-rajdhani)",
+                fontSize: "1.5rem",
+                fontWeight: 700,
+                color: isActive("/") ? "var(--cyber-cyan)" : "var(--text-primary)",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.25rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+              }}
+            >
+              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.2em", lineHeight: 0 }}>&lt;</span>
+              Vitaly Ford
+              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.2em", lineHeight: 0 }}>/&gt;</span>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="nav-desktop">
-            {mainLinks.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            {/* Desktop Navigation */}
+            <div className="nav-desktop">
+              {mainLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-link"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`nav-link ${isActive(link.href) ? "active" : ""}`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+
+              {/* Talks Dropdown */}
+              <div className="dropdown-cyber">
+                <button
                   className="nav-link"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.25rem",
+                  }}
                 >
-                  {link.label}
-                </a>
-              ) : (
+                  {talksDropdown.label}
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                  </svg>
+                </button>
+                <div className="dropdown-menu-cyber">
+                  {talksDropdown.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="dropdown-item"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pentest Dropdown */}
+              <div className="dropdown-cyber">
+                <button
+                  className={`nav-link ${isPentestActive() ? "active" : ""}`}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.25rem",
+                  }}
+                >
+                  {pentestDropdown.label}
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                  </svg>
+                </button>
+                <div className="dropdown-menu-cyber">
+                  {pentestDropdown.items.map((item) => (
+                    <Link key={item.href} href={item.href} className="dropdown-item">
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {endLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -153,92 +224,23 @@ export default function Navbar() {
                 >
                   {link.label}
                 </Link>
-              )
-            )}
-
-            {/* Talks Dropdown */}
-            <div className="dropdown-cyber">
-              <button
-                className="nav-link"
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.25rem",
-                }}
-              >
-                {talksDropdown.label}
-                <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
-                  <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                </svg>
-              </button>
-              <div className="dropdown-menu-cyber">
-                {talksDropdown.items.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="dropdown-item"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+              ))}
             </div>
 
-            {/* Pentest Dropdown */}
-            <div className="dropdown-cyber">
-              <button
-                className={`nav-link ${isPentestActive() ? "active" : ""}`}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.25rem",
-                }}
-              >
-                {pentestDropdown.label}
-                <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
-                  <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                </svg>
-              </button>
-              <div className="dropdown-menu-cyber">
-                {pentestDropdown.items.map((item) => (
-                  <Link key={item.href} href={item.href} className="dropdown-item">
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {endLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`nav-link ${isActive(link.href) ? "active" : ""}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {/* Mobile Menu Button */}
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+              <span style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
+              <span style={{ transform: mobileMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <span style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
-            <span style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
-            <span style={{ transform: mobileMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
-          </button>
         </div>
-      </div>
-    </nav>
+      </nav>
 
       {/* Mobile Navigation */}
       <div className={`nav-mobile ${mobileMenuOpen ? "open" : ""}`}>
