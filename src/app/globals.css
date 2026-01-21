@@ -7,38 +7,41 @@
 /* CSS Custom Properties - Cyber Theme */
 :root {
   /* Primary Cyber Colors */
-  --cyber-black: #0a0a0f;
-  --cyber-darker: #0d0d14;
-  --cyber-dark: #12121a;
-  --cyber-surface: #1a1a24;
-  --cyber-border: #2a2a3a;
+  --cyber-black: #050508;
+  --cyber-darker: #08080c;
+  --cyber-dark: #0c0c12;
+  --cyber-surface: #121218;
+  --cyber-border: #2a2a35;
 
-  /* Accent Colors - Cyber Neon */
-  --cyber-cyan: #00f5ff;
-  --cyber-cyan-dim: #00b8c4;
-  --cyber-cyan-glow: rgba(0, 245, 255, 0.15);
-  --cyber-blue: #0066ff;
-  --cyber-purple: #9945ff;
-  --cyber-pink: #ff00aa;
-  --cyber-green: #00ff88;
+  /* Accent Colors - Sharp Neon */
+  --cyber-cyan: #00f0ff;
+  --cyber-cyan-dim: #00a0aa;
+  --cyber-cyan-glow: rgba(0, 240, 255, 0.15);
+  --cyber-blue: #0044ff;
+  --cyber-purple: #b026ff;
+  --cyber-pink: #ff0055;
+  --cyber-green: #00ff66;
+  --cyber-danger: #ff2a2a;
 
   /* Text Colors */
-  --text-primary: #f0f0f5;
-  --text-secondary: #a0a0b0;
-  --text-muted: #606070;
+  --text-primary: #e0e0e6;
+  --text-secondary: #9090a0;
+  --text-muted: #505060;
 
   /* Gradients */
   --gradient-cyber: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-blue), var(--cyber-purple));
   --gradient-glow: linear-gradient(180deg, var(--cyber-cyan-glow), transparent);
+  --gradient-surface: linear-gradient(180deg, rgba(18, 18, 24, 0.9), rgba(12, 12, 18, 0.95));
 
   /* Shadows */
-  --shadow-cyber: 0 0 20px rgba(0, 245, 255, 0.1);
-  --shadow-hover: 0 0 30px rgba(0, 245, 255, 0.2);
+  --shadow-cyber: 0 0 15px rgba(0, 240, 255, 0.1);
+  --shadow-hover: 0 0 25px rgba(0, 240, 255, 0.25);
+  --shadow-sharp: 4px 4px 0px rgba(0, 0, 0, 0.5);
 
   /* Animation Timing */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -57,12 +60,12 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-rajdhani), 'Segoe UI', Roboto, sans-serif;
   background-color: var(--cyber-black);
   color: var(--text-primary);
   overflow-x: hidden;
   max-width: 100vw;
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -188,38 +191,63 @@ samp {
 
 /* Cyber Card */
 .cyber-card {
-  background: rgba(26, 26, 36, 0.8);
+  background: rgba(18, 18, 24, 0.6);
   border: 1px solid var(--cyber-border);
-  border-radius: 12px;
+  border-radius: 4px;
+  /* Angled corners via clip-path */
+  clip-path: polygon(20px 0, 100% 0,
+      100% calc(100% - 20px), calc(100% - 20px) 100%,
+      0 100%,
+      0 20px);
   padding: 1.5rem;
   position: relative;
   transition: all var(--transition-base);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .cyber-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 1px;
-  background: linear-gradient(135deg, var(--cyber-cyan), transparent 50%, var(--cyber-purple));
+  background: linear-gradient(135deg, var(--cyber-cyan), transparent 30%, var(--cyber-purple));
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   -webkit-mask-composite: xor;
-  opacity: 0;
+  opacity: 0.3;
   transition: opacity var(--transition-base);
   pointer-events: none;
 }
 
+.cyber-card::after {
+  /* Corner accents */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--cyber-cyan);
+  border-left: 2px solid var(--cyber-cyan);
+  opacity: 0.5;
+  transition: all var(--transition-base);
+}
+
 .cyber-card:hover {
-  border-color: rgba(0, 245, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 245, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .cyber-card:hover::before {
-  opacity: 0.6;
+  opacity: 0.8;
+}
+
+.cyber-card:hover::after {
+  opacity: 1;
+  width: 30px;
+  height: 30px;
 }
 
 /* Cyber Button */
@@ -228,36 +256,46 @@ samp {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: transparent;
+  padding: 0.75rem 1.75rem;
+  background: rgba(0, 240, 255, 0.05);
   border: 1px solid var(--cyber-cyan);
   color: var(--cyber-cyan);
-  font-weight: 500;
-  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 0;
+  clip-path: polygon(10px 0, 100% 0,
+      100% calc(100% - 10px), calc(100% - 10px) 100%,
+      0 100%,
+      0 10px);
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
   text-decoration: none;
+  font-family: var(--font-rajdhani);
 }
 
 .cyber-btn::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: var(--cyber-cyan);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .cyber-btn:hover {
   color: var(--cyber-black);
-  box-shadow: 0 0 20px var(--cyber-cyan-glow);
+  background: var(--cyber-cyan);
+  box-shadow: 0 0 30px var(--cyber-cyan-glow);
   text-shadow: none;
 }
 
 .cyber-btn:hover::before {
-  opacity: 1;
+  left: 100%;
 }
 
 .cyber-btn span {
@@ -275,6 +313,7 @@ samp {
 .cyber-btn-primary:hover {
   background: var(--text-primary);
   border-color: var(--text-primary);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
 /* Cyber Divider */
@@ -915,7 +954,7 @@ blockquote cite {
     bottom: 2rem;
     right: 2rem;
   }
-  
+
   .scroll-to-top.left {
     left: 2rem;
   }
@@ -1533,10 +1572,14 @@ blockquote cite {
    ============================================ */
 
 @keyframes blink {
-  0%, 49% {
+
+  0%,
+  49% {
     opacity: 1;
   }
-  50%, 100% {
+
+  50%,
+  100% {
     opacity: 0;
   }
 }

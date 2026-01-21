@@ -74,20 +74,21 @@ export default function Footer() {
           <div className="footer-brand" style={{ flex: 1, minWidth: "280px" }}>
             <div
               style={{
-                fontFamily: "var(--font-mono), monospace",
-                fontSize: "1.25rem",
+                fontFamily: "var(--font-rajdhani)",
+                fontSize: "1.75rem",
                 fontWeight: 700,
                 marginBottom: "1rem",
                 color: "var(--text-primary)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
               }}
             >
               <span style={{ color: "var(--cyber-cyan)" }}>&lt;</span>
               Vitaly Ford
               <span style={{ color: "var(--cyber-cyan)" }}>/&gt;</span>
             </div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.6 }}>
-              Associate Professor, WiCyS Global Chapter Coordinator, and CTO
-              <br />
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.6, fontFamily: "var(--font-mono)" }}>
+              Associate Professor // WiCyS Global Coordinator // CTO <br />
               Cybersecurity Researcher & Educator
             </p>
           </div>
