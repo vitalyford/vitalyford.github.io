@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import CyberBackground from "@/components/CyberBackground";
+
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${rajdhani.variable} ${jetbrainsMono.variable}`}>
       <body style={{ fontFamily: "var(--font-rajdhani), sans-serif" }} suppressHydrationWarning>
-        <CyberBackground />
+
         <Navbar />
         <main className="container-cyber" style={{ paddingTop: "clamp(60px, 10vw, 88px)", paddingBottom: "4rem", minHeight: "100vh" }}>
           {children}
