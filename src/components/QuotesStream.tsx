@@ -535,7 +535,7 @@ export default function QuotesStream() {
                         padding-top: 4.5rem; /* Make room for icon at top-left */
                     }
                     .quote-context {
-                         margin-left: 2rem;
+                         margin-left: 3rem;
                     }
                 }
             `}</style>
