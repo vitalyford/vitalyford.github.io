@@ -11,7 +11,7 @@ export default function Publications() {
       <PageHeader title="Publications" />
 
       {/* Stats */}
-      <section style={{ padding: "1rem 0 2rem" }}>
+      <section className="section" style={{ padding: "1rem 0 2rem" }}>
         <div
           style={{
             display: "flex",
@@ -51,9 +51,12 @@ export default function Publications() {
       <div className="cyber-divider" />
 
       {/* Publications by Year */}
-      <section style={{ padding: "2rem 0" }}>
+      <section className="section" style={{ paddingTop: "2rem" }}>
         {publications.map((pub, index) => (
-          <div key={pub.year} style={{ marginBottom: index < publications.length - 1 ? "2.5rem" : 0 }}>
+          <div
+            key={pub.year}
+            style={{ marginBottom: index < publications.length - 1 ? "2.5rem" : 0 }}
+          >
             {/* Year Header */}
             <div className="publication-year">
               <span style={{ fontFamily: "var(--font-mono), monospace" }}>{pub.year}</span>
