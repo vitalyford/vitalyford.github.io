@@ -94,76 +94,85 @@ export default function QuotesStream() {
                 background: "transparent"
             }}
         >
-            {/* Knowledge Graph Background */}
+            {/* Sleek Knowledge Graph Background */}
             <div className="quotes-graph-container" style={{
                 position: "absolute",
                 inset: 0,
                 zIndex: 0,
-                opacity: 0.8
+                opacity: 0.85
             }}>
-                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: 'none' }}>
+                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" style={{ filter: 'none' }}>
+                    {/* Define gradients and filters */}
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="var(--cyber-cyan)" stopOpacity="0.6" />
+                            <stop offset="100%" stopColor="rgba(138, 43, 226, 0.4)" />
+                        </linearGradient>
+
+                    </defs>
+
+                    {/* Clean connection lines */}
                     {quotes.map((q, i) => (
                         quotes.map((nextQ, j) => {
                             if (i >= j) return null;
                             const isActive = activeIndex === i || activeIndex === j;
+
                             return (
-                                <motion.line
+                                <line
                                     key={`line-${i}-${j}`}
                                     x1={q.x}
                                     y1={q.y}
                                     x2={nextQ.x}
                                     y2={nextQ.y}
-                                    stroke="var(--cyber-cyan)"
-                                    strokeWidth={isActive ? "0.3" : "0.08"}
-                                    animate={{
-                                        opacity: isActive ? 0.35 : 0.05,
-                                        strokeWidth: isActive ? 0.3 : 0.08
+                                    stroke={isActive ? "url(#lineGradient)" : "var(--cyber-cyan)"}
+                                    strokeWidth={isActive ? "0.25" : "0.08"}
+                                    strokeLinecap="round"
+                                    opacity={isActive ? 0.5 : 0.12}
+                                    style={{
+                                        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                                     }}
-                                    transition={{ duration: 0.8 }}
                                 />
                             );
                         })
                     ))}
 
-                    {quotes.map((q, i) => (
-                        <g key={`node-${q.id}`}>
-                            <motion.circle
-                                cx={q.x}
-                                cy={q.y}
-                                r={activeIndex === i ? 2.5 : 1}
-                                fill={activeIndex === i ? "var(--cyber-cyan)" : "transparent"}
-                                stroke="var(--cyber-cyan)"
-                                strokeWidth="0.2"
-                                animate={{
-                                    opacity: activeIndex === i ? 1 : 0.4,
-                                    r: activeIndex === i ? 2.5 : 1
-                                }}
-                                transition={{ duration: 0.4 }}
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => setActiveIndex(i)}
-                            />
-                            <AnimatePresence mode="wait">
-                                {activeIndex === i && (
-                                    <motion.circle
-                                        key={`pulse-${q.id}`}
+                    {/* Sleek nodes */}
+                    {quotes.map((q, i) => {
+                        const isActive = activeIndex === i;
+                        return (
+                            <g key={`node-${q.id}`}>
+                                {/* Subtle outer glow for active node */}
+                                {isActive && (
+                                    <circle
                                         cx={q.x}
                                         cy={q.y}
-                                        r={q.x > 50 ? 5 : 4}
-                                        fill="transparent"
-                                        stroke="var(--cyber-cyan)"
-                                        strokeWidth="0.1"
-                                        initial={{ scale: 0.5, opacity: 0 }}
-                                        animate={{ scale: 2.5, opacity: 0.8 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{
-                                            opacity: { duration: 0.3 },
-                                            scale: { repeat: Infinity, duration: 3, ease: "easeOut" }
+                                        r={3}
+                                        fill="var(--cyber-cyan)"
+                                        opacity={0.15}
+                                        style={{
+                                            transition: "all 0.3s ease-out"
                                         }}
                                     />
                                 )}
-                            </AnimatePresence>
-                        </g>
-                    ))}
+
+                                {/* Main node */}
+                                <circle
+                                    cx={q.x}
+                                    cy={q.y}
+                                    r={isActive ? 1.5 : 0.8}
+                                    fill={isActive ? "var(--cyber-cyan)" : "rgba(0, 245, 255, 0.4)"}
+                                    stroke="var(--cyber-cyan)"
+                                    strokeWidth={isActive ? "0.3" : "0.12"}
+                                    opacity={isActive ? 1 : 0.6}
+                                    style={{
+                                        cursor: 'pointer',
+                                        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                                    }}
+                                    onClick={() => setActiveIndex(i)}
+                                />
+                            </g>
+                        );
+                    })}
                 </svg>
             </div>
 
@@ -526,7 +535,7 @@ export default function QuotesStream() {
                         padding-top: 4.5rem; /* Make room for icon at top-left */
                     }
                     .quote-context {
-                         margin-left: 2rem;
+                         margin-left: 3rem;
                     }
                 }
             `}</style>
