@@ -1643,6 +1643,10 @@ blockquote cite {
   font-size: 1rem;
   color: var(--cyber-cyan);
   opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .security-tooltip-header {
