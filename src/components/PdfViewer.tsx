@@ -31,9 +31,7 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
   return (
     <div className="pdf-viewer-container">
       <div className="pdf-header">
-        <div className="pdf-header-tag">
-          <span className="blink">●</span> SECURE DOC ACCESS
-        </div>
+
         <div className="pdf-title-container">
           <h1 className="pdf-title">{title}</h1>
           <div className="pdf-meta">
@@ -90,7 +88,6 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
           margin-top: 1rem;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 243, 255, 0.05);
         }
 
         .pdf-header {
@@ -104,28 +101,7 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
           flex-wrap: wrap;
         }
 
-        .pdf-header-tag {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: var(--cyber-cyan);
-          letter-spacing: 2px;
-          opacity: 0.8;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          width: 100%;
-          margin-bottom: 0.5rem;
-        }
 
-        .blink {
-          animation: blink 1s infinite step-start;
-          font-size: 0.5rem;
-        }
-
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
 
         .pdf-title-container {
           flex: 1;
@@ -191,8 +167,6 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
         .pdf-action-btn.download:hover {
           background: var(--cyber-cyan);
           color: #000;
-          box-shadow: 0 0 20px var(--cyber-cyan-40);
-          transform: translateY(-1px);
         }
 
         .pdf-close-btn {
