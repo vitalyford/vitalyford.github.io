@@ -588,11 +588,11 @@ blockquote cite {
 }
 
 /* Security Badge Tooltip */
-.security-badge-wrapper {
+.security-badge-container {
   transition: all var(--transition-base);
 }
 
-.security-badge-wrapper:hover {
+.security-badge-container:hover {
   border-color: var(--cyber-cyan);
   box-shadow: none;
 }
@@ -643,7 +643,7 @@ blockquote cite {
 }
 
 /* Keep tooltip visible when hovering over badge OR tooltip itself */
-.security-badge-wrapper:hover .security-tooltip,
+.security-badge-container:hover .security-tooltip,
 .security-tooltip:hover {
   opacity: 1;
   visibility: visible;
@@ -653,7 +653,7 @@ blockquote cite {
 }
 
 /* Add delay when leaving to prevent accidental dismissal */
-.security-badge-wrapper .security-tooltip {
+.security-badge-container .security-tooltip {
   transition-delay: 0ms, 150ms, 0ms;
 }
 
