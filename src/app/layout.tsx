@@ -44,7 +44,7 @@ export default function RootLayout({
       <body style={{ fontFamily: "var(--font-rajdhani), sans-serif" }} suppressHydrationWarning>
 
         <Navbar />
-        <main className="container-cyber" style={{ paddingTop: "clamp(60px, 10vw, 88px)", paddingBottom: "4rem", minHeight: "100vh" }}>
+        <main className="container-cyber main-layout">
           {children}
         </main>
         <Footer />
