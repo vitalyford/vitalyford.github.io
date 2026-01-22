@@ -1,3 +1,5 @@
+import { Coffee } from "lucide-react";
+
 interface SocialLink {
   href: string;
   label: string;
@@ -5,6 +7,11 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
+  {
+    href: "https://buymeacoffee.com/vitalyfordy",
+    label: "Buy Me a Coffee",
+    icon: <Coffee size={20} />,
+  },
   {
     href: "https://linkedin.com/in/vitalyford",
     label: "LinkedIn",
