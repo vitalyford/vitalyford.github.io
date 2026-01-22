@@ -169,7 +169,6 @@ export default function Contact() {
             padding: "0.75rem 1.5rem",
             borderRadius: "8px",
             zIndex: 1000,
-            boxShadow: "0 0 20px var(--cyber-cyan-glow)",
             fontFamily: "var(--font-mono), monospace",
             fontSize: "0.9rem",
           }}

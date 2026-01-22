@@ -1040,7 +1040,6 @@ blockquote cite {
 .research-card:hover {
   border-color: var(--cyber-cyan);
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 245, 255, 0.15);
 }
 
 .research-card-image {
