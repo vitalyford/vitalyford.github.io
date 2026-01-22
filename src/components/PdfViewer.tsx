@@ -88,7 +88,6 @@ export default function PdfViewer({ url, title }: PdfViewerProps) {
           margin-top: 1rem;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 243, 255, 0.05);
         }
 
         .pdf-header {
