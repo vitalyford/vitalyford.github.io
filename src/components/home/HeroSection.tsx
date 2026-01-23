@@ -11,11 +11,12 @@ const HeroSection = () => {
                 {/* Left Column: Content */}
                 <div className="animate-slide-up">
                     <div className="security-badge-container">
-                        <div className="security-badge-dot" />
-                        <span className="security-badge-text">
-                            Security: Zero Trust, Zero Hype
-                        </span>
-                        <span className="security-badge-icon">ⓘ</span>
+                        <div className="security-badge-inner">
+                            <span className="security-badge-text">
+                                Security: Zero Trust, Zero Hype
+                            </span>
+                            <span className="security-badge-icon">ⓘ</span>
+                        </div>
                         <div className="security-tooltip">
                             <strong className="security-tooltip-header">
                                 Free security tools I recommend:
@@ -93,8 +94,8 @@ const HeroSection = () => {
 
                         {/* Decorative Tech Overlay Tags */}
                         <div className="profile-overlay-card">
-                            <span style={{ fontSize: "0.6rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Current Focus</span>
-                            <span style={{ fontSize: "0.85rem", color: "var(--cyber-cyan)", fontWeight: 600 }}>Security, AI, and Uncomfortable Edge Cases</span>
+                            <span className="profile-current-focus-label">Current Focus</span>
+                            <span className="profile-current-focus-value">Security, AI, and Uncomfortable Edge Cases</span>
                         </div>
 
                     </div>

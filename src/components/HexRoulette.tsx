@@ -160,10 +160,10 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     {hexValue}
                 </span>
                 <span
+                    className="text-small"
                     style={{
-                        fontSize: "0.65rem",
-                        color: "var(--text-muted)",
-                        opacity: 0.7,
+                        color: "var(--text-secondary)",
+                        opacity: 0.8,
                         fontFamily: "var(--font-mono), monospace",
                         letterSpacing: "0.05em",
                         marginLeft: "0.45rem"

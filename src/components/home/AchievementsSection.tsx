@@ -14,7 +14,7 @@ const AchievementsSection = () => {
                                 <h3 className="project-card-title achievement-title">
                                     {item.title}
                                 </h3>
-                                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", margin: 0 }}>
+                                <p className="achievement-desc">
                                     {item.description}
                                 </p>
                             </div>

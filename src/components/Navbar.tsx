@@ -119,7 +119,7 @@ export default function Navbar() {
               className="nav-logo"
               style={{
                 fontFamily: "var(--font-rajdhani)",
-                fontSize: "1.5rem",
+                fontSize: "1.75rem",
                 fontWeight: 700,
                 color: isActive("/") ? "var(--cyber-cyan)" : "var(--text-primary)",
                 display: "flex",
@@ -129,9 +129,9 @@ export default function Navbar() {
                 letterSpacing: "0.05em",
               }}
             >
-              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.2em", lineHeight: 0 }}>&lt;</span>
+              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.1em", lineHeight: 0 }}>&lt;</span>
               Vitaly Ford
-              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.2em", lineHeight: 0 }}>/&gt;</span>
+              <span style={{ color: "var(--cyber-cyan)", fontSize: "1.1em", lineHeight: 0 }}>/&gt;</span>
             </Link>
 
             {/* Desktop Navigation */}

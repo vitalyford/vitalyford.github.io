@@ -14,9 +14,9 @@ export default function ResearchAreaCard({ area }: { area: ResearchArea }) {
                 />
             </div>
             <div className="research-card-title">
-                <h3 style={{ fontSize: "1rem", margin: 0, marginBottom: "0.25rem" }}>{area.title}</h3>
+                <h3 style={{ margin: 0, marginBottom: "0.25rem" }} className="text-medium">{area.title}</h3>
                 {area.description && (
-                    <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", margin: 0 }}>
+                    <p style={{ color: "var(--text-secondary)", margin: 0 }} className="text-standard">
                         {area.description}
                     </p>
                 )}

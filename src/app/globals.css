@@ -43,6 +43,13 @@
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Centralized Font Sizes */
+  --font-size-tiny: 0.75rem;
+  --font-size-small: 0.85rem;
+  --font-size-standard: 1.15rem;
+  --font-size-medium: 1.1rem;
+  --font-size-large: 1.25rem;
 }
 
 /* ============================================
@@ -70,6 +77,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  font-size: var(--font-size-standard);
 }
 
 /* Selection */
@@ -264,6 +272,9 @@ samp {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 0;
+  min-width: 180px;
+  /* Standardized width */
+  text-align: center;
   clip-path: polygon(10px 0, 100% 0,
       100% calc(100% - 10px), calc(100% - 10px) 100%,
       0 100%,
@@ -589,33 +600,88 @@ blockquote cite {
 
 /* Security Badge Tooltip */
 .security-badge-container {
+  display: inline-flex;
+  position: relative;
+  margin-bottom: 2rem;
+  cursor: help;
+}
+
+.security-badge-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem;
+  background: rgba(18, 18, 24, 0.6);
+  border: 1px solid var(--cyber-border);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: all var(--transition-base);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.security-badge-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--cyber-cyan);
+  border-left: 2px solid var(--cyber-cyan);
+  opacity: 0.4;
   transition: all var(--transition-base);
 }
 
-.security-badge-container:hover {
+.security-badge-container:hover .security-badge-inner {
   border-color: var(--cyber-cyan);
+  background: rgba(18, 18, 24, 0.8);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.security-badge-container:hover .security-badge-inner::after {
+  opacity: 1;
+  width: 15px;
+  height: 15px;
+}
+
+.security-badge-text {
+  font-size: 0.8rem;
+  font-family: var(--font-mono), monospace;
+  color: var(--cyber-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.security-badge-icon {
+  font-size: 1.1rem;
+  color: var(--cyber-cyan);
+  opacity: 0.7;
+}
+
+/* Tooltip Styles */
+.security-tooltip {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translate(-50%, 10px);
+  width: max-content;
+  max-width: 400px;
+  padding: 1.25rem;
+  background: rgba(12, 12, 18, 0.98);
+  border: 1px solid var(--cyber-cyan);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000;
+  backdrop-filter: blur(15px);
   box-shadow: none;
 }
 
-.security-tooltip {
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 50%;
-  width: max-content;
-  max-width: 350px;
-  padding: 1rem;
-  background: var(--cyber-surface);
-  border: 1px solid var(--cyber-cyan-glow);
-  border-radius: 8px;
-  box-shadow: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, -4px);
-  transition: opacity 200ms ease, visibility 200ms ease, transform 200ms ease;
-  transition-delay: 0ms, 0ms, 0ms;
-  pointer-events: none;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
+.security-badge-container:hover .security-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
 }
 
 .security-tooltip::before {
@@ -623,51 +689,64 @@ blockquote cite {
   position: absolute;
   top: -6px;
   left: 50%;
+  transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: var(--cyber-surface);
-  border-left: 1px solid var(--cyber-cyan-glow);
-  border-top: 1px solid var(--cyber-cyan-glow);
-  transform: translateX(-50%) rotate(45deg);
+  background: rgba(12, 12, 18, 0.98);
+  border-top: 1px solid var(--cyber-cyan);
+  border-left: 1px solid var(--cyber-cyan);
 }
 
-/* Bridge the gap between badge and tooltip */
-.security-tooltip::after {
-  content: '';
-  position: absolute;
-  top: -0.25rem;
-  left: 0;
-  right: 0;
-  height: 0.25rem;
-  background: transparent;
+.security-tooltip-header {
+  font-size: 1.1rem;
+  color: var(--cyber-cyan);
+  display: block;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--cyber-border);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Keep tooltip visible when hovering over badge OR tooltip itself */
-.security-badge-container:hover .security-tooltip,
-.security-tooltip:hover {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-  pointer-events: auto;
-  transition-delay: 0ms, 0ms, 0ms;
+.security-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
-/* Add delay when leaving to prevent accidental dismissal */
-.security-badge-container .security-tooltip {
-  transition-delay: 0ms, 150ms, 0ms;
+.security-tooltip-label {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  min-width: 90px;
+  font-weight: 500;
 }
 
 .security-tooltip-link {
   color: var(--cyber-cyan);
-  font-size: 0.75rem;
+  font-size: 1rem;
   text-decoration: none;
   transition: all var(--transition-fast);
+  font-family: var(--font-mono), monospace;
 }
 
 .security-tooltip-link:hover {
-  text-decoration: underline;
   color: var(--cyber-green);
+  text-shadow: 0 0 8px var(--cyber-green);
 }
+
+.security-tooltip-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cyber-border);
+  font-style: italic;
+  text-align: center;
+}
+
 
 /* ============================================
    ANIMATIONS
@@ -850,7 +929,7 @@ blockquote cite {
 
 .nav-link {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem 0.875rem;
   border-radius: 6px;
@@ -1174,7 +1253,7 @@ blockquote cite {
   padding: 0.6rem 1rem;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .dropdown-item:hover {
@@ -1306,7 +1385,7 @@ blockquote cite {
     padding: 0.875rem 1rem;
     border-radius: 8px;
     border-bottom: none;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
     text-decoration: none;
     flex-shrink: 0;
@@ -1336,7 +1415,7 @@ blockquote cite {
     border: none;
     border-radius: 8px;
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -1374,7 +1453,7 @@ blockquote cite {
 
   .mobile-dropdown-content .nav-link {
     padding-left: 1.5rem;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--text-muted);
   }
 
@@ -1535,6 +1614,19 @@ blockquote cite {
   white-space: nowrap;
 }
 
+.profile-current-focus-label {
+  font-size: var(--font-size-tiny);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile-current-focus-value {
+  font-size: var(--font-size-small);
+  color: var(--cyber-cyan);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .profile-overlay-card {
     /* Restore the shift-outside look but slightly tighter for mobile */
@@ -1560,6 +1652,7 @@ blockquote cite {
 .project-card-title {
   color: var(--text-primary);
   transition: all var(--transition-fast);
+  font-size: var(--font-size-large);
 }
 
 .project-card-link:hover .project-card-title {
@@ -1610,76 +1703,7 @@ blockquote cite {
   align-items: center;
 }
 
-.security-badge-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.4rem 0.8rem;
-  background: rgba(0, 245, 255, 0.05);
-  border: 1px solid var(--cyber-cyan-glow);
-  border-radius: 50px;
-  margin-bottom: 1.5rem;
-  position: relative;
-  cursor: help;
-}
 
-.security-badge-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--cyber-green);
-  box-shadow: 0 0 10px var(--cyber-green);
-}
-
-.security-badge-text {
-  font-size: 0.75rem;
-  font-family: var(--font-mono), monospace;
-  color: var(--cyber-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.security-badge-icon {
-  font-size: 1rem;
-  color: var(--cyber-cyan);
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.security-tooltip-header {
-  font-size: 0.8rem;
-  color: var(--cyber-cyan);
-  display: block;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--cyber-border);
-  font-weight: bold;
-}
-
-.security-tooltip-row {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.security-tooltip-label {
-  color: var(--text-muted);
-  font-size: 0.7rem;
-  min-width: 70px;
-}
-
-.security-tooltip-note {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  display: block;
-  margin-top: 0.75rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--cyber-border);
-  font-style: italic;
-}
 
 .cyber-hero-subtitle {
   font-family: var(--font-mono), monospace;
@@ -1708,10 +1732,28 @@ blockquote cite {
 }
 
 .cyber-bio-note {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  /* Standardized in later CSS */
   margin-top: 1rem;
   display: block;
+}
+
+.text-medium {
+  font-size: var(--font-size-medium);
+}
+
+.text-standard {
+  font-size: var(--font-size-standard);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+}
+
+.cyber-badge-lg {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .cyber-btn-group {
@@ -1755,7 +1797,7 @@ blockquote cite {
 
 .featured-project-desc {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: var(--font-size-standard);
   margin: 0;
 }
 
@@ -1771,15 +1813,21 @@ blockquote cite {
 }
 
 .achievement-title {
-  font-size: 1rem;
+  font-size: var(--font-size-large);
   margin-bottom: 0.25rem;
 }
 
 .achievement-year {
   font-family: var(--font-mono), monospace;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 1rem;
   white-space: nowrap;
+}
+
+.achievement-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-size-medium);
+  margin: 0;
 }
 
 .achievement-card {

@@ -39,8 +39,7 @@ export default function Research() {
           {interests.map((interest) => (
             <span
               key={interest}
-              className="cyber-badge"
-              style={{ fontSize: "0.85rem", padding: "0.5rem 1rem" }}
+              className="cyber-badge cyber-badge-lg"
             >
               {interest}
             </span>
