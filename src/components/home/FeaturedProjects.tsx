@@ -24,7 +24,6 @@ const FeaturedProjects = () => {
                         <h3
                             className="project-card-title"
                             style={{
-                                fontSize: "1.1rem",
                                 marginBottom: "0.5rem",
                                 marginTop: project.badge ? "0.75rem" : 0,
                             }}

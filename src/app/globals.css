@@ -6,43 +6,57 @@
 
 /* CSS Custom Properties - Cyber Theme */
 :root {
-  /* Primary Cyber Colors */
-  --cyber-black: #050508;
-  --cyber-darker: #08080c;
-  --cyber-dark: #0c0c12;
-  --cyber-surface: #121218;
-  --cyber-border: #2a2a35;
+  /* Primary Cyber Colors - Industrial Dark */
+  --cyber-black: #020202;
+  /* Pure Deep Void */
+  --cyber-darker: #050505;
+  /* Structure Base */
+  --cyber-dark: #080808;
+  /* Secondary Surface */
+  --cyber-surface: #0c0c0c;
+  /* Component Surface */
+  --cyber-border: #1a1a1a;
+  /* Sharp Hardware Border */
 
-  /* Accent Colors - Sharp Neon */
+  /* Accent Color - Pure Tech */
   --cyber-cyan: #00f0ff;
-  --cyber-cyan-dim: #00a0aa;
-  --cyber-cyan-glow: rgba(0, 240, 255, 0.15);
-  --cyber-blue: #0044ff;
-  --cyber-purple: #b026ff;
-  --cyber-pink: #ff0055;
-  --cyber-green: #00ff66;
+  /* Laser Cyan */
+  --cyber-cyan-dim: #007c85;
+  --cyber-cyan-glow: rgba(0, 240, 255, 0.08);
+  --cyber-green: #00ff9f;
   --cyber-danger: #ff2a2a;
 
+  /* Tiered Backgrounds - Sharp Tech */
+  --nav-bg: rgba(2, 2, 2, 0.9);
+  --card-bg: rgba(12, 12, 12, 0.8);
+  --card-bg-hover: rgba(18, 18, 18, 0.95);
+
   /* Text Colors */
-  --text-primary: #e0e0e6;
-  --text-secondary: #9090a0;
-  --text-muted: #505060;
+  --text-primary: #f0f0f5;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
 
-  /* Gradients */
-  --gradient-cyber: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-blue), var(--cyber-purple));
-  --gradient-glow: linear-gradient(180deg, var(--cyber-cyan-glow), transparent);
-  --gradient-surface: linear-gradient(180deg, rgba(18, 18, 24, 0.9), rgba(12, 12, 18, 0.95));
+  /* Decorative elements - Solid Only */
+  --cyber-accent-solid: var(--cyber-cyan);
+  --cyber-border-glow: var(--cyber-border);
 
-  /* Shadows */
-  --shadow-cyber: 0 0 15px rgba(0, 240, 255, 0.1);
-  --shadow-hover: 0 0 25px rgba(0, 240, 255, 0.25);
-  --shadow-sharp: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  /* Shadows - Tight & Sharp */
+  --shadow-cyber: 0 0 20px rgba(0, 240, 255, 0.05);
+  --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 240, 255, 0.08);
+  --shadow-sharp: 2px 2px 0px rgba(0, 0, 0, 0.8);
 
   /* Animation Timing */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Centralized Font Sizes */
+  --font-size-tiny: 0.75rem;
+  --font-size-small: 0.85rem;
+  --font-size-standard: 1.15rem;
+  --font-size-medium: 1.1rem;
+  --font-size-large: 1.25rem;
 }
 
 /* ============================================
@@ -62,6 +76,7 @@ html {
 body {
   font-family: var(--font-rajdhani), 'Segoe UI', Roboto, sans-serif;
   background-color: var(--cyber-black);
+  background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
   max-width: 100vw;
@@ -70,6 +85,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  font-size: var(--font-size-standard);
 }
 
 /* Selection */
@@ -191,7 +207,7 @@ samp {
 
 /* Cyber Card */
 .cyber-card {
-  background: rgba(18, 18, 24, 0.6);
+  background: var(--card-bg);
   border: 1px solid var(--cyber-border);
   border-radius: 4px;
   /* Angled corners via clip-path */
@@ -202,8 +218,8 @@ samp {
   padding: 1.5rem;
   position: relative;
   transition: all var(--transition-base);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .cyber-card::before {
@@ -212,11 +228,11 @@ samp {
   inset: 0;
   border-radius: 4px;
   padding: 1px;
-  background: linear-gradient(135deg, var(--cyber-cyan), transparent 30%, var(--cyber-purple));
+  background: var(--cyber-border);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   -webkit-mask-composite: xor;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: opacity var(--transition-base);
   pointer-events: none;
 }
@@ -236,18 +252,21 @@ samp {
 }
 
 .cyber-card:hover {
-  border-color: rgba(0, 240, 255, 0.5);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.05);
+  transform: translateY(-2px);
+  background: var(--card-bg-hover);
 }
 
 .cyber-card:hover::before {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .cyber-card:hover::after {
   opacity: 1;
   width: 30px;
   height: 30px;
+  border-color: var(--cyber-cyan);
 }
 
 /* Cyber Button */
@@ -264,6 +283,9 @@ samp {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 0;
+  min-width: 180px;
+  /* Standardized width */
+  text-align: center;
   clip-path: polygon(10px 0, 100% 0,
       100% calc(100% - 10px), calc(100% - 10px) 100%,
       0 100%,
@@ -283,7 +305,7 @@ samp {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+  background: rgba(255, 255, 255, 0.05);
   transition: left 0.5s ease;
 }
 
@@ -319,7 +341,7 @@ samp {
 /* Cyber Divider */
 .cyber-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyber-border), var(--cyber-cyan), var(--cyber-border), transparent);
+  background: var(--cyber-border);
   margin: 2rem 0;
   border: none;
 }
@@ -347,11 +369,8 @@ samp {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(var(--cyber-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--cyber-border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.15;
+  border: 1px solid var(--cyber-border);
+  opacity: 0.05;
   pointer-events: none;
 }
 
@@ -442,7 +461,7 @@ samp {
   }
 }
 
-/* Circuit Glow Effect */
+/* Circuit Element - Pure Borders */
 .circuit-glow {
   position: relative;
 }
@@ -451,15 +470,10 @@ samp {
   content: '';
   position: absolute;
   inset: -20px;
-  background:
-    radial-gradient(circle at 50% 50%, var(--cyber-cyan-glow) 0%, transparent 70%),
-    linear-gradient(45deg, transparent 45%, var(--cyber-cyan) 45%, var(--cyber-cyan) 46%, transparent 46%),
-    linear-gradient(-45deg, transparent 45%, var(--cyber-cyan) 45%, var(--cyber-cyan) 46%, transparent 46%);
-  background-size: 100% 100%, 30px 30px, 30px 30px;
+  border: 1px solid var(--cyber-cyan-dim);
   opacity: 0.1;
   pointer-events: none;
   border-radius: 50%;
-  animation: pulse-glow 4s ease-in-out infinite;
 }
 
 /* ============================================
@@ -589,33 +603,88 @@ blockquote cite {
 
 /* Security Badge Tooltip */
 .security-badge-container {
+  display: inline-flex;
+  position: relative;
+  margin-bottom: 2rem;
+  cursor: help;
+}
+
+.security-badge-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--cyber-border);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: all var(--transition-base);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.security-badge-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--cyber-cyan);
+  border-left: 2px solid var(--cyber-cyan);
+  opacity: 0.4;
   transition: all var(--transition-base);
 }
 
-.security-badge-container:hover {
+.security-badge-container:hover .security-badge-inner {
   border-color: var(--cyber-cyan);
+  background: rgba(18, 18, 24, 0.8);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.security-badge-container:hover .security-badge-inner::after {
+  opacity: 1;
+  width: 15px;
+  height: 15px;
+}
+
+.security-badge-text {
+  font-size: 0.8rem;
+  font-family: var(--font-mono), monospace;
+  color: var(--cyber-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.security-badge-icon {
+  font-size: 1.1rem;
+  color: var(--cyber-cyan);
+  opacity: 0.7;
+}
+
+/* Tooltip Styles */
+.security-tooltip {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translate(-50%, 10px);
+  width: max-content;
+  max-width: 400px;
+  padding: 1.25rem;
+  background: rgba(12, 12, 18, 0.98);
+  border: 1px solid var(--cyber-cyan);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000;
+  backdrop-filter: blur(15px);
   box-shadow: none;
 }
 
-.security-tooltip {
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 50%;
-  width: max-content;
-  max-width: 350px;
-  padding: 1rem;
-  background: var(--cyber-surface);
-  border: 1px solid var(--cyber-cyan-glow);
-  border-radius: 8px;
-  box-shadow: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, -4px);
-  transition: opacity 200ms ease, visibility 200ms ease, transform 200ms ease;
-  transition-delay: 0ms, 0ms, 0ms;
-  pointer-events: none;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
+.security-badge-container:hover .security-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
 }
 
 .security-tooltip::before {
@@ -623,51 +692,64 @@ blockquote cite {
   position: absolute;
   top: -6px;
   left: 50%;
+  transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: var(--cyber-surface);
-  border-left: 1px solid var(--cyber-cyan-glow);
-  border-top: 1px solid var(--cyber-cyan-glow);
-  transform: translateX(-50%) rotate(45deg);
+  background: rgba(12, 12, 18, 0.98);
+  border-top: 1px solid var(--cyber-cyan);
+  border-left: 1px solid var(--cyber-cyan);
 }
 
-/* Bridge the gap between badge and tooltip */
-.security-tooltip::after {
-  content: '';
-  position: absolute;
-  top: -0.25rem;
-  left: 0;
-  right: 0;
-  height: 0.25rem;
-  background: transparent;
+.security-tooltip-header {
+  font-size: 1.1rem;
+  color: var(--cyber-cyan);
+  display: block;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--cyber-border);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Keep tooltip visible when hovering over badge OR tooltip itself */
-.security-badge-container:hover .security-tooltip,
-.security-tooltip:hover {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-  pointer-events: auto;
-  transition-delay: 0ms, 0ms, 0ms;
+.security-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
-/* Add delay when leaving to prevent accidental dismissal */
-.security-badge-container .security-tooltip {
-  transition-delay: 0ms, 150ms, 0ms;
+.security-tooltip-label {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  min-width: 90px;
+  font-weight: 500;
 }
 
 .security-tooltip-link {
   color: var(--cyber-cyan);
-  font-size: 0.75rem;
+  font-size: 1rem;
   text-decoration: none;
   transition: all var(--transition-fast);
+  font-family: var(--font-mono), monospace;
 }
 
 .security-tooltip-link:hover {
-  text-decoration: underline;
   color: var(--cyber-green);
+  text-shadow: 0 0 8px var(--cyber-green);
 }
+
+.security-tooltip-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cyber-border);
+  font-style: italic;
+  text-align: center;
+}
+
 
 /* ============================================
    ANIMATIONS
@@ -803,10 +885,10 @@ blockquote cite {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(10, 10, 15, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(42, 42, 58, 0.5);
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--cyber-border);
   transition: all var(--transition-base);
 }
 
@@ -824,9 +906,9 @@ blockquote cite {
 }
 
 .nav-cyber.scrolled {
-  background: rgba(10, 10, 15, 0.95);
-  border-bottom-color: var(--cyber-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: var(--cyber-black);
+  border-bottom-color: var(--cyber-cyan);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 240, 255, 0.1);
 }
 
 .nav-cyber.scrolled .nav-inner {
@@ -850,7 +932,7 @@ blockquote cite {
 
 .nav-link {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem 0.875rem;
   border-radius: 6px;
@@ -1030,11 +1112,12 @@ blockquote cite {
    ============================================ */
 
 .research-card {
-  background: var(--cyber-surface);
+  background: var(--card-bg);
   border: 1px solid var(--cyber-border);
   border-radius: 12px;
   overflow: hidden;
   transition: all var(--transition-base);
+  backdrop-filter: blur(12px);
 }
 
 .research-card:hover {
@@ -1051,7 +1134,7 @@ blockquote cite {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, var(--cyber-surface));
+  border-bottom: 2px solid var(--cyber-cyan-dim);
 }
 
 .research-card-title {
@@ -1150,7 +1233,7 @@ blockquote cite {
   top: 100%;
   left: 0;
   min-width: 220px;
-  background: var(--cyber-surface);
+  background: var(--nav-bg);
   border: 1px solid var(--cyber-border);
   border-radius: 8px;
   padding: 0.5rem 0;
@@ -1159,7 +1242,8 @@ blockquote cite {
   transform: translateY(10px);
   transition: all var(--transition-base);
   z-index: 1001;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
 }
 
 .dropdown-cyber:hover .dropdown-menu-cyber,
@@ -1174,7 +1258,7 @@ blockquote cite {
   padding: 0.6rem 1rem;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .dropdown-item:hover {
@@ -1306,7 +1390,7 @@ blockquote cite {
     padding: 0.875rem 1rem;
     border-radius: 8px;
     border-bottom: none;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
     text-decoration: none;
     flex-shrink: 0;
@@ -1336,7 +1420,7 @@ blockquote cite {
     border: none;
     border-radius: 8px;
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -1374,7 +1458,7 @@ blockquote cite {
 
   .mobile-dropdown-content .nav-link {
     padding-left: 1.5rem;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--text-muted);
   }
 
@@ -1522,7 +1606,7 @@ blockquote cite {
   position: absolute;
   bottom: -20px;
   right: -20px;
-  background: rgba(5, 5, 12, 0.95);
+  background: var(--nav-bg);
   /* Darker background as requested */
   border: 1px solid var(--cyber-border);
   padding: 0.75rem 1rem;
@@ -1530,9 +1614,22 @@ blockquote cite {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
   z-index: 10;
   white-space: nowrap;
+}
+
+.profile-current-focus-label {
+  font-size: var(--font-size-tiny);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile-current-focus-value {
+  font-size: var(--font-size-small);
+  color: var(--cyber-cyan);
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -1560,6 +1657,7 @@ blockquote cite {
 .project-card-title {
   color: var(--text-primary);
   transition: all var(--transition-fast);
+  font-size: var(--font-size-large);
 }
 
 .project-card-link:hover .project-card-title {
@@ -1607,79 +1705,10 @@ blockquote cite {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 4rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.security-badge-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.4rem 0.8rem;
-  background: rgba(0, 245, 255, 0.05);
-  border: 1px solid var(--cyber-cyan-glow);
-  border-radius: 50px;
-  margin-bottom: 1.5rem;
-  position: relative;
-  cursor: help;
-}
 
-.security-badge-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--cyber-green);
-  box-shadow: 0 0 10px var(--cyber-green);
-}
-
-.security-badge-text {
-  font-size: 0.75rem;
-  font-family: var(--font-mono), monospace;
-  color: var(--cyber-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.security-badge-icon {
-  font-size: 1rem;
-  color: var(--cyber-cyan);
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.security-tooltip-header {
-  font-size: 0.8rem;
-  color: var(--cyber-cyan);
-  display: block;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--cyber-border);
-  font-weight: bold;
-}
-
-.security-tooltip-row {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.security-tooltip-label {
-  color: var(--text-muted);
-  font-size: 0.7rem;
-  min-width: 70px;
-}
-
-.security-tooltip-note {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  display: block;
-  margin-top: 0.75rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--cyber-border);
-  font-style: italic;
-}
 
 .cyber-hero-subtitle {
   font-family: var(--font-mono), monospace;
@@ -1708,10 +1737,28 @@ blockquote cite {
 }
 
 .cyber-bio-note {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  /* Standardized in later CSS */
   margin-top: 1rem;
   display: block;
+}
+
+.text-medium {
+  font-size: var(--font-size-medium);
+}
+
+.text-standard {
+  font-size: var(--font-size-standard);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+}
+
+.cyber-badge-lg {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .cyber-btn-group {
@@ -1755,7 +1802,7 @@ blockquote cite {
 
 .featured-project-desc {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: var(--font-size-standard);
   margin: 0;
 }
 
@@ -1771,15 +1818,21 @@ blockquote cite {
 }
 
 .achievement-title {
-  font-size: 1rem;
+  font-size: var(--font-size-large);
   margin-bottom: 0.25rem;
 }
 
 .achievement-year {
   font-family: var(--font-mono), monospace;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 1rem;
   white-space: nowrap;
+}
+
+.achievement-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-size-medium);
+  margin: 0;
 }
 
 .achievement-card {

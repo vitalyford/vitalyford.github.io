@@ -50,16 +50,15 @@ export default function Contact() {
               }}
             >
               I&apos;m always interested in discussing research collaborations, cybersecurity
-              education, and innovative projects. Feel free to reach out!
+              education, and innovative projects. <br /><br />Ping me!
             </p>
 
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
               <a
                 href="https://linkedin.com/in/vitalyford"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cyber-btn"
-                style={{ flex: 1, minWidth: "120px" }}
               >
                 <span>LinkedIn</span>
               </a>
@@ -68,7 +67,6 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cyber-btn"
-                style={{ flex: 1, minWidth: "120px" }}
               >
                 <span>GitHub</span>
               </a>

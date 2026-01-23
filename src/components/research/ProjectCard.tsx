@@ -31,7 +31,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     </h3>
                     <p style={{ color: "var(--text-secondary)", margin: 0 }}>{project.description}</p>
                     {project.presenters && (
-                        <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
+                        <p style={{ color: "var(--text-secondary)", marginTop: "0.5rem" }} className="text-medium">
                             <strong>Students:</strong> {project.presenters}
                         </p>
                     )}
@@ -49,7 +49,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     }}
                 >
                     {project.highlights.map((highlight) => (
-                        <li key={highlight} style={{ fontSize: "0.9rem" }}>
+                        <li key={highlight} className="text-medium">
                             {highlight}
                         </li>
                     ))}

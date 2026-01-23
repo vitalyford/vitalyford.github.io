@@ -21,7 +21,7 @@ export const researchAreas: ResearchArea[] = [
     {
         title: "Machine Learning",
         image: "/images/machineLearning.jpg",
-        description: "AI-powered security solutions and predictive analytics",
+        description: "AI-powered secure systems and predictive analytics",
     },
     {
         title: "CS Education",
