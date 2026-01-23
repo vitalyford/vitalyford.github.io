@@ -10,38 +10,17 @@ const HeroSection = () => {
             <div className="cyber-hero-grid">
                 {/* Left Column: Content */}
                 <div className="animate-slide-up">
-                    <div className="security-badge-container">
-                        <div className="security-badge-inner">
-                            <span className="security-badge-text">
-                                Security: Zero Trust, Zero Hype
-                            </span>
-                            <span className="security-badge-icon">ⓘ</span>
-                        </div>
-                        <div className="security-tooltip">
-                            <strong className="security-tooltip-header">
-                                Free security tools I recommend:
-                            </strong>
-                            {securityRecs.map(rec => (
-                                <div key={rec.label} className="security-tooltip-row">
-                                    <span className="security-tooltip-label">{rec.label}:</span>
-                                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="security-tooltip-link">{rec.name}</a>
-                                </div>
-                            ))}
-                            <em className="security-tooltip-note">
-                                Not sponsored, not affiliated with. Personal preferences only.
-                            </em>
-                        </div>
-                    </div>
+                    <h2 className="cyber-hero-subtitle" style={{ marginBottom: "1.5rem" }}>
+                        &gt;&gt; Discover Innovation → Deliver Success
+                    </h2>
 
-                    <h1 className="hero-title">
+
+
+                    <h1 className="hero-title" style={{ marginBottom: "2rem" }}>
                         <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
                         whoami
                         <span className="terminal-cursor" />
                     </h1>
-
-                    <h2 className="cyber-hero-subtitle">
-                        &gt;&gt; Discover Innovation → Deliver Success
-                    </h2>
 
                     <div className="roulette-container">
                         <HexRoulette showFact={true} displayMode="inline" />
@@ -69,7 +48,29 @@ const HeroSection = () => {
                 </div>
 
                 {/* Right Column: Profile Image */}
-                <div className="animate-fade-in" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
+                <div className="animate-fade-in" style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
+                    <div className="security-badge-container" style={{ marginBottom: "2rem" }}>
+                        <div className="security-badge-inner">
+                            <span className="security-badge-text">
+                                Security: Zero Trust, Zero Hype
+                            </span>
+                            <span className="security-badge-icon">ⓘ</span>
+                        </div>
+                        <div className="security-tooltip">
+                            <strong className="security-tooltip-header">
+                                Free security tools I recommend:
+                            </strong>
+                            {securityRecs.map(rec => (
+                                <div key={rec.label} className="security-tooltip-row">
+                                    <span className="security-tooltip-label">{rec.label}:</span>
+                                    <a href={rec.url} target="_blank" rel="noopener noreferrer" className="security-tooltip-link">{rec.name}</a>
+                                </div>
+                            ))}
+                            <em className="security-tooltip-note">
+                                Not sponsored, not affiliated with. Personal preferences only.
+                            </em>
+                        </div>
+                    </div>
                     <div style={{ position: "relative" }}>
                         <div
                             style={{
@@ -97,7 +98,6 @@ const HeroSection = () => {
                             <span className="profile-current-focus-label">Current Focus</span>
                             <span className="profile-current-focus-value">Security, AI, and Uncomfortable Edge Cases</span>
                         </div>
-
                     </div>
                 </div>
             </div>
