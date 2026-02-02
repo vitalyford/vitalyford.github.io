@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -38,12 +39,14 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     const [data, setData] = useState<ContributionsData | null>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(true);
+    const [mounted, setMounted] = useState(false);
     const [currentNode, setCurrentNode] = useState<{ x: number; y: number } | null>(null);
     const [visitedDates, setVisitedDates] = useState<Set<string>>(new Set());
     const [pathHistory, setPathHistory] = useState<{ x: number; y: number }[]>([]);
     const [logs, setLogs] = useState<LogEntry[]>([]);
     const [isAuto, setIsAuto] = useState(true);
     const [targetNode, setTargetNode] = useState<{ x: number; y: number } | null>(null);
+    const [autoTarget, setAutoTarget] = useState<{ x: number; y: number; date: string } | null>(null);
     const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null);
     const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
     const [hackerMode, setHackerMode] = useState(false);
@@ -130,6 +133,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             }
         }
         fetchData();
+        setMounted(true);
     }, [username]);
 
     // Character Logic
@@ -139,6 +143,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         // Initialize starting position
         if (!currentNode) {
             setCurrentNode({ x: 0, y: 0 });
+            setPathHistory([{ x: 0, y: 0 }]);
             return;
         }
 
@@ -149,24 +154,22 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             const curr = currentNode;
             let next: { x: number; y: number } | null = null;
 
-            if (targetNode) {
-                next = targetNode;
-                setTargetNode(null);
-                addLog(`Manual Override: Target set to [${next.x},${next.y}]`, "warning");
-                setActiveMessage("Manual override in progress...");
-            } else {
-                // TSP Heuristic: Greedy Nearest Neighbor
+            // Determine destination: manual target takes priority, then autoTarget
+            let destination: { x: number; y: number } | null = targetNode || (autoTarget ? { x: autoTarget.x, y: autoTarget.y } : null);
+
+            // In auto mode, find a new TSP target only if we don't have one
+            if (isAuto && !targetNode && !autoTarget) {
                 const remaining = contributionNodes.filter(n => !visitedDates.has(n.date));
 
                 if (remaining.length === 0) {
                     addLog("Optimization Complete. Resetting Path Buffer.", "info");
                     setVisitedDates(new Set());
-                    setPathHistory([]);
+                    setPathHistory([curr]);
                     return;
                 }
 
                 // Randomly change fun message
-                if (Math.random() > 0.7) {
+                if (Math.random() > 0.85) {
                     setActiveMessage(funMessages[Math.floor(Math.random() * funMessages.length)]);
                 }
 
@@ -174,10 +177,8 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 let minScore = Infinity;
                 let nearest: ContributionDay | null = null;
 
-                const nodesToSearch = remaining as ContributionDay[];
-                for (const node of nodesToSearch) {
+                for (const node of remaining) {
                     const dist = Math.sqrt(Math.pow(node.x - curr.x, 2) + Math.pow(node.y - curr.y, 2));
-                    // Score = distance / (1 + contributionCount * 0.1) -> bias towards higher counts
                     const score = dist / (1 + node.contributionCount * 0.1);
                     if (score < minScore) {
                         minScore = score;
@@ -186,12 +187,9 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 }
 
                 if (nearest) {
-                    next = { x: nearest.x, y: nearest.y };
-                    setVisitedDates(prev => {
-                        const nextSet = new Set(prev);
-                        nextSet.add(nearest!.date);
-                        return nextSet;
-                    });
+                    // Set as autoTarget - DON'T mark as visited yet!
+                    setAutoTarget({ x: nearest.x, y: nearest.y, date: nearest.date });
+                    destination = { x: nearest.x, y: nearest.y };
 
                     if (nearest.contributionCount > 5) {
                         setHackerMode(true);
@@ -199,19 +197,73 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                         setActiveMessage("ALERT: High intensity energy detected!");
                         setTimeout(() => setHackerMode(false), 2000);
                     } else {
-                        addLog(`Node [${next.x},${next.y}]: d=${minScore.toFixed(2)}`, "info");
+                        addLog(`Target [${nearest.x},${nearest.y}]: d=${minScore.toFixed(2)}`, "info");
                     }
                 }
             }
 
+            // Move towards destination
+            if (destination) {
+                const dx = destination.x - curr.x;
+                const dy = destination.y - curr.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance === 0) {
+                    // Already at destination - mark as visited and clear target
+                    if (targetNode) {
+                        setTargetNode(null);
+                        setActiveMessage("Manual override complete.");
+                    }
+                    if (autoTarget) {
+                        // Mark as visited NOW when we arrive
+                        setVisitedDates(prev => {
+                            const nextSet = new Set(prev);
+                            nextSet.add(autoTarget.date);
+                            return nextSet;
+                        });
+                        setAutoTarget(null);
+                    }
+                } else if (distance <= 1.5) {
+                    // Close enough, snap to destination
+                    next = { x: destination.x, y: destination.y };
+                    if (targetNode) {
+                        setTargetNode(null);
+                        addLog(`Manual Override: Arrived at [${next.x},${next.y}]`, "success");
+                        setActiveMessage("Manual override complete.");
+                    }
+                    if (autoTarget) {
+                        // Mark as visited NOW when we arrive
+                        setVisitedDates(prev => {
+                            const nextSet = new Set(prev);
+                            nextSet.add(autoTarget.date);
+                            return nextSet;
+                        });
+                        setAutoTarget(null);
+                    }
+                } else {
+                    // Move one step towards destination
+                    const stepX = Math.sign(dx);
+                    const stepY = Math.sign(dy);
+                    next = { x: curr.x + stepX, y: curr.y + stepY };
+                    if (targetNode) {
+                        addLog(`Moving to [${next.x},${next.y}]`, "warning");
+                        setActiveMessage("Manual override in progress...");
+                    }
+                }
+            }
+
+            // Update position and path history together
             if (next) {
                 setCurrentNode(next);
-                setPathHistory(prev => [...prev.slice(-15), next!]);
+                setPathHistory(prev => {
+                    const newHistory = [...prev, next!];
+                    return newHistory.slice(-40);
+                });
             }
-        }, hackerMode ? 100 : 400);
+        }, hackerMode ? 80 : 150);
 
         return () => clearInterval(interval);
-    }, [data, currentNode, visitedDates, isAuto, targetNode, contributionNodes, hackerMode, funMessages]);
+    }, [data, currentNode, visitedDates, isAuto, targetNode, autoTarget, contributionNodes, hackerMode, funMessages]);
 
     // Auto-scroll to keep Character in center (Camera Follow)
     useEffect(() => {
@@ -305,8 +357,10 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                 key={day.date}
                                                 onMouseEnter={(e) => {
                                                     setHoveredDay(day);
-                                                    const rect = e.currentTarget.getBoundingClientRect();
-                                                    setTooltipPos({ x: rect.left, y: rect.top });
+                                                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                                                }}
+                                                onMouseMove={(e) => {
+                                                    setTooltipPos({ x: e.clientX, y: e.clientY });
                                                 }}
                                                 onMouseLeave={() => setHoveredDay(null)}
                                                 onClick={() => {
@@ -470,39 +524,45 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 </div>
             </div>
 
-            {/* Intel Tooltip (Fixed) */}
-            <AnimatePresence>
-                {hoveredDay && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 5 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        style={{
-                            position: "fixed",
-                            left: tooltipPos.x,
-                            top: tooltipPos.y - 80,
-                            zIndex: 100,
-                        }}
-                        className="pointer-events-none bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-42.5"
-                    >
-                        <div className="relative">
-                            <div className="flex flex-col gap-2">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Packet Origin</span>
-                                    <span className="text-white/90">{hoveredDay.date}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Payload</span>
-                                    <span className="text-cyan-400 font-bold">{hoveredDay.contributionCount} Commits</span>
-                                </div>
-                                <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-cyan-400/60 animate-pulse">
-                                    [ DECRYPTING_CONTRIBUTION_METADATA... ]
+            {/* Intel Tooltip (Fixed with Portal) */}
+            {/* Intel Tooltip (Fixed with Portal) */}
+            {mounted && createPortal(
+                <AnimatePresence>
+                    {hoveredDay && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: -5 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            style={{
+                                position: "fixed",
+                                left: tooltipPos.x,
+                                top: tooltipPos.y + 15,
+                                zIndex: 99999,
+                                transform: "translateX(-50%)",
+                                pointerEvents: "none",
+                            }}
+                            className="bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-42.5"
+                        >
+                            <div className="relative">
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Packet Origin</span>
+                                        <span className="text-white/90">{hoveredDay.date}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Payload</span>
+                                        <span className="text-cyan-400 font-bold">{hoveredDay.contributionCount} Commits</span>
+                                    </div>
+                                    <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-cyan-400/60 animate-pulse">
+                                        [ DECRYPTING_CONTRIBUTION_METADATA... ]
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </div>
     );
 }
