@@ -160,7 +160,7 @@ export default function QuotesStream() {
                                     cx={q.x}
                                     cy={q.y}
                                     r={isActive ? 1.5 : 0.8}
-                                    fill={isActive ? "var(--cyber-cyan)" : "rgba(0, 245, 255, 0.4)"}
+                                    fill={isActive ? "var(--cyber-cyan)" : "rgba(183, 148, 246, 0.4)"}
                                     stroke="var(--cyber-cyan)"
                                     strokeWidth={isActive ? "0.3" : "0.12"}
                                     opacity={isActive ? 1 : 0.6}
@@ -277,11 +277,11 @@ export default function QuotesStream() {
                             >
                                 {/* Clean Header without Title */}
                                 <div style={{
-                                    background: isCenter ? "rgba(0, 245, 255, 0.12)" : "rgba(255, 255, 255, 0.03)",
+                                    background: isCenter ? "rgba(183, 148, 246, 0.12)" : "rgba(255, 255, 255, 0.03)",
                                     padding: "1rem 1.5rem",
                                     display: "flex",
                                     alignItems: "center",
-                                    borderBottom: `1px solid ${isCenter ? "rgba(0, 245, 255, 0.25)" : "rgba(255, 255, 255, 0.08)"}`,
+                                    borderBottom: `1px solid ${isCenter ? "rgba(183, 148, 246, 0.25)" : "rgba(255, 255, 255, 0.08)"}`,
                                     transition: "background 0.4s ease, border-color 0.4s ease"
                                 }}>
                                     <div style={{ display: "flex", gap: "8px" }}>
@@ -356,8 +356,8 @@ export default function QuotesStream() {
             <style jsx>{`
                 .quotes-section {
                     background-image: 
-                        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+                        linear-gradient(rgba(183, 148, 246, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(183, 148, 246, 0.03) 1px, transparent 1px);
                     background-size: 100px 100px;
                 }
                 .nav-arrow {
@@ -395,7 +395,7 @@ export default function QuotesStream() {
                     transform: translateY(-50%) scale(0.9);
                 }
                 .preview:hover {
-                    border-color: rgba(0, 245, 255, 0.5) !important;
+                    border-color: rgba(183, 148, 246, 0.5) !important;
                     opacity: 0.6 !important;
                 }
 

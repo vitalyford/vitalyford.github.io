@@ -313,8 +313,8 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" style={{ left: 8, top: 24 }}>
                             <defs>
                                 <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="rgba(0, 245, 255, 0)" />
-                                    <stop offset="100%" stopColor="rgba(0, 245, 255, 0.5)" />
+                                    <stop offset="0%" stopColor="rgba(183, 148, 246, 0)" />
+                                    <stop offset="100%" stopColor="rgba(183, 148, 246, 0.5)" />
                                 </linearGradient>
                                 <filter id="glow">
                                     <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -370,7 +370,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                 className={cn(
                                                     "w-3 h-3 rounded-xs transition-all duration-300 relative group cursor-pointer",
                                                     getBgColor(level),
-                                                    isVisited && "ring-1 ring-cyan-500/50 shadow-[0_0_8px_rgba(0,245,255,0.2)]",
+                                                    isVisited && "ring-1 ring-violet-500/50 shadow-[0_0_8px_rgba(183,148,246,0.25)]",
                                                     day.contributionCount > 0 && "hover:scale-125 hover:z-20",
                                                     isCurrent && "z-30"
                                                 )}
@@ -382,10 +382,10 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                     >
                                                         <div className="w-full h-full relative">
                                                             <div className={cn(
-                                                                "absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-75"
+                                                                "absolute inset-0 rounded-full border-2 border-violet-400 animate-ping opacity-75"
                                                             )} />
                                                             <div className={cn(
-                                                                "w-full h-full rounded-sm bg-cyan-400 shadow-[0_0_15px_rgba(0,245,255,0.8)] flex items-center justify-center",
+                                                                "w-full h-full rounded-sm bg-violet-400 shadow-[0_0_15px_rgba(183,148,246,0.9)] flex items-center justify-center",
                                                                 hackerMode && "bg-white animate-pulse shadow-[0_0_20px_#fff]"
                                                             )}>
                                                                 <div className="w-1 h-1 bg-black rounded-full" />
