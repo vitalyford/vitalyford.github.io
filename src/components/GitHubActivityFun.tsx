@@ -450,7 +450,6 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/20 pt-4 lg:pt-0 lg:pl-6 bg-linear-to-b from-transparent to-black/10 shrink-0">
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_5px_var(--cyber-red)]" />
                         <h3 className="text-[10px] font-mono text-white uppercase tracking-widest font-bold">Neural Calc Lab</h3>
                     </div>
                 </div>
@@ -554,7 +553,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                         <span className="text-white font-bold">{hoveredDay.contributionCount} Commits</span>
                                     </div>
                                     <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-white/60 animate-pulse">
-                                        [ DECRYPTING_CONTRIBUTION_METADATA... ]
+                                        [ DECRYPTING CONTRIBUTION METADATA... ]
                                     </div>
                                 </div>
                             </div>

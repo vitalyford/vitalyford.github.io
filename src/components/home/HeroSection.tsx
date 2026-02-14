@@ -39,7 +39,7 @@ const HeroSection = () => {
 
                     <div className="cyber-btn-group">
                         <Link href="/research" className="cyber-btn cyber-btn-primary cyber-btn-lg">
-                            <span>View Research</span>
+                            <span>Research</span>
                         </Link>
                         <Link href="/contact" className="cyber-btn cyber-btn-lg">
                             <span>Get in Touch</span>
