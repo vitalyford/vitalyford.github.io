@@ -4,51 +4,59 @@
    CYBER DESIGN SYSTEM - Vitaly Ford's Site
    ============================================ */
 
-/* CSS Custom Properties - Chromatic Steel Theme */
+/* CSS Custom Properties - TRON LEGACY Theme */
 :root {
   /* Primary Cyber Colors - TRON LEGACY - Deep Grid */
-  --cyber-black: #050505;
-  /* Deep Void with subtle blue undertone */
-  --cyber-darker: #0a0a0f;
-  /* Structure Base - dark grid */
-  --cyber-dark: #0f1115;
-  /* Secondary Surface */
-  --cyber-surface: #14161c;
-  /* Component Surface - warmer dark */
-  --cyber-border: var(--cyber-cyan);
-  /* Sharp bright border matching buttons */
+  --cyber-black: #020202;
+  /* Ultimate Deep Void */
+  --cyber-darker: #050508;
+  /* Deep Structure */
+  --cyber-dark: #0a0a0f;
+  /* Base Surface */
+  --cyber-surface: #0f1016;
+  /* Component Surface */
+  --cyber-border: var(--cyber-white);
+  /* Default to white-neon borders */
 
   /* Accent Colors - TRON NEON PALETTE */
+  --cyber-white: #FFFFFF;
+  /* Pure White Neon - High Intensity */
+  --cyber-white-glow: rgba(255, 255, 255, 0.2);
+  /* Reduced intensity white reflection */
+
+  --cyber-red: #FF3030;
+  /* Slightly softer red for better elegance */
+  --cyber-red-dim: #D10000;
+  /* Dimmed Red for depth */
+  --cyber-red-glow: rgba(255, 48, 48, 0.15);
+
   --cyber-cyan: #00F0FF;
-  /* Neon Cyan - The Grid's Life Force */
-  --cyber-cyan-dim: #00bcd4;
-  /* Darker Cyan for dimmed states */
+  /* Keep Cyan available for subtle secondary accents or data points */
   --cyber-cyan-glow: rgba(0, 240, 255, 0.15);
-  --cyber-green: #FF9E00;
-  /* Neon Amber/Orange - The Clu's Influence (Secondary Accent) */
-  --cyber-danger: #EF4444;
+
+  --cyber-danger: var(--cyber-red);
 
   /* Tiered Backgrounds - Glass Grid */
-  --nav-bg: rgba(5, 5, 8, 0.95);
-  --card-bg: rgba(10, 12, 16, 0.92);
-  --card-bg-hover: rgba(15, 18, 24, 0.95);
+  --nav-bg: rgba(2, 2, 5, 0.98);
+  --card-bg: rgba(5, 5, 10, 0.94);
+  --card-bg-hover: rgba(10, 10, 20, 0.96);
 
   /* Text Colors - High Contrast Digital */
   --text-primary: #FFFFFF;
   /* Pure White - Digital Crispness */
-  --text-secondary: #B0C4DE;
-  /* Light Steel Blue - Readable Secondary */
-  --text-muted: #708090;
-  /* Slate Gray - Muted Elements */
+  --text-secondary: #E0E0E0;
+  /* High contrast gray-white */
+  --text-muted: #808080;
+  /* Neutral Muted */
 
-  /* Decorative elements - Solid Only */
-  --cyber-accent-solid: var(--cyber-cyan);
-  --cyber-border-glow: var(--cyber-border);
+  /* Decorative elements */
+  --cyber-accent-solid: var(--cyber-white);
+  --cyber-border-glow: var(--cyber-white-glow);
 
-  /* Shadows - Tight & Sharp with Cyan/Orange Glow */
-  --shadow-cyber: 0 0 20px rgba(0, 240, 255, 0.1);
-  --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 240, 255, 0.2);
-  --shadow-sharp: 2px 2px 0px rgba(0, 240, 255, 0.15);
+  /* Shadows - Tight & Ultra-Sharp Neon */
+  --shadow-cyber: 0 0 15px var(--cyber-white-glow);
+  --shadow-hover: 0 0 25px var(--cyber-red-glow), 0 0 50px rgba(0, 0, 0, 1);
+  --shadow-sharp: 1px 1px 0px var(--cyber-white);
 
   /* Animation Timing */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -81,6 +89,11 @@ html {
 body {
   font-family: var(--font-rajdhani), 'Segoe UI', Roboto, sans-serif;
   background-color: var(--cyber-black);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255, 48, 48, 0.05) 0%, transparent 70%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
@@ -91,12 +104,25 @@ body {
   text-rendering: optimizeLegibility;
   min-height: 100vh;
   font-size: var(--font-size-standard);
+  animation: grid-pulse 10s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+
+  0%,
+  100% {
+    background-position: 0 0, 0 0, center;
+  }
+
+  50% {
+    background-position: 0 0, 0 0, 50% 45%;
+  }
 }
 
 /* Selection */
 ::selection {
-  background: var(--cyber-cyan);
-  color: var(--cyber-black);
+  background: var(--cyber-red);
+  color: var(--cyber-white);
 }
 
 /* Scrollbar */
@@ -106,16 +132,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--cyber-darker);
+  background: var(--cyber-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--cyber-border);
+  background: var(--cyber-white);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--cyber-cyan-dim);
+  background: var(--cyber-red);
 }
 
 /* ============================================
@@ -173,21 +199,34 @@ a:hover {
 code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   background: var(--cyber-surface);
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   padding: 0.2em 0.5em;
   border-radius: 4px;
   font-size: 0.9em;
-  border: 1px solid var(--cyber-border);
+  border: 1px solid var(--cyber-white);
+  transition: all var(--transition-base);
+}
+
+code:hover {
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 10px var(--cyber-red-glow);
+  color: var(--cyber-red);
 }
 
 pre {
   background: var(--cyber-surface);
-  border: 1px solid var(--cyber-border);
+  border: 1px solid var(--cyber-white);
   border-radius: 8px;
   padding: 1.5rem;
   overflow-x: auto;
   font-size: 0.9rem;
   line-height: 1.6;
+  transition: all var(--transition-base);
+}
+
+pre:hover {
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 15px var(--cyber-red-glow);
 }
 
 pre code {
@@ -257,7 +296,7 @@ samp {
 /* Cyber Card */
 .cyber-card {
   background: var(--card-bg);
-  border: 1px solid var(--cyber-border);
+  border: 1px solid var(--cyber-white);
   border-radius: 4px;
   /* Angled corners via clip-path */
   clip-path: polygon(20px 0, 100% 0,
@@ -269,7 +308,7 @@ samp {
   transition: all var(--transition-base);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* .cyber-card::before removed to ensure sharp 1px border */
@@ -282,28 +321,24 @@ samp {
   left: 0;
   width: 20px;
   height: 20px;
-  border-top: 2px solid var(--cyber-cyan);
-  border-left: 2px solid var(--cyber-cyan);
-  opacity: 0.5;
+  border-top: 2px solid var(--cyber-red);
+  border-left: 2px solid var(--cyber-red);
+  opacity: 0.8;
   transition: all var(--transition-base);
 }
 
 .cyber-card:hover {
-  border-color: var(--cyber-cyan);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(183, 148, 246, 0.08);
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 30px var(--cyber-red-glow);
   transform: translateY(-2px);
   background: var(--card-bg-hover);
 }
 
 .cyber-card:hover::after {
   opacity: 1;
-}
-
-.cyber-card:hover::after {
-  opacity: 1;
   width: 30px;
   height: 30px;
-  border-color: var(--cyber-cyan);
+  border-color: var(--cyber-red);
 }
 
 /* Cyber Button */
@@ -313,9 +348,9 @@ samp {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: rgba(183, 148, 246, 0.08);
-  border: 1px solid var(--cyber-cyan);
-  color: var(--cyber-cyan);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--cyber-white);
+  color: var(--cyber-white);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -342,15 +377,16 @@ samp {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 16, 16, 0.1);
   transition: left 0.5s ease;
 }
 
 .cyber-btn:hover {
-  color: var(--cyber-black);
-  background: var(--cyber-cyan);
-  box-shadow: none;
-  text-shadow: none;
+  color: var(--cyber-white);
+  background: rgba(255, 16, 16, 0.15);
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 15px var(--cyber-red-glow);
+  text-shadow: 0 0 5px var(--cyber-red-glow);
 }
 
 .cyber-btn:hover::before {
@@ -364,15 +400,16 @@ samp {
 
 /* Cyber Button Primary */
 .cyber-btn-primary {
-  background: var(--cyber-cyan);
+  background: var(--cyber-white);
   color: var(--cyber-black);
-  border-color: var(--cyber-cyan);
+  border-color: var(--cyber-white);
 }
 
 .cyber-btn-primary:hover {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  box-shadow: none;
+  background: var(--cyber-red);
+  color: var(--cyber-white);
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 20px var(--cyber-red-glow);
 }
 
 /* Cyber Divider */
@@ -388,12 +425,12 @@ samp {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  background: var(--cyber-cyan-glow);
-  border: 1px solid var(--cyber-cyan);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--cyber-white);
   border-radius: 50px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -429,8 +466,28 @@ samp {
 
 .terminal-prompt::before {
   content: '$ ';
-  color: var(--cyber-green);
+  color: var(--cyber-red);
   font-weight: bold;
+}
+
+.neon-white {
+  color: var(--cyber-white);
+  text-shadow: 0 0 5px var(--cyber-white-glow), 0 0 10px var(--cyber-white-glow);
+}
+
+.neon-red {
+  color: var(--cyber-red);
+  text-shadow: 0 0 5px var(--cyber-red-glow), 0 0 10px var(--cyber-red-glow);
+}
+
+.border-neon-white {
+  border-color: var(--cyber-white);
+  box-shadow: 0 0 10px var(--cyber-white-glow);
+}
+
+.border-neon-red {
+  border-color: var(--cyber-red);
+  box-shadow: 0 0 10px var(--cyber-red-glow);
 }
 
 /* Unique Hex Runner Indicator */
@@ -652,7 +709,7 @@ blockquote cite {
   position: relative;
   padding: 1px;
   /* The border width */
-  background: var(--cyber-cyan);
+  background: var(--cyber-white);
   /* Border color */
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   transition: all var(--transition-base);
@@ -709,15 +766,15 @@ blockquote cite {
 .security-badge-text {
   font-size: 0.8rem;
   font-family: var(--font-mono), monospace;
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 .security-badge-icon {
   font-size: 1.1rem;
-  color: var(--cyber-cyan);
-  opacity: 0.7;
+  color: var(--cyber-red);
+  opacity: 0.9;
 }
 
 /* Tooltip Styles */
@@ -729,8 +786,8 @@ blockquote cite {
   width: max-content;
   max-width: 400px;
   padding: 1.25rem;
-  background: rgba(12, 12, 18, 0.98);
-  border: 1px solid var(--cyber-cyan);
+  background: rgba(2, 2, 5, 0.98);
+  border: 1px solid var(--cyber-white);
   border-radius: 4px;
   opacity: 0;
   visibility: hidden;
@@ -754,14 +811,14 @@ blockquote cite {
   transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: rgba(12, 12, 18, 0.98);
-  border-top: 1px solid var(--cyber-cyan);
-  border-left: 1px solid var(--cyber-cyan);
+  background: rgba(2, 2, 5, 0.98);
+  border-top: 1px solid var(--cyber-white);
+  border-left: 1px solid var(--cyber-white);
 }
 
 .security-tooltip-header {
   font-size: 1.1rem;
-  color: var(--cyber-cyan);
+  color: var(--cyber-red);
   display: block;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
@@ -786,7 +843,7 @@ blockquote cite {
 }
 
 .security-tooltip-link {
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   font-size: 1rem;
   text-decoration: none;
   transition: all var(--transition-fast);
@@ -794,8 +851,8 @@ blockquote cite {
 }
 
 .security-tooltip-link:hover {
-  color: var(--cyber-green);
-  text-shadow: 0 0 8px var(--cyber-green);
+  color: var(--cyber-red);
+  text-shadow: 0 0 8px var(--cyber-red-glow);
 }
 
 .security-tooltip-note {
@@ -1072,7 +1129,7 @@ blockquote cite {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   cursor: pointer;
   transition: all var(--transition-base);
   z-index: 1001;
@@ -1084,8 +1141,8 @@ blockquote cite {
 }
 
 .scroll-to-top:hover {
-  border-color: var(--cyber-cyan);
-  background: var(--cyber-cyan-glow);
+  border-color: var(--cyber-red);
+  background: var(--cyber-red-glow);
   box-shadow: none;
   transform: translateY(-2px);
 }
@@ -1112,7 +1169,7 @@ blockquote cite {
 .page-header-title {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  color: var(--cyber-cyan);
+  color: var(--cyber-white);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1120,7 +1177,7 @@ blockquote cite {
 
 .page-header-title::before {
   content: '>>';
-  color: var(--cyber-green);
+  color: var(--cyber-red);
 }
 
 /* ============================================
@@ -1781,7 +1838,7 @@ blockquote cite {
 .roulette-container {
   margin-bottom: 2rem;
   padding-left: 1rem;
-  border-left: 2px solid var(--cyber-cyan-dim);
+  border-left: 2px solid var(--cyber-red);
   display: flex;
   align-items: center;
   min-height: 40px;

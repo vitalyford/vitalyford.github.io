@@ -17,9 +17,9 @@ const HeroSection = () => {
 
 
                     <h1 className="hero-title" style={{ marginBottom: "2rem" }}>
-                        <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
+                        <span style={{ color: "var(--cyber-red)", opacity: 0.9 }}>$ </span>
                         whoami
-                        <span className="terminal-cursor" />
+                        <span className="terminal-cursor" style={{ backgroundColor: "var(--cyber-red)" }} />
                     </h1>
 
                     <div className="roulette-container">
@@ -77,8 +77,10 @@ const HeroSection = () => {
                         <div
                             style={{
                                 padding: "6px",
-                                background: "var(--cyber-surface)",
+                                background: "var(--cyber-dark)",
+                                border: "1px solid var(--cyber-white)",
                                 borderRadius: "16px",
+                                boxShadow: "0 0 15px var(--cyber-white-glow)",
                             }}
                         >
                             <Image
