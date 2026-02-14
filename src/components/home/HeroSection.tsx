@@ -51,10 +51,12 @@ const HeroSection = () => {
                 <div className="animate-fade-in" style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
                     <div className="security-badge-container" style={{ marginBottom: "2rem" }}>
                         <div className="security-badge-inner">
-                            <span className="security-badge-text">
-                                Security: Zero Trust, Zero Hype
-                            </span>
-                            <span className="security-badge-icon">ⓘ</span>
+                            <div className="security-badge-content">
+                                <span className="security-badge-text">
+                                    Security: Zero Trust, Zero Hype
+                                </span>
+                                <span className="security-badge-icon" style={{ marginLeft: "0.5rem" }}>ⓘ</span>
+                            </div>
                         </div>
                         <div className="security-tooltip">
                             <strong className="security-tooltip-header">
