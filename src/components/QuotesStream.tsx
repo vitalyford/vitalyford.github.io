@@ -277,11 +277,11 @@ export default function QuotesStream() {
                             >
                                 {/* Clean Header without Title */}
                                 <div style={{
-                                    background: isCenter ? "rgba(183, 148, 246, 0.12)" : "rgba(255, 255, 255, 0.03)",
+                                    background: isCenter ? "rgba(0, 240, 255, 0.12)" : "rgba(255, 255, 255, 0.03)",
                                     padding: "1rem 1.5rem",
                                     display: "flex",
                                     alignItems: "center",
-                                    borderBottom: `1px solid ${isCenter ? "rgba(183, 148, 246, 0.25)" : "rgba(255, 255, 255, 0.08)"}`,
+                                    borderBottom: `1px solid ${isCenter ? "rgba(0, 240, 255, 0.25)" : "rgba(255, 255, 255, 0.15)"}`,
                                     transition: "background 0.4s ease, border-color 0.4s ease"
                                 }}>
                                     <div style={{ display: "flex", gap: "8px" }}>

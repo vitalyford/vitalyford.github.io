@@ -17,9 +17,9 @@ const HeroSection = () => {
 
 
                     <h1 className="hero-title" style={{ marginBottom: "2rem" }}>
-                        <span style={{ color: "var(--cyber-green)", opacity: 0.8 }}>$ </span>
+                        <span style={{ color: "var(--cyber-red)", opacity: 0.9 }}>$ </span>
                         whoami
-                        <span className="terminal-cursor" />
+                        <span className="terminal-cursor" style={{ backgroundColor: "var(--cyber-red)" }} />
                     </h1>
 
                     <div className="roulette-container">
@@ -39,7 +39,7 @@ const HeroSection = () => {
 
                     <div className="cyber-btn-group">
                         <Link href="/research" className="cyber-btn cyber-btn-primary cyber-btn-lg">
-                            <span>View Research</span>
+                            <span>Research</span>
                         </Link>
                         <Link href="/contact" className="cyber-btn cyber-btn-lg">
                             <span>Get in Touch</span>
@@ -51,10 +51,12 @@ const HeroSection = () => {
                 <div className="animate-fade-in" style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
                     <div className="security-badge-container" style={{ marginBottom: "2rem" }}>
                         <div className="security-badge-inner">
-                            <span className="security-badge-text">
-                                Security: Zero Trust, Zero Hype
-                            </span>
-                            <span className="security-badge-icon">ⓘ</span>
+                            <div className="security-badge-content">
+                                <span className="security-badge-text">
+                                    Security: Zero Trust, Zero Hype
+                                </span>
+                                <span className="security-badge-icon" style={{ marginLeft: "0.5rem" }}>ⓘ</span>
+                            </div>
                         </div>
                         <div className="security-tooltip">
                             <strong className="security-tooltip-header">
@@ -75,8 +77,10 @@ const HeroSection = () => {
                         <div
                             style={{
                                 padding: "6px",
-                                background: "var(--cyber-surface)",
+                                background: "var(--cyber-dark)",
+                                border: "1px solid var(--cyber-white)",
                                 borderRadius: "16px",
+                                boxShadow: "0 0 15px var(--cyber-white-glow)",
                             }}
                         >
                             <Image

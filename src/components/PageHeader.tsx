@@ -42,7 +42,7 @@ export default function PageHeader({ title, subtitle, imageSrc, altText }: PageH
             style={{
               fontFamily: "var(--font-mono), monospace",
               fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
-              color: "var(--cyber-cyan)",
+              color: "var(--cyber-white)",
               marginTop: 0,
               marginBottom: "1rem",
             }}
@@ -50,16 +50,7 @@ export default function PageHeader({ title, subtitle, imageSrc, altText }: PageH
             {title}
           </h1>
 
-          <div
-            style={{
-              marginBottom: subtitle ? "0.75rem" : "0",
-              paddingLeft: "1rem",
-              borderLeft: "2px solid var(--cyber-cyan-dim)",
-              display: "flex",
-              alignItems: "center",
-              minHeight: "40px"
-            }}
-          >
+          <div className="roulette-container">
             <HexRoulette showFact={true} displayMode="inline" />
           </div>
           {subtitle && (

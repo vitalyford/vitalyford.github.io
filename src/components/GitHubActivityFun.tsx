@@ -106,7 +106,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     const addLog = (msg: string, type: LogEntry["type"] = "info") => {
         setLogs((prev) => [
             { id: Math.random().toString(36).substr(2, 9), msg, type, timestamp: Date.now() },
-            ...prev.slice(0, 5),
+            ...prev.slice(0, 6),
         ]);
     };
 
@@ -304,7 +304,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     if (!data) return null;
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/20 rounded-xl border border-white/5 min-h-112.5">
+        <div className="flex flex-col lg:flex-row gap-6 p-4 bg-black/40 rounded-xl border border-white min-h-112.5 shadow-[0_0_15px_var(--cyber-white-glow)]">
             {/* Main Area: Grid & TSP Path */}
             <div className="flex-1 relative overflow-hidden flex flex-col">
                 <div ref={scrollContainerRef} className="flex-1 relative overflow-x-auto pb-4 custom-scrollbar">
@@ -313,8 +313,8 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" style={{ left: 8, top: 24 }}>
                             <defs>
                                 <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="rgba(183, 148, 246, 0)" />
-                                    <stop offset="100%" stopColor="rgba(183, 148, 246, 0.5)" />
+                                    <stop offset="0%" stopColor="rgba(255, 255, 255, 0)" />
+                                    <stop offset="100%" stopColor="rgba(255, 255, 255, 0.6)" />
                                 </linearGradient>
                                 <filter id="glow">
                                     <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -344,10 +344,10 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
                                         const getBgColor = (lvl: string) => {
                                             switch (lvl) {
-                                                case "FIRST_QUARTILE": return "bg-emerald-900/40";
-                                                case "SECOND_QUARTILE": return "bg-emerald-700/60";
-                                                case "THIRD_QUARTILE": return "bg-emerald-500/80";
-                                                case "FOURTH_QUARTILE": return "bg-emerald-400";
+                                                case "FIRST_QUARTILE": return "bg-white/10";
+                                                case "SECOND_QUARTILE": return "bg-white/30";
+                                                case "THIRD_QUARTILE": return "bg-white/60";
+                                                case "FOURTH_QUARTILE": return "bg-white";
                                                 default: return "bg-white/5";
                                             }
                                         };
@@ -370,7 +370,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                 className={cn(
                                                     "w-3 h-3 rounded-xs transition-all duration-300 relative group cursor-pointer",
                                                     getBgColor(level),
-                                                    isVisited && "ring-1 ring-violet-500/50 shadow-[0_0_8px_rgba(183,148,246,0.25)]",
+                                                    isVisited && "ring-1 ring-white/50 shadow-[0_0_8px_var(--cyber-white-glow)]",
                                                     day.contributionCount > 0 && "hover:scale-125 hover:z-20",
                                                     isCurrent && "z-30"
                                                 )}
@@ -382,11 +382,11 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                                     >
                                                         <div className="w-full h-full relative">
                                                             <div className={cn(
-                                                                "absolute inset-0 rounded-full border-2 border-violet-400 animate-ping opacity-75"
+                                                                "absolute inset-0 rounded-full border-2 border-white animate-ping opacity-75"
                                                             )} />
                                                             <div className={cn(
-                                                                "w-full h-full rounded-sm bg-violet-400 shadow-[0_0_15px_rgba(183,148,246,0.9)] flex items-center justify-center",
-                                                                hackerMode && "bg-white animate-pulse shadow-[0_0_20px_#fff]"
+                                                                "w-full h-full rounded-sm bg-white shadow-[0_0_15px_var(--cyber-white-glow)] flex items-center justify-center",
+                                                                hackerMode && "bg-red-500 animate-pulse shadow-[0_0_20px_var(--cyber-red)]"
                                                             )}>
                                                                 <div className="w-1 h-1 bg-black rounded-full" />
                                                             </div>
@@ -403,14 +403,14 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 </div>
 
                 {/* Fun Messages Area */}
-                <div className="h-10 flex items-center justify-center bg-cyan-500/5 border-y border-cyan-500/10 mt-4 overflow-hidden">
+                <div className="h-10 flex items-center justify-center bg-white/5 border-y border-white/20 mt-4 overflow-hidden">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeMessage}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            className="text-[10px] font-mono text-cyan-400 uppercase tracking-[0.2em] italic text-center w-full"
+                            className="text-[10px] font-mono text-white uppercase tracking-[0.2em] italic text-center w-full"
                         >
                             &gt; {activeMessage}
                         </motion.div>
@@ -418,8 +418,8 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 </div>
 
                 {/* Console Log */}
-                <div className="flex flex-col gap-1.5 h-30 bg-black/40 p-3 mt-4 rounded-lg border border-white/5 font-mono overflow-hidden">
-                    <div className="text-[8px] text-white/40 mb-2 border-b border-white/10 pb-1 flex justify-between">
+                <div className="flex flex-col gap-1.5 h-30 bg-black/40 p-3 mt-4 rounded-lg border border-white/20 font-mono overflow-hidden">
+                    <div className="text-[8px] text-white/40 mb-2 border-b border-white/20 pb-1 flex justify-between">
                         <span>LIVE_CALC_STREAM_V4.2</span>
                         <span className="animate-pulse">STREAMING_ACTIVE</span>
                     </div>
@@ -432,9 +432,9 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                     animate={{ opacity: 1, x: 0 }}
                                     className={cn(
                                         "text-[9px] leading-tight mb-1",
-                                        log.type === "success" ? "text-emerald-400" :
-                                            log.type === "warning" ? "text-yellow-400" :
-                                                log.type === "error" ? "text-rose-400" : "text-cyan-400"
+                                        log.type === "success" ? "neon-white" :
+                                            log.type === "warning" ? "text-red-400" :
+                                                log.type === "error" ? "text-red-600" : "text-white/70"
                                     )}
                                 >
                                     <span className="opacity-40 mr-1">[{new Date(log.timestamp).toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}]</span>
@@ -447,23 +447,22 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             </div>
 
             {/* Sidebar: Neural Calc Lab */}
-            <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6 bg-linear-to-b from-transparent to-black/10 shrink-0">
+            <div className="w-full lg:w-72 flex flex-col gap-5 border-t lg:border-t-0 lg:border-l border-white/20 pt-4 lg:pt-0 lg:pl-6 bg-linear-to-b from-transparent to-black/10 shrink-0">
                 <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_5px_#00f5ff]" />
-                        <h3 className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold">Neural Calc Lab</h3>
+                        <h3 className="text-[10px] font-mono text-white uppercase tracking-widest font-bold">Neural Calc Lab</h3>
                     </div>
                 </div>
 
                 {/* Contribution Guide (Legend) */}
-                <div className="flex flex-col gap-2 p-2 bg-white/5 rounded border border-white/5">
+                <div className="flex flex-col gap-2 p-2 bg-white/5 rounded border border-white/20">
                     <div className="text-[7px] font-mono text-white/60 uppercase tracking-widest">Contribution Intensity</div>
                     <div className="flex items-center gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-[1px] bg-white/5" />
-                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-900/40" />
-                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-700/60" />
-                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500/80" />
-                        <div className="w-2.5 h-2.5 rounded-[1px] bg-emerald-400" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-white/10" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-white/30" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-white/60" />
+                        <div className="w-2.5 h-2.5 rounded-[1px] bg-white" />
                         <div className="ml-auto text-[7px] font-mono text-white/40 uppercase">Low &rarr; High</div>
                     </div>
                 </div>
@@ -476,7 +475,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                             onClick={() => setIsAuto(!isAuto)}
                             className={cn(
                                 "text-[9px] font-mono px-3 py-2 rounded border transition-all uppercase tracking-widest text-center font-bold cursor-pointer",
-                                isAuto ? "bg-cyan-500/10 border-cyan-500/50 text-cyan-400" : "bg-white/5 border-white/10 text-white/60"
+                                isAuto ? "bg-white/10 border border-white/50 text-white" : "bg-white/5 border border-white/20 text-white/60"
                             )}
                         >
                             {isAuto ? "Auto-Pilot: ACTIVE" : "Manual: STANDBY"}
@@ -488,7 +487,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                     setVisitedDates(new Set());
                                     setPathHistory([]);
                                 }}
-                                className="text-[9px] font-mono px-3 py-2 rounded border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all uppercase tracking-widest text-center font-bold cursor-pointer"
+                                className="text-[9px] font-mono px-3 py-2 rounded border border-red-500/50 text-red-500 hover:bg-red-500/10 transition-all uppercase tracking-widest text-center font-bold cursor-pointer"
                             >
                                 Re-Calibrate System
                             </button>
@@ -500,26 +499,26 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                 <div className="flex flex-col gap-2">
                     <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest mb-1">System Metrics</div>
                     <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
+                        <div className="bg-white/5 p-2 rounded border border-white/20 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">VELOCITY</div>
                             <div className="text-white font-bold">{hackerMode ? "42.0 GB/s" : "12.5 GB/s"}</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
+                        <div className="bg-white/5 p-2 rounded border border-white/20 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">LATENCY</div>
                             <div className="text-white font-bold">1ms</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
+                        <div className="bg-white/5 p-2 rounded border border-white/20 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">NODES</div>
                             <div className="text-white font-bold">{contributionNodes.length}</div>
                         </div>
-                        <div className="bg-white/5 p-2 rounded border border-white/5 h-11.25">
+                        <div className="bg-white/5 p-2 rounded border border-white/20 h-11.25">
                             <div className="text-white/60 text-[7px] mb-1">CLEARANCE</div>
                             <div className="text-white font-bold">{Math.round((visitedDates.size / contributionNodes.length) * 100) || 0}%</div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-auto pt-4 text-[8px] font-mono text-white/30 italic leading-relaxed border-t border-white/10">
+                <div className="mt-auto pt-4 text-[8px] font-mono text-white/30 italic leading-relaxed border-t border-white/20">
                     Analyzing multidimensional contribution vectors using localized TSP heuristics... Optimized path found.
                 </div>
             </div>
@@ -541,7 +540,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                 transform: "translateX(-50%)",
                                 pointerEvents: "none",
                             }}
-                            className="bg-black/95 backdrop-blur-xl border border-cyan-500/40 p-4 rounded-xl font-mono text-[10px] text-cyan-400 shadow-[0_0_30px_rgba(0,245,255,0.3)] min-w-42.5"
+                            className="bg-black/95 backdrop-blur-xl border border-white/40 p-4 rounded-xl font-mono text-[10px] text-white shadow-[0_0_30px_var(--cyber-white-glow)] min-w-42.5"
                         >
                             <div className="relative">
                                 <div className="flex flex-col gap-2">
@@ -551,10 +550,10 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-white/20 pb-0.5">Payload</span>
-                                        <span className="text-cyan-400 font-bold">{hoveredDay.contributionCount} Commits</span>
+                                        <span className="text-white font-bold">{hoveredDay.contributionCount} Commits</span>
                                     </div>
-                                    <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-cyan-400/60 animate-pulse">
-                                        [ DECRYPTING_CONTRIBUTION_METADATA... ]
+                                    <div className="mt-2 pt-2 border-t border-white/10 text-[8px] text-white/60 animate-pulse">
+                                        [ DECRYPTING CONTRIBUTION METADATA... ]
                                     </div>
                                 </div>
                             </div>

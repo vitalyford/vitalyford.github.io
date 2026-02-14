@@ -87,10 +87,10 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
                     className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
                     style={{
-                        fontSize: "0.9rem",
+                        fontSize: "1rem",
                         color: "var(--text-primary)",
                         fontFamily: "var(--font-rajdhani)",
-                        borderLeft: isTooltip ? "none" : "2px solid var(--cyber-cyan)",
+                        borderLeft: isTooltip ? "none" : "2px solid var(--cyber-red)",
                         paddingLeft: isTooltip ? "0" : "1rem",
                         maxWidth: isTooltip ? "350px" : "none",
                         lineHeight: "1.4",
@@ -98,12 +98,12 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                         flex: isTooltip ? "none" : "1",
                         ...(isTooltip ? {
                             position: "absolute",
-                            background: "rgba(10, 10, 15, 0.95)",
+                            background: "rgba(5, 5, 10, 0.98)",
                             backdropFilter: "blur(12px)",
                             padding: "1rem",
                             borderRadius: "0",
-                            border: "1px solid var(--cyber-cyan)",
-                            boxShadow: "none",
+                            border: "1px solid var(--cyber-white)",
+                            boxShadow: "0 0 15px var(--cyber-white-glow)",
                             clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)",
                             zIndex: 100,
                             width: "max-content",
@@ -121,7 +121,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     }}
                 >
                     <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
-                        <span style={{ color: "var(--cyber-cyan)", fontWeight: "bold" }}>&gt;</span>
+                        <span style={{ color: "var(--cyber-red)", fontWeight: "bold" }}>&gt;</span>
                         {fact}
                     </div>
                 </motion.div>
