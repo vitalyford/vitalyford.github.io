@@ -11,7 +11,7 @@ const funFacts = [
     { hex: "0x8D", text: "The first bug was a real moth found in a Relay Calculator in 1947." },
     { hex: "0xB2", text: "640K ought to be enough for anybody." },
     { hex: "0xF4", text: "Algorithm: A word used by programmers when they don't want to explain what they did." },
-    { hex: "0x1A", text: "The Computer is incredibly fast, accurate and stupid. Man is unbelievably slow, inaccurate and brilliant. The marriage of the two is a challenge and an opportunity beyond imagination." },
+    { hex: "0x1A", text: "The Computer is incredibly fast, accurate and stupid. Human is unbelievably slow, inaccurate and brilliant. The marriage of the two is a challenge and an opportunity beyond imagination." },
     { hex: "0x3B", text: "Debugging is like being the detective in a crime movie where you are also the murderer. — Filipe Fortes" },
     { hex: "0x4C", text: "If at first you don't succeed, call it version 1.0." },
     { hex: "0x7D", text: "A programmer had a problem. He decided to use Java. Now he has a ProblemFactory." },
