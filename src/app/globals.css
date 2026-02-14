@@ -42,8 +42,8 @@
   --card-bg-hover: rgba(10, 10, 20, 0.96);
 
   /* Text Colors - High Contrast Digital */
-  --text-primary: #FFFFFF;
-  /* Pure White - Digital Crispness */
+  --text-primary: #F5F5F7;
+  /* Soft Silver - Improved Readability */
   --text-secondary: #E0E0E0;
   /* High contrast gray-white */
   --text-muted: #808080;
