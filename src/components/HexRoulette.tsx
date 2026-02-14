@@ -87,7 +87,7 @@ export default function HexRoulette({ showFact = true, displayMode = "inline" }:
                     exit={{ opacity: 0, scale: 0.9, x: isTooltip ? "-50%" : 0 }}
                     className={isTooltip ? "roulette-tooltip" : "roulette-inline"}
                     style={{
-                        fontSize: "0.9rem",
+                        fontSize: "1rem",
                         color: "var(--text-primary)",
                         fontFamily: "var(--font-rajdhani)",
                         borderLeft: isTooltip ? "none" : "2px solid var(--cyber-red)",
