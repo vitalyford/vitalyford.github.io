@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Grid, ContactShadows, Edges } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -71,12 +71,12 @@ const DayMesh = ({ day, hoveredDay, setHoveredDay }: { day: ContributionDay, hov
     return (
         <group position={[posX, posY, posZ]}>
             {/* Base tile forming the chessboard */}
-            <mesh position={[0, -height / 2 + 0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <mesh position={[0, -height / 2 - 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[GAP, GAP]} />
                 <meshStandardMaterial color={isDarkTile ? "#0a0a0a" : "#151515"} roughness={0.8} />
             </mesh>
 
-            {(count > 0 || isHovered) && (
+            {count > 0 && (
                 <mesh
                     onPointerOver={(e) => {
                         e.stopPropagation();
@@ -91,7 +91,7 @@ const DayMesh = ({ day, hoveredDay, setHoveredDay }: { day: ContributionDay, hov
                 >
                     <boxGeometry args={[0.85, height, 0.85]} />
                     <meshStandardMaterial
-                        color={count > 0 ? "#050505" : "#000000"}
+                        color="#050505"
                         emissive={isHovered ? "#ff0055" : color}
                         emissiveIntensity={isHovered ? 2.0 : emissiveInt * 0.3}
                         roughness={0.1}
@@ -102,24 +102,33 @@ const DayMesh = ({ day, hoveredDay, setHoveredDay }: { day: ContributionDay, hov
                     </Edges>
                 </mesh>
             )}
-
-            {/* If count is 0 and not hovered, we still need an invisible hit box for hovering */}
-            {count === 0 && !isHovered && (
-                <mesh
-                    position={[0, -height / 2 + 0.1, 0]}
-                    onPointerOver={(e) => {
-                        e.stopPropagation();
-                        setHoveredDay(day);
-                        document.body.style.cursor = 'pointer';
-                    }}
-                >
-                    <boxGeometry args={[GAP, 0.2, GAP]} />
-                    <meshBasicMaterial visible={false} />
-                </mesh>
-            )}
         </group>
     );
 }
+
+const LightCycle = ({ zIndex, color, speed, direction, yPos }: { zIndex: number, color: string, speed: number, direction: number, yPos: number }) => {
+    const meshRef = React.useRef<THREE.Mesh>(null!);
+    useFrame((state, delta) => {
+        if (meshRef.current) {
+            meshRef.current.position.x += speed * delta * direction;
+            const bound = (WIDTH / 2 + 5) * GAP;
+            if (direction > 0 && meshRef.current.position.x > bound) {
+                meshRef.current.position.x = -bound;
+            } else if (direction < 0 && meshRef.current.position.x < -bound) {
+                meshRef.current.position.x = bound;
+            }
+        }
+    });
+
+    const zPos = (zIndex - DEPTH / 2) * GAP + GAP / 2;
+
+    return (
+        <mesh ref={meshRef} position={[direction * (WIDTH / 2 * GAP), yPos, zPos]}>
+            <boxGeometry args={[4, 0.05, 0.05]} />
+            <meshBasicMaterial color={color} toneMapped={false} />
+        </mesh>
+    );
+};
 
 const BoardGroup = ({ data, hoveredDay, setHoveredDay }: { data: ContributionsData, hoveredDay: ContributionDay | null, setHoveredDay: (day: ContributionDay | null) => void }) => {
     // Flatten days
@@ -133,16 +142,25 @@ const BoardGroup = ({ data, hoveredDay, setHoveredDay }: { data: ContributionsDa
                 <DayMesh key={day.date} day={day} hoveredDay={hoveredDay} setHoveredDay={setHoveredDay} />
             ))}
 
+            {/* Floating Tron Light Cycles randomly placed across Z tracks */}
+            <LightCycle zIndex={1} color="#ff0000" speed={30} direction={1} yPos={0.2} />
+            <LightCycle zIndex={3} color="#00f0ff" speed={25} direction={-1} yPos={0.4} />
+            <LightCycle zIndex={5} color="#ff0044" speed={45} direction={1} yPos={0.15} />
+            <LightCycle zIndex={2} color="#b026ff" speed={35} direction={-1} yPos={0.5} />
+            <LightCycle zIndex={4} color="#00aaee" speed={40} direction={1} yPos={0.25} />
+            <LightCycle zIndex={6} color="#ff0000" speed={20} direction={-1} yPos={0.3} />
+
             {/* Central Board Base */}
             <mesh position={[0, -0.4, 0]}>
                 <boxGeometry args={[(WIDTH + 2) * GAP, 0.8, (DEPTH + 2) * GAP]} />
                 <meshStandardMaterial color="#020202" roughness={0.1} metalness={0.9} />
             </mesh>
 
-            {/* Glowing Edge/rim around the board */}
+            {/* Glowing Edge/rim around the board - NO WIREFRAME to avoid diagonal lines */}
             <mesh position={[0, 0.05, 0]}>
                 <boxGeometry args={[(WIDTH + 2.2) * GAP, 0.1, (DEPTH + 2.2) * GAP]} />
-                <meshBasicMaterial color="#00aaee" wireframe opacity={0.05} transparent toneMapped={false} />
+                <meshBasicMaterial color="#00aaee" transparent opacity={0.0} />
+                <Edges color="#00aaee" />
             </mesh>
         </group>
     );
@@ -214,8 +232,6 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
             <div className="absolute bottom-4 right-6 z-10 pointer-events-none">
                 <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest text-right">
-                    Interactive 3D Subnet
-                    <br />
                     Drag to rotate · Scroll to zoom
                 </div>
             </div>
@@ -269,7 +285,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                             </span>
                         </div>
                         <div className="mt-1 pt-2 border-t border-white/10 text-[8px] text-white/50 animate-pulse">
-                            [ TARGET ACQUIRED ]
+                            [ DEREZZING BUGS... ]
                         </div>
                     </div>
                 </div>
