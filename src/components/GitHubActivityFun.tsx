@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Grid, ContactShadows, Edges } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -171,6 +171,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     const [loading, setLoading] = useState(true);
     const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -217,8 +218,14 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
     return (
         <div
+            ref={containerRef}
             className="w-full h-[400px] md:h-[600px] bg-black/90 rounded-xl border border-white/20 shadow-[0_0_30px_var(--cyber-white-glow)] overflow-hidden relative cursor-grab active:cursor-grabbing"
-            onPointerMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+            onPointerMove={(e) => {
+                if (containerRef.current) {
+                    const rect = containerRef.current.getBoundingClientRect();
+                    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+                }
+            }}
         >
             {/* Overlay UI elements */}
             <div className="absolute top-4 left-6 z-10 pointer-events-none">
@@ -270,7 +277,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
             {/* Custom Interactive Tooltip Overlay */}
             {hoveredDay && (
                 <div
-                    className="fixed z-50 pointer-events-none bg-black/90 backdrop-blur-xl border border-cyan-500/50 p-4 rounded-xl font-mono text-[10px] text-white shadow-[0_0_20px_rgba(0,240,255,0.3)] min-w-[170px] transform -translate-x-1/2 -translate-y-full transition-all duration-75"
+                    className="absolute z-50 pointer-events-none bg-black/90 backdrop-blur-xl border border-cyan-500/50 p-4 rounded-xl font-mono text-[10px] text-white shadow-[0_0_20px_rgba(0,240,255,0.3)] min-w-[170px] transform -translate-x-1/2 -translate-y-full transition-all duration-75"
                     style={{ left: mousePos.x, top: mousePos.y - 20 }}
                 >
                     <div className="flex flex-col gap-2">
