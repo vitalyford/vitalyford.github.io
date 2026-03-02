@@ -353,6 +353,7 @@ export default function QuotesStream() {
                 </div>
             </div>
 
+            {/* @ts-expect-error styled-jsx type mismatch in React 19 */}
             <style jsx>{`
                 .quotes-section {
                     background-image: 
