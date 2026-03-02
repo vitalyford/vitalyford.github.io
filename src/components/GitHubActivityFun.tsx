@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Grid, ContactShadows } from "@react-three/drei";
+import { OrbitControls, Grid, ContactShadows, Edges } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -34,22 +35,22 @@ const GAP = 1.05;
 const WIDTH = 53;
 const DEPTH = 7;
 const BASE_Height = 0.1;
-const MULTIPLIER = 0.4;
+const MULTIPLIER = 0.5;
 
 function getContributionColor(count: number): string {
     if (count === 0) return "#151515"; // empty, dark
     if (count < 3) return "#004466";   // low, dark cyan
-    if (count < 6) return "#0088cc";   // medium, blue
-    if (count < 10) return "#00f0ff";  // high, neon cyan
-    return "#b026ff";                  // max, electric violet
+    if (count < 6) return "#00aaee";   // medium, neon cyan
+    if (count < 10) return "#00f0ff";  // high, bright neon cyan
+    return "#ff00ff";                  // max, screaming magenta
 }
 
 function getEmissiveIntensity(count: number): number {
     if (count === 0) return 0;
-    if (count < 3) return 0.5;
-    if (count < 6) return 1.5;
-    if (count < 10) return 2;
-    return 3;
+    if (count < 3) return 1.5;
+    if (count < 6) return 2.0;
+    if (count < 10) return 3.5;
+    return 5.0; // intense bloom for top items
 }
 
 const DayMesh = ({ day, hoveredDay, setHoveredDay }: { day: ContributionDay, hoveredDay: ContributionDay | null, setHoveredDay: (day: ContributionDay | null) => void }) => {
@@ -65,30 +66,58 @@ const DayMesh = ({ day, hoveredDay, setHoveredDay }: { day: ContributionDay, hov
 
     const color = getContributionColor(count);
     const emissiveInt = getEmissiveIntensity(count);
+    const isDarkTile = (day.x + day.y) % 2 === 0;
 
     return (
-        <mesh
-            position={[posX, posY, posZ]}
-            onPointerOver={(e) => {
-                e.stopPropagation();
-                setHoveredDay(day);
-                document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={(e) => {
-                e.stopPropagation();
-                setHoveredDay(null);
-                document.body.style.cursor = 'auto';
-            }}
-        >
-            <boxGeometry args={[0.85, height, 0.85]} />
-            <meshStandardMaterial
-                color={isHovered ? "#ff0055" : color}
-                emissive={isHovered ? "#ff0055" : color}
-                emissiveIntensity={isHovered ? 2.5 : emissiveInt}
-                roughness={0.2}
-                metalness={0.8}
-            />
-        </mesh>
+        <group position={[posX, posY, posZ]}>
+            {/* Base tile forming the chessboard */}
+            <mesh position={[0, -height / 2 + 0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[GAP, GAP]} />
+                <meshStandardMaterial color={isDarkTile ? "#0a0a0a" : "#151515"} roughness={0.8} />
+            </mesh>
+
+            {(count > 0 || isHovered) && (
+                <mesh
+                    onPointerOver={(e) => {
+                        e.stopPropagation();
+                        setHoveredDay(day);
+                        document.body.style.cursor = 'pointer';
+                    }}
+                    onPointerOut={(e) => {
+                        e.stopPropagation();
+                        setHoveredDay(null);
+                        document.body.style.cursor = 'auto';
+                    }}
+                >
+                    <boxGeometry args={[0.85, height, 0.85]} />
+                    <meshStandardMaterial
+                        color={count > 0 ? "#050505" : "#000000"}
+                        emissive={isHovered ? "#ff0055" : color}
+                        emissiveIntensity={isHovered ? 2.0 : emissiveInt * 0.3}
+                        roughness={0.1}
+                        metalness={0.9}
+                    />
+                    <Edges threshold={15}>
+                        <lineBasicMaterial attach="material" color={isHovered ? "#ffffff" : color} toneMapped={false} />
+                    </Edges>
+                </mesh>
+            )}
+
+            {/* If count is 0 and not hovered, we still need an invisible hit box for hovering */}
+            {count === 0 && !isHovered && (
+                <mesh
+                    position={[0, -height / 2 + 0.1, 0]}
+                    onPointerOver={(e) => {
+                        e.stopPropagation();
+                        setHoveredDay(day);
+                        document.body.style.cursor = 'pointer';
+                    }}
+                >
+                    <boxGeometry args={[GAP, 0.2, GAP]} />
+                    <meshBasicMaterial visible={false} />
+                </mesh>
+            )}
+        </group>
     );
 }
 
@@ -107,13 +136,13 @@ const BoardGroup = ({ data, hoveredDay, setHoveredDay }: { data: ContributionsDa
             {/* Central Board Base */}
             <mesh position={[0, -0.4, 0]}>
                 <boxGeometry args={[(WIDTH + 2) * GAP, 0.8, (DEPTH + 2) * GAP]} />
-                <meshStandardMaterial color="#080808" roughness={0.1} metalness={0.9} />
+                <meshStandardMaterial color="#020202" roughness={0.1} metalness={0.9} />
             </mesh>
 
             {/* Glowing Edge/rim around the board */}
             <mesh position={[0, 0.05, 0]}>
                 <boxGeometry args={[(WIDTH + 2.2) * GAP, 0.1, (DEPTH + 2.2) * GAP]} />
-                <meshBasicMaterial color="#00f0ff" wireframe opacity={0.15} transparent />
+                <meshBasicMaterial color="#00aaee" wireframe opacity={0.05} transparent toneMapped={false} />
             </mesh>
         </group>
     );
@@ -205,31 +234,21 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
                 <BoardGroup data={data} hoveredDay={hoveredDay} setHoveredDay={setHoveredDay} />
 
-                {/* Subdued Grid helping spatial context */}
-                <Grid
-                    position={[0, -0.39, 0]}
-                    args={[100, 100]}
-                    cellSize={1}
-                    cellThickness={0.5}
-                    cellColor="#222"
-                    sectionSize={5}
-                    sectionThickness={1}
-                    sectionColor="#00f0ff"
-                    fadeDistance={60}
-                    fadeStrength={0.8}
-                />
-
                 <ContactShadows position={[0, -0.8, 0]} opacity={0.8} scale={80} blur={3} far={4} color="#000000" />
 
                 <OrbitControls
                     autoRotate
-                    autoRotateSpeed={1.2}
+                    autoRotateSpeed={1.0}
                     enablePan={false}
                     maxPolarAngle={Math.PI / 2.1} // Prevent viewing from totally underneath
                     minPolarAngle={0.1}
                     maxDistance={60}
                     minDistance={10}
                 />
+
+                <EffectComposer>
+                    <Bloom luminanceThreshold={1} mipmapBlur intensity={1.5} />
+                </EffectComposer>
             </Canvas>
 
             {/* Custom Interactive Tooltip Overlay */}
