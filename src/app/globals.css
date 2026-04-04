@@ -4,59 +4,61 @@
    CYBER DESIGN SYSTEM - Vitaly Ford's Site
    ============================================ */
 
-/* CSS Custom Properties - TRON LEGACY Theme */
+/* CSS Custom Properties - Human Warmth Theme */
 :root {
-  /* Primary Cyber Colors - TRON LEGACY - Deep Grid */
-  --cyber-black: #020202;
-  /* Ultimate Deep Void */
-  --cyber-darker: #050508;
-  /* Deep Structure */
-  --cyber-dark: #0a0a0f;
-  /* Base Surface */
-  --cyber-surface: #0f1016;
-  /* Component Surface */
+  /* Primary Colors - Warm Dark Palette */
+  --cyber-black: #0d0d12;
+  /* Deep warm-indigo void */
+  --cyber-darker: #111118;
+  /* Warm deep structure */
+  --cyber-dark: #16161f;
+  /* Base surface with warmth */
+  --cyber-surface: #1c1c28;
+  /* Component surface */
+
+  /* Accent Colors - Softer, More Human Palette */
+  /* Soft blue-lavender border instead of harsh white */
+  --cyber-white: hsl(225, 35%, 72%);
+  /* Soft periwinkle-white */
+  --cyber-white-glow: hsla(225, 35%, 72%, 0.18);
+  /* Gentle glow */
+
+  /* Muted rose-red — less aggressive than pure neon red */
+  --cyber-red: hsl(348, 65%, 62%);
+  --cyber-red-dim: hsl(348, 55%, 45%);
+  --cyber-red-glow: hsla(348, 65%, 62%, 0.18);
+
+  /* Warm mint-teal — softer than electric cyan */
+  --cyber-cyan: hsl(175, 65%, 65%);
+  --cyber-cyan-glow: hsla(175, 65%, 65%, 0.15);
+  --cyber-cyan-dim: hsl(175, 55%, 45%);
+
+  /* Border defaults to the soft periwinkle */
   --cyber-border: var(--cyber-white);
-  /* Default to white-neon borders */
-
-  /* Accent Colors - TRON NEON PALETTE */
-  --cyber-white: #FFFFFF;
-  /* Pure White Neon - High Intensity */
-  --cyber-white-glow: rgba(255, 255, 255, 0.2);
-  /* Reduced intensity white reflection */
-
-  --cyber-red: #FF3030;
-  /* Slightly softer red for better elegance */
-  --cyber-red-dim: #D10000;
-  /* Dimmed Red for depth */
-  --cyber-red-glow: rgba(255, 48, 48, 0.15);
-
-  --cyber-cyan: #00F0FF;
-  /* Keep Cyan available for subtle secondary accents or data points */
-  --cyber-cyan-glow: rgba(0, 240, 255, 0.15);
 
   --cyber-danger: var(--cyber-red);
 
-  /* Tiered Backgrounds - Glass Grid */
-  --nav-bg: rgba(2, 2, 5, 0.98);
-  --card-bg: rgba(5, 5, 10, 0.94);
-  --card-bg-hover: rgba(10, 10, 20, 0.96);
+  /* Tiered Backgrounds - Warm Glass */
+  --nav-bg: rgba(13, 13, 18, 0.97);
+  --card-bg: rgba(18, 18, 26, 0.92);
+  --card-bg-hover: rgba(22, 22, 32, 0.95);
 
-  /* Text Colors - High Contrast Digital */
-  --text-primary: #F5F5F7;
-  /* Soft Silver - Improved Readability */
-  --text-secondary: #E0E0E0;
-  /* High contrast gray-white */
-  --text-muted: #808080;
-  /* Neutral Muted */
+  /* Text Colors - Comfortable Reading */
+  --text-primary: #e8e8f0;
+  /* Warm near-white */
+  --text-secondary: #b8b8cc;
+  /* Soft lavender-gray */
+  --text-muted: #6e6e88;
+  /* Muted warm slate */
 
   /* Decorative elements */
   --cyber-accent-solid: var(--cyber-white);
   --cyber-border-glow: var(--cyber-white-glow);
 
-  /* Shadows - Tight & Ultra-Sharp Neon */
-  --shadow-cyber: 0 0 15px var(--cyber-white-glow);
-  --shadow-hover: 0 0 25px var(--cyber-red-glow), 0 0 50px rgba(0, 0, 0, 1);
-  --shadow-sharp: 1px 1px 0px var(--cyber-white);
+  /* Shadows - minimal/none */
+  --shadow-cyber: none;
+  --shadow-hover: none;
+  --shadow-sharp: none;
 
   /* Animation Timing */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,10 +92,10 @@ body {
   font-family: var(--font-rajdhani), 'Segoe UI', Roboto, sans-serif;
   background-color: var(--cyber-black);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    radial-gradient(circle at 50% 50%, rgba(255, 48, 48, 0.05) 0%, transparent 70%);
-  background-size: 40px 40px, 40px 40px, 100% 100%;
+    linear-gradient(hsla(230, 30%, 60%, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(230, 30%, 60%, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, hsla(348, 50%, 50%, 0.04) 0%, transparent 70%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
@@ -121,23 +123,23 @@ body {
 
 /* Selection */
 ::selection {
-  background: var(--cyber-red);
-  color: var(--cyber-white);
+  background: hsla(348, 55%, 55%, 0.4);
+  color: var(--text-primary);
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--cyber-black);
+  background: var(--cyber-darker);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--cyber-white);
-  border-radius: 4px;
+  background: hsla(225, 25%, 45%, 0.6);
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -198,25 +200,25 @@ a:hover {
 
 code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  background: var(--cyber-surface);
-  color: var(--cyber-white);
+  background: hsla(225, 25%, 30%, 0.25);
+  color: var(--cyber-cyan);
   padding: 0.2em 0.5em;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 0.9em;
-  border: 1px solid var(--cyber-white);
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
   transition: all var(--transition-base);
 }
 
 code:hover {
-  border-color: var(--cyber-red);
-  box-shadow: 0 0 10px var(--cyber-red-glow);
+  border-color: hsla(348, 55%, 62%, 0.4);
+  box-shadow: 0 2px 8px var(--cyber-red-glow);
   color: var(--cyber-red);
 }
 
 pre {
-  background: var(--cyber-surface);
-  border: 1px solid var(--cyber-white);
-  border-radius: 8px;
+  background: hsla(225, 20%, 12%, 0.8);
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
+  border-radius: 10px;
   padding: 1.5rem;
   overflow-x: auto;
   font-size: 0.9rem;
@@ -225,8 +227,8 @@ pre {
 }
 
 pre:hover {
-  border-color: var(--cyber-red);
-  box-shadow: 0 0 15px var(--cyber-red-glow);
+  border-color: hsla(348, 55%, 62%, 0.35);
+  box-shadow: 0 4px 16px var(--cyber-red-glow);
 }
 
 pre code {
@@ -296,48 +298,42 @@ samp {
 /* Cyber Card */
 .cyber-card {
   background: var(--card-bg);
-  border: 1px solid var(--cyber-white);
-  border-radius: 4px;
-  /* Angled corners via clip-path */
-  clip-path: polygon(20px 0, 100% 0,
-      100% calc(100% - 20px), calc(100% - 20px) 100%,
-      0 100%,
-      0 20px);
+  border: 1px solid hsla(225, 25%, 55%, 0.3);
+  border-radius: 10px;
   padding: 1.5rem;
   position: relative;
   transition: all var(--transition-base);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
-/* .cyber-card::before removed to ensure sharp 1px border */
-
 .cyber-card::after {
-  /* Corner accents */
+  /* Corner accent - softer */
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-top: 2px solid var(--cyber-red);
   border-left: 2px solid var(--cyber-red);
-  opacity: 0.8;
+  border-radius: 4px 0 0 0;
+  opacity: 0.55;
   transition: all var(--transition-base);
 }
 
 .cyber-card:hover {
-  border-color: var(--cyber-red);
-  box-shadow: 0 0 30px var(--cyber-red-glow);
+  border-color: hsla(348, 55%, 62%, 0.45);
+  box-shadow: none;
   transform: translateY(-2px);
   background: var(--card-bg-hover);
 }
 
 .cyber-card:hover::after {
-  opacity: 1;
-  width: 30px;
-  height: 30px;
+  opacity: 0.85;
+  width: 24px;
+  height: 24px;
   border-color: var(--cyber-red);
 }
 
@@ -348,20 +344,15 @@ samp {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--cyber-white);
-  color: var(--cyber-white);
+  background: hsla(225, 25%, 55%, 0.07);
+  border: 1px solid hsla(225, 25%, 60%, 0.35);
+  color: var(--text-primary);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-radius: 0;
+  letter-spacing: 0.08em;
+  border-radius: 8px;
   min-width: 180px;
-  /* Standardized width */
   text-align: center;
-  clip-path: polygon(10px 0, 100% 0,
-      100% calc(100% - 10px), calc(100% - 10px) 100%,
-      0 100%,
-      0 10px);
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
@@ -377,16 +368,16 @@ samp {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(255, 16, 16, 0.1);
+  background: hsla(348, 60%, 55%, 0.08);
   transition: left 0.5s ease;
 }
 
 .cyber-btn:hover {
-  color: var(--cyber-white);
-  background: rgba(255, 16, 16, 0.15);
-  border-color: var(--cyber-red);
-  box-shadow: 0 0 15px var(--cyber-red-glow);
-  text-shadow: 0 0 5px var(--cyber-red-glow);
+  color: var(--text-primary);
+  background: hsla(348, 55%, 55%, 0.12);
+  border-color: hsla(348, 55%, 62%, 0.5);
+  box-shadow: 0 4px 16px var(--cyber-red-glow);
+  text-shadow: none;
 }
 
 .cyber-btn:hover::before {
@@ -400,22 +391,22 @@ samp {
 
 /* Cyber Button Primary */
 .cyber-btn-primary {
-  background: var(--cyber-white);
-  color: var(--cyber-black);
-  border-color: var(--cyber-white);
+  background: hsla(225, 30%, 60%, 0.18);
+  color: var(--text-primary);
+  border-color: hsla(225, 30%, 65%, 0.4);
 }
 
 .cyber-btn-primary:hover {
-  background: var(--cyber-red);
-  color: var(--cyber-white);
+  background: hsla(348, 55%, 55%, 0.2);
+  color: var(--text-primary);
   border-color: var(--cyber-red);
-  box-shadow: 0 0 20px var(--cyber-red-glow);
+  box-shadow: none;
 }
 
 /* Cyber Divider */
 .cyber-divider {
   height: 1px;
-  background: var(--cyber-border);
+  background: hsla(225, 25%, 55%, 0.2);
   margin: 2rem 0;
   border: none;
 }
@@ -425,8 +416,8 @@ samp {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--cyber-white);
+  background: hsla(225, 30%, 55%, 0.1);
+  border: 1px solid hsla(225, 30%, 60%, 0.3);
   border-radius: 50px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -628,8 +619,8 @@ li::marker {
   border-collapse: separate;
   border-spacing: 0;
   background: var(--cyber-surface);
-  border: 1px solid var(--cyber-border);
-  border-radius: 8px;
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -637,7 +628,7 @@ li::marker {
 .cyber-table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--cyber-border);
+  border-bottom: 1px solid hsla(225, 25%, 55%, 0.15);
 }
 
 .cyber-table th {
@@ -654,7 +645,7 @@ li::marker {
 }
 
 .cyber-table tr:hover td {
-  background: rgba(183, 148, 246, 0.04);
+  background: hsla(225, 25%, 55%, 0.05);
 }
 
 /* ============================================
@@ -662,13 +653,13 @@ li::marker {
    ============================================ */
 
 blockquote {
-  border-left: 3px solid var(--cyber-cyan);
-  background: var(--cyber-surface);
+  border-left: 3px solid hsla(175, 55%, 60%, 0.45);
+  background: hsla(225, 20%, 14%, 0.6);
   padding: 1.5rem;
   margin: 1.5rem 0;
   font-style: italic;
   color: var(--text-secondary);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 blockquote footer,
@@ -786,14 +777,14 @@ blockquote cite {
   width: max-content;
   max-width: 400px;
   padding: 1.25rem;
-  background: rgba(2, 2, 5, 0.98);
-  border: 1px solid var(--cyber-white);
-  border-radius: 4px;
+  background: rgba(13, 13, 18, 0.97);
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
+  border-radius: 10px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   box-shadow: none;
 }
 
@@ -811,9 +802,9 @@ blockquote cite {
   transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: rgba(2, 2, 5, 0.98);
-  border-top: 1px solid var(--cyber-white);
-  border-left: 1px solid var(--cyber-white);
+  background: rgba(13, 13, 18, 0.97);
+  border-top: 1px solid hsla(225, 25%, 55%, 0.25);
+  border-left: 1px solid hsla(225, 25%, 55%, 0.25);
 }
 
 .security-tooltip-header {
@@ -1002,9 +993,9 @@ blockquote cite {
   right: 0;
   z-index: 1000;
   background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--cyber-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid hsla(225, 25%, 55%, 0.18);
   transition: all var(--transition-base);
 }
 
@@ -1013,18 +1004,18 @@ blockquote cite {
     top: auto;
     bottom: 0;
     border-bottom: none;
-    border-top: 1px solid rgba(42, 42, 58, 0.5);
+    border-top: 1px solid hsla(225, 25%, 55%, 0.15);
   }
 
   .nav-cyber.scrolled {
-    border-top-color: var(--cyber-border);
+    border-top-color: hsla(225, 25%, 55%, 0.25);
   }
 }
 
 .nav-cyber.scrolled {
-  background: var(--cyber-black);
-  border-bottom-color: var(--cyber-cyan);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 10px rgba(183, 148, 246, 0.12);
+  background: rgba(13, 13, 18, 0.99);
+  border-bottom-color: hsla(175, 55%, 60%, 0.25);
+  box-shadow: none;
 }
 
 .nav-cyber.scrolled .nav-inner {
@@ -1058,8 +1049,8 @@ blockquote cite {
 
 .nav-link:hover {
   color: var(--cyber-cyan);
-  background: rgba(183, 148, 246, 0.06);
-  text-shadow: 0 0 8px var(--cyber-cyan-glow);
+  background: hsla(175, 55%, 60%, 0.07);
+  text-shadow: none;
 }
 
 .nav-link.active {
@@ -1075,7 +1066,7 @@ blockquote cite {
   height: 2px;
   background: var(--cyber-cyan);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--cyber-cyan);
+  box-shadow: none;
 }
 
 .nav-desktop {
@@ -1090,7 +1081,7 @@ blockquote cite {
 
 .footer-cyber {
   background: var(--cyber-darker);
-  border-top: 1px solid var(--cyber-border);
+  border-top: 1px solid hsla(225, 25%, 55%, 0.18);
   padding: 3rem 0 2rem;
 }
 
@@ -1100,16 +1091,16 @@ blockquote cite {
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--cyber-border);
-  border-radius: 8px;
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
+  border-radius: 10px;
   color: var(--text-secondary);
   transition: all var(--transition-base);
 }
 
 .social-link:hover {
-  border-color: var(--cyber-cyan);
+  border-color: hsla(175, 55%, 60%, 0.45);
   color: var(--cyber-cyan);
-  background: var(--cyber-cyan-glow);
+  background: hsla(175, 55%, 60%, 0.08);
   box-shadow: none;
 }
 
@@ -1123,16 +1114,17 @@ blockquote cite {
   right: 1rem;
   width: 48px;
   height: 48px;
-  background: var(--cyber-surface);
-  border: 1px solid var(--cyber-border);
-  border-radius: 8px;
+  background: hsla(225, 20%, 18%, 0.9);
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--cyber-white);
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all var(--transition-base);
   z-index: 1001;
+  backdrop-filter: blur(8px);
 }
 
 .scroll-to-top.left {
@@ -1141,10 +1133,11 @@ blockquote cite {
 }
 
 .scroll-to-top:hover {
-  border-color: var(--cyber-red);
-  background: var(--cyber-red-glow);
+  border-color: hsla(348, 55%, 62%, 0.45);
+  background: hsla(348, 55%, 55%, 0.12);
   box-shadow: none;
   transform: translateY(-2px);
+  color: var(--cyber-red);
 }
 
 @media (min-width: 1025px) {
@@ -1177,7 +1170,7 @@ blockquote cite {
 
 .page-header-title::before {
   content: '>>';
-  color: var(--cyber-red);
+  color: hsla(348, 55%, 62%, 0.7);
 }
 
 /* ============================================
@@ -1229,16 +1222,18 @@ blockquote cite {
 
 .research-card {
   background: var(--card-bg);
-  border: 1px solid var(--cyber-border);
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
   border-radius: 12px;
   overflow: hidden;
   transition: all var(--transition-base);
   backdrop-filter: blur(12px);
+  box-shadow: none;
 }
 
 .research-card:hover {
-  border-color: var(--cyber-cyan);
+  border-color: hsla(175, 55%, 60%, 0.4);
   transform: translateY(-4px);
+  box-shadow: none;
 }
 
 .research-card-image {
@@ -1323,8 +1318,8 @@ blockquote cite {
 .copy-btn {
   padding: 0.25rem 0.5rem;
   background: transparent;
-  border: 1px solid var(--cyber-border);
-  border-radius: 4px;
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
+  border-radius: 5px;
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -1332,7 +1327,7 @@ blockquote cite {
 }
 
 .copy-btn:hover {
-  border-color: var(--cyber-cyan);
+  border-color: hsla(175, 55%, 60%, 0.4);
   color: var(--cyber-cyan);
 }
 
@@ -1349,16 +1344,16 @@ blockquote cite {
   top: 100%;
   left: 0;
   min-width: 220px;
-  background: var(--nav-bg);
-  border: 1px solid var(--cyber-border);
-  border-radius: 8px;
+  background: rgba(13, 13, 18, 0.97);
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
+  border-radius: 10px;
   padding: 0.5rem 0;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all var(--transition-base);
   z-index: 1001;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
   backdrop-filter: blur(20px);
 }
 
@@ -1378,7 +1373,7 @@ blockquote cite {
 }
 
 .dropdown-item:hover {
-  background: var(--cyber-cyan-glow);
+  background: hsla(175, 55%, 60%, 0.08);
   color: var(--cyber-cyan);
   text-shadow: none;
 }
@@ -1396,16 +1391,16 @@ blockquote cite {
   width: 48px;
   height: 48px;
   padding: 0;
-  background: var(--cyber-surface);
-  border: 1px solid var(--cyber-border);
-  border-radius: 8px;
+  background: hsla(225, 20%, 18%, 0.8);
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
+  border-radius: 10px;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .mobile-menu-btn:hover {
-  border-color: var(--cyber-cyan);
-  background: var(--cyber-cyan-glow);
+  border-color: hsla(175, 55%, 60%, 0.4);
+  background: hsla(175, 55%, 60%, 0.08);
   box-shadow: none;
 }
 
@@ -1452,7 +1447,7 @@ blockquote cite {
     right: 0;
     bottom: 64px;
     width: 100%;
-    background: rgba(13, 13, 20, 0.98);
+    background: rgba(13, 13, 18, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 1rem;
@@ -1480,16 +1475,16 @@ blockquote cite {
     height: 44px;
     margin-bottom: 1rem;
     background: transparent;
-    border: 1px solid var(--cyber-border);
-    border-radius: 8px;
+    border: 1px solid hsla(225, 25%, 55%, 0.25);
+    border-radius: 10px;
     color: var(--cyber-cyan);
     cursor: pointer;
     transition: all var(--transition-fast);
   }
 
   .mobile-menu-close:hover {
-    background: rgba(183, 148, 246, 0.12);
-    border-color: var(--cyber-cyan);
+    background: hsla(175, 55%, 60%, 0.08);
+    border-color: hsla(175, 55%, 60%, 0.4);
   }
 
   .mobile-menu-close:active {
@@ -1518,7 +1513,7 @@ blockquote cite {
   }
 
   .nav-mobile .nav-link:hover {
-    background: rgba(183, 148, 246, 0.1);
+    background: hsla(225, 30%, 55%, 0.1);
   }
 
   /* Mobile accordion dropdown */
@@ -1543,7 +1538,7 @@ blockquote cite {
   }
 
   .mobile-dropdown-toggle:hover {
-    background: rgba(183, 148, 246, 0.1);
+    background: hsla(225, 30%, 55%, 0.1);
     color: var(--cyber-cyan);
   }
 
@@ -1605,7 +1600,7 @@ blockquote cite {
   margin-top: 3rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--cyber-border);
+  border-bottom: 1px solid hsla(225, 25%, 55%, 0.2);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1666,8 +1661,8 @@ blockquote cite {
   max-width: 100%;
   height: auto;
   margin: 1.5rem 0;
-  border-radius: 8px;
-  border: 2px solid var(--cyber-border);
+  border-radius: 10px;
+  border: 1px solid hsla(225, 25%, 55%, 0.2);
 }
 
 .pentest-content pre {
@@ -1723,16 +1718,16 @@ blockquote cite {
   bottom: -20px;
   right: -20px;
   background: var(--nav-bg);
-  /* Darker background as requested */
-  border: 2px solid var(--cyber-border);
+  border: 1px solid hsla(225, 25%, 55%, 0.25);
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   backdrop-filter: blur(16px);
   z-index: 10;
   white-space: nowrap;
+  box-shadow: none;
 }
 
 .profile-current-focus-label {
@@ -1778,7 +1773,7 @@ blockquote cite {
 
 .project-card-link:hover .project-card-title {
   color: var(--cyber-cyan) !important;
-  text-shadow: 0 0 10px var(--cyber-cyan);
+  text-shadow: none;
 }
 
 /* ============================================
@@ -1838,7 +1833,7 @@ blockquote cite {
 .roulette-container {
   margin-bottom: 2rem;
   padding-left: 1rem;
-  border-left: 2px solid var(--cyber-red);
+  border-left: 2px solid hsla(348, 55%, 62%, 0.45);
   display: flex;
   align-items: center;
   min-height: 40px;
