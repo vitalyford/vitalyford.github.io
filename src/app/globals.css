@@ -184,14 +184,15 @@ p {
 }
 
 a {
-  color: var(--cyber-cyan);
+  /* A vibrant blue-ish lavender that stands out from regular text */
+  color: hsl(225, 80%, 65%);
   text-decoration: none;
   transition: color var(--transition-fast), text-shadow var(--transition-fast);
 }
 
 a:hover {
-  color: var(--text-primary);
-  text-shadow: none;
+  color: hsl(225, 90%, 80%);
+  text-shadow: 0 0 10px hsla(225, 80%, 65%, 0.4);
 }
 
 /* ============================================
@@ -1670,12 +1671,12 @@ blockquote cite {
 }
 
 .pentest-content a {
-  color: var(--cyber-cyan);
+  color: hsl(225, 80%, 65%);
 }
 
 .pentest-content a:hover {
-  color: var(--text-primary);
-  text-shadow: 0 0 8px var(--cyber-cyan-glow);
+  color: hsl(225, 90%, 80%);
+  text-shadow: 0 0 10px hsla(225, 80%, 65%, 0.4);
 }
 
 /* ============================================
