@@ -203,7 +203,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-[400px] md:h-[600px] border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm shadow-[0_0_15px_var(--cyber-white-glow)]">
+            <div className="flex items-center justify-center h-[400px] md:h-[600px] border border-cyan-500/20 rounded-xl bg-black/40 backdrop-blur-sm">
                 <div className="relative">
                     <div className="w-16 h-16 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
                     <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono text-cyan-400 animate-pulse uppercase">
@@ -219,7 +219,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     return (
         <div
             ref={containerRef}
-            className="w-full h-[400px] md:h-[600px] bg-black/90 rounded-xl border border-white/20 shadow-[0_0_30px_var(--cyber-white-glow)] overflow-hidden relative cursor-grab active:cursor-grabbing"
+            className="w-full h-[400px] md:h-[600px] bg-black/90 rounded-xl border border-white/20 overflow-hidden relative cursor-grab active:cursor-grabbing"
             onPointerMove={(e) => {
                 if (containerRef.current) {
                     const rect = containerRef.current.getBoundingClientRect();
@@ -229,7 +229,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
         >
             {/* Overlay UI elements */}
             <div className="absolute top-4 left-6 z-10 pointer-events-none">
-                <h3 className="text-[12px] font-mono text-white uppercase tracking-widest font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                <h3 className="text-[12px] font-mono text-white uppercase tracking-widest font-bold">
                     Git Activity Matrix
                 </h3>
                 <div className="text-[9px] font-mono text-cyan-400 mt-1 uppercase tracking-widest">
@@ -269,15 +269,13 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                     minDistance={10}
                 />
 
-                <EffectComposer>
-                    <Bloom luminanceThreshold={1} mipmapBlur intensity={1.5} />
-                </EffectComposer>
+
             </Canvas>
 
             {/* Custom Interactive Tooltip Overlay */}
             {hoveredDay && (
                 <div
-                    className="absolute z-50 pointer-events-none bg-black/90 backdrop-blur-xl border border-cyan-500/50 p-4 rounded-xl font-mono text-[10px] text-white shadow-[0_0_20px_rgba(0,240,255,0.3)] min-w-[170px] transform -translate-x-1/2 -translate-y-full transition-all duration-75"
+                    className="absolute z-50 pointer-events-none bg-black/90 backdrop-blur-xl border border-cyan-500/50 p-4 rounded-xl font-mono text-[10px] text-white min-w-[170px] transform -translate-x-1/2 -translate-y-full transition-all duration-75"
                     style={{ left: mousePos.x, top: mousePos.y - 20 }}
                 >
                     <div className="flex flex-col gap-2">
@@ -287,7 +285,7 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
                         </div>
                         <div className="flex justify-between items-center">
                             <span className="text-white/60 uppercase text-[7px] tracking-widest border-b border-cyan-500/30 pb-0.5">Payload</span>
-                            <span className="text-cyan-400 font-bold drop-shadow-[0_0_5px_rgba(0,240,255,0.8)]">
+                            <span className="text-cyan-400 font-bold">
                                 {hoveredDay.contributionCount} Commits
                             </span>
                         </div>

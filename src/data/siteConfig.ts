@@ -1,5 +1,6 @@
 export const securityRecs = [
     { label: "VPN", name: "ProtonVPN", url: "https://protonvpn.com/" },
+    { label: "Safe Internet", name: "Cloudflare WARP", url: "https://one.one.one.one/" },
     { label: "Antivirus", name: "BitDefender", url: "https://www.bitdefender.com/en-us/consumer/free-antivirus" },
     { label: "Zero-trust", name: "Cloudflare Access", url: "https://www.cloudflare.com/zero-trust/products/access/" },
     { label: "DNS", name: "NextDNS", url: "https://nextdns.io/" },
