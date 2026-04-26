@@ -46,6 +46,30 @@ export const interests = [
 
 export const projects: Project[] = [
     {
+        title: "ProgressLM: General Reward Model for Embodied Agents",
+        description:
+            "Can AI look at a single photo of a task in progress and estimate how far along it is? We tested 14 vision-language models and found that most struggle with this kind of temporal reasoning—they can describe what they see, but not gauge how much work remains. Inspired by how humans intuitively judge progress, we fine-tuned a lightweight 3B-parameter multimodal LLM that learns human-like progress reasoning and matches or beats much larger models. This work pushes embodied intelligence closer to understanding “where I am” in a task—a key capability for autonomous long-horizon decision-making.",
+        presenters: "Qian Chengxuan",
+    },
+    {
+        title: "SMTest Audits: Comprehensive Cybersecurity Assessments",
+        description:
+            "In this project, we developed and conducted a multi-phase cybersecurity engagement, consisting of a formal Cybersecurity Audit and a targeted Penetration Test for local businesses. Following the NIST Cybersecurity Framework, we evaluated administrative and technical controls to identify critical vulnerabilities and compliance gaps within local organizations. The technical assessment involved deep reconnaissance, web application testing, and wireless network exploitation, alongside social engineering simulations via phishing. The resulting summary combines our findings into a clear, prioritized report designed to strengthen the organization's security posture.",
+        presenters: "Sabrina Barrile, Thomas Tubinas, Michael Judge",
+    },
+    {
+        title: "nerd_speak",
+        description:
+            "Roll for initiative! nerd_speak is a new esoteric programming language designed to look like a Dungeons and Dragons adventure. This project incorporates ideas of dice rolling and spellcasting to create a new, fun way to program. Created using Java, nerd_speak is an interpreted language meant to add some randomness and creativity into programming.",
+        presenters: "Theo Osborn",
+    },
+    {
+        title: "Global News Aggregator – Scoop",
+        description:
+            "A news aggregator that allows users to read global news with AI-assisted research, analysis, and fact-checking. Scoop aggregates updates from 200+ news sources using Real Simple Syndication (RSS) feeds, which are standardized XML text files released by newspapers and similar outlets. Scoop is a full-stack application with Next.JS as the frontend. With the Backend being made with FastAPI, PostgreSQL, and ChromaDB, with a custom-built RSS ingester coded in Rust.",
+        presenters: "Jordan Green, Tomas Acosta",
+    },
+    {
         title: "An LLM-Augmented AutoML Framework for End-to-End Data Analysis",
         description:
             "We propose an AutoML-LLM Data Analysis Platform that streamlines end-to-end data analysis workflows by automating data ingestion, cleaning, feature engineering, and model selection. It uses Large Language Models for task detection and research question generation, supporting classification, regression, and clustering. The platform also features automated task type detection, imbalanced data handling, and multi-model benchmarking.",
