@@ -48,4 +48,10 @@ export const featuredProjects: Project[] = [
         href: "https://vford.cloudflareaccess.com",
         badge: "Security",
     },
+    {
+        title: "Scot Engineering",
+        description: "A custom mechanical engineering site for a local engineering firm, built with Astro on Cloudflare Workers",
+        href: "https://scot-engineering.com",
+        badge: "Commerce",
+    },
 ];
