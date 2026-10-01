@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="animate-fade-in">
-      <Script src="https://privacy-staging.lerlia.com/snippet/v1.js" data-key="pk_test_f231055fc9b24bf7879f16f645b39e4b" />
+      <Script src="https://privacy-staging.lerlia.com/snippet/v1.js" data-key="pk_test_f231055fc9b24bf7879f16f645b39e4b" data-privacy-slug="c4ea918e25ee42629550e59a06b7faf4" />
       <HeroSection />
 
       <StatsSection
