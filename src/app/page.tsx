@@ -15,10 +15,17 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   const { totalPapers, yearsActive } = getPublicationStats();
   const citationCount = process.env.SCHOLAR_CITATIONS || "721";
+  const isLerliaEnabled = process.env.NEXT_PUBLIC_LERLIA === "true";
 
   return (
     <div className="animate-fade-in">
-      <Script src="https://privacy-staging.lerlia.com/snippet/v1.js" data-key="pk_test_f231055fc9b24bf7879f16f645b39e4b" data-privacy-slug="c4ea918e25ee42629550e59a06b7faf4" />
+      {isLerliaEnabled && (
+        <Script
+          src="https://privacy-staging.lerlia.com/snippet/v1.js"
+          data-key="pk_test_f231055fc9b24bf7879f16f645b39e4b"
+          data-privacy-slug="c4ea918e25ee42629550e59a06b7faf4"
+        />
+      )}
       <HeroSection />
 
       <StatsSection
