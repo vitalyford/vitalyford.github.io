@@ -1,3 +1,4 @@
+import Script from "next/script";
 import GitHubActivityFun from "@/components/GitHubActivityFun";
 import AdventOfRustShowcase from "@/components/AdventOfRustShowcase";
 import QuotesStream from "@/components/QuotesStream";
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <div className="animate-fade-in">
+      <Script src="https://privacy-staging.lerlia.com/snippet/v1.js" data-key="pk_test_f231055fc9b24bf7879f16f645b39e4b" />
       <HeroSection />
 
       <StatsSection
