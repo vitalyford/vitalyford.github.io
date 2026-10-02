@@ -7,23 +7,10 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { normalizeContributions, type ContributionDay, type ContributionsData } from "@/utils/githubContributions";
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
-}
-
-interface ContributionDay {
-    color: string;
-    contributionCount: number;
-    contributionLevel: string;
-    date: string;
-    x: number; // week index
-    y: number; // day index
-}
-
-interface ContributionsData {
-    contributions: ContributionDay[][];
-    totalContributions: number;
 }
 
 interface GitHubActivityFunProps {
@@ -176,15 +163,10 @@ export default function GitHubActivityFun({ username }: GitHubActivityFunProps) 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://github-contributions-api.deno.dev/${username}.json?y=last`);
+                const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
                 if (!response.ok) throw new Error("Connection Timeout");
                 const json = await response.json();
-
-                // Add coordinates
-                const enrichedContributions = json.contributions.map((week: ContributionDay[], x: number) =>
-                    week.map((day, y) => ({ ...day, x, y }))
-                );
-                setData({ ...json, contributions: enrichedContributions });
+                setData(normalizeContributions(json));
             } catch (error) {
                 console.error("Uplink Error", error);
             } finally {
